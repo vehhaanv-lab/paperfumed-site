@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PaperFumed — Plastic-Free Packaging for India</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --navy:#0D1B2A;
+  --navy2:#162234;
+  --cream:#F4EEE0;
+  --cream2:#EDE5D2;
+  --white:#FAFAF8;
+  --sage:#3B5E38;
+  --pale-sage:#8AAB86;
+  --muted:#7A8B89;
+  --border:rgba(13,27,42,.08);
+  --border-strong:rgba(13,27,42,.14);
+}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background:var(--white);
+  color:var(--navy);
+  font-size:16px;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+::selection{background:var(--navy);color:var(--cream)}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 3rem;
+  height:64px;
+  background:rgba(250,250,248,.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  transition:border-color .3s;
+}
+.nav-logo{
+  display:flex;align-items:center;gap:10px;
+  text-decoration:none;
+}
+/* SVG logo mark — redrawn from original */
+.logo-svg{flex-shrink:0}
+.logo-wordmark{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:1.1rem;font-weight:600;
+  color:var(--navy);letter-spacing:-.02em;
+}
+.nav-links{
+  display:flex;align-items:center;gap:2.5rem;
+  list-style:none;
+}
+.nav-links a{
+  font-size:.8rem;letter-spacing:.04em;text-transform:uppercase;
+  font-weight:500;color:var(--muted);text-decoration:none;
+  transition:color .2s;
+}
+.nav-links a:hover{color:var(--navy)}
+.nav-cta{
+  height:36px;padding:0 1.25rem;
+  background:var(--navy);color:var(--cream)!important;
+  border-radius:4px;font-size:.8rem!important;
+  font-weight:600!important;
+  display:flex!important;align-items:center;gap:.4rem;
+  transition:background .2s!important;
+  letter-spacing:.04em!important;
+  text-transform:uppercase!important;
+}
+.nav-cta:hover{background:var(--navy2)!important;color:var(--cream)!important}
+
+/* ─── HERO ─── */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;
+  padding:9rem 3rem 6rem;
+  position:relative;
+  overflow:hidden;
+}
+.hero-tag{
+  font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+  font-weight:600;color:var(--pale-sage);
+  margin-bottom:2.5rem;
+  display:flex;align-items:center;gap:.85rem;justify-content:center;
+}
+.hero-tag span{width:24px;height:1px;background:var(--pale-sage);display:inline-block}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(3.2rem,6.5vw,6.5rem);
+  font-weight:400;line-height:1.04;
+  letter-spacing:-.03em;
+  color:var(--navy);
+  max-width:820px;
+  margin-bottom:2rem;
+}
+.hero h1 em{font-style:italic;color:var(--sage)}
+.hero-sub{
+  font-size:1.05rem;color:var(--muted);
+  max-width:460px;line-height:1.75;
+  font-weight:300;margin-bottom:3rem;
+}
+.cta-row{display:flex;align-items:center;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{
+  height:48px;padding:0 2rem;
+  background:var(--navy);color:var(--cream);
+  border-radius:4px;text-decoration:none;
+  font-size:.85rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:.5rem;
+  transition:background .2s,transform .15s;
+  border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;
+}
+.btn-primary:hover{background:var(--navy2);transform:translateY(-1px)}
+.btn-secondary{
+  height:48px;padding:0 1.75rem;
+  border:1.5px solid var(--border-strong);color:var(--navy);
+  border-radius:4px;text-decoration:none;
+  font-size:.85rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:.5rem;
+  transition:border-color .2s,transform .15s;
+}
+.btn-secondary:hover{border-color:var(--navy);transform:translateY(-1px)}
+
+/* ─── HERO SCROLL HINT ─── */
+.scroll-hint{
+  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  color:var(--muted);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
+  opacity:.5;animation:bounce 2.5s ease-in-out infinite;
+}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+.scroll-hint svg{width:16px;height:16px}
+
+/* ─── DIVIDER ─── */
+.rule{border:none;border-top:1px solid var(--border);margin:0}
+
+/* ─── STATEMENT BAND ─── */
+.statement{
+  padding:5rem 3rem;
+  text-align:center;
+}
+.statement-inner{max-width:700px;margin:0 auto}
+.statement h2{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.6rem,3vw,2.4rem);
+  font-weight:400;line-height:1.3;letter-spacing:-.02em;
+  color:var(--navy);
+}
+.statement h2 em{font-style:italic;color:var(--sage)}
+
+/* ─── NUMBERS ─── */
+.numbers{
+  background:var(--navy);
+  padding:6rem 3rem;
+}
+.numbers-inner{max-width:1080px;margin:0 auto}
+.numbers-eyebrow{
+  font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+  font-weight:600;color:var(--pale-sage);margin-bottom:4rem;
+  display:flex;align-items:center;gap:.85rem;
+}
+.numbers-eyebrow span{width:24px;height:1px;background:var(--pale-sage)}
+.numbers-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border-top:1px solid rgba(244,238,224,.08);
+}
+.num-item{
+  padding:3rem 2.5rem 3rem 0;
+  border-right:1px solid rgba(244,238,224,.08);
+}
+.num-item:last-child{border-right:none;padding-right:0;padding-left:2.5rem}
+.num-item:nth-child(2){padding:3rem 2.5rem}
+.num-big{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(3rem,5vw,5.5rem);
+  font-weight:400;line-height:1;letter-spacing:-.04em;
+  color:var(--cream);margin-bottom:1rem;
+  display:block;
+}
+.num-big sup{font-size:.45em;vertical-align:.3em;letter-spacing:0}
+.num-label{
+  font-size:.88rem;color:rgba(244,238,224,.55);
+  line-height:1.65;font-weight:300;max-width:220px;
+}
+.num-source{
+  font-size:.65rem;letter-spacing:.06em;text-transform:uppercase;
+  color:rgba(244,238,224,.2);margin-top:.75rem;display:block;
+}
+
+/* ─── PRODUCT ─── */
+.product{padding:7rem 3rem}
+.product-inner{max-width:1080px;margin:0 auto}
+.section-eyebrow{
+  font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+  font-weight:600;color:var(--pale-sage);margin-bottom:2rem;
+  display:flex;align-items:center;gap:.85rem;
+}
+.section-eyebrow span{width:24px;height:1px;background:var(--pale-sage)}
+.product-header{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:5rem;gap:2rem;flex-wrap:wrap;
+}
+.product-h2{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,3.5vw,3rem);
+  font-weight:400;line-height:1.15;letter-spacing:-.025em;
+  max-width:480px;
+}
+.product-h2 em{font-style:italic;color:var(--sage)}
+.product-desc{
+  font-size:.92rem;color:var(--muted);line-height:1.75;
+  max-width:340px;font-weight:300;
+}
+/* Bottle showcase */
+.bottles-row{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--border);
+  border:1px solid var(--border);
+  border-radius:8px;overflow:hidden;
+}
+.bottle-item{
+  background:var(--white);
+  padding:3rem 2rem 2rem;
+  display:flex;flex-direction:column;align-items:center;
+  transition:background .25s;
+  cursor:default;
+}
+.bottle-item:hover{background:var(--cream)}
+.bottle-item:hover .bottle-drawing{transform:translateY(-6px)}
+.bottle-drawing{
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1);
+  margin-bottom:2rem;
+}
+.bottle-info{text-align:center}
+.bottle-size{
+  font-family:'Playfair Display',serif;
+  font-size:1.5rem;font-weight:400;color:var(--navy);letter-spacing:-.02em;
+  display:block;margin-bottom:.2rem;
+}
+.bottle-use{
+  font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);font-weight:500;
+}
+
+/* ─── MATERIAL BAND ─── */
+.material{
+  background:var(--cream);
+  padding:5rem 3rem;
+}
+.material-inner{
+  max-width:1080px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;
+}
+.material-left h2{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.8rem,3vw,2.6rem);
+  font-weight:400;line-height:1.2;letter-spacing:-.025em;
+  margin-bottom:1.5rem;
+}
+.material-left h2 em{font-style:italic}
+.material-left p{font-size:.92rem;color:var(--muted);line-height:1.8;font-weight:300}
+.material-facts{display:flex;flex-direction:column;gap:1px}
+.fact{
+  display:flex;align-items:center;gap:1.5rem;
+  padding:1.25rem 0;
+  border-bottom:1px solid rgba(13,27,42,.08);
+}
+.fact:last-child{border-bottom:none}
+.fact-num{
+  font-family:'Playfair Display',serif;
+  font-size:1.5rem;font-weight:400;color:var(--sage);
+  min-width:60px;letter-spacing:-.02em;
+}
+.fact-text{font-size:.85rem;color:var(--navy);line-height:1.5;font-weight:400}
+
+/* ─── FOR WHO ─── */
+.forwho{padding:7rem 3rem;background:var(--white)}
+.forwho-inner{max-width:1080px;margin:0 auto}
+.forwho h2{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,3.5vw,3rem);
+  font-weight:400;line-height:1.15;letter-spacing:-.025em;
+  margin-bottom:4rem;
+}
+.forwho h2 em{font-style:italic;color:var(--sage)}
+.sectors{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--border);
+  border:1px solid var(--border);border-radius:8px;overflow:hidden;
+}
+.sector{
+  background:var(--white);
+  padding:2.5rem 2rem;
+  transition:background .2s;
+}
+.sector:hover{background:var(--cream)}
+.sector-icon{
+  width:36px;height:36px;
+  margin-bottom:1.5rem;
+}
+.sector h3{
+  font-size:.95rem;font-weight:600;color:var(--navy);
+  margin-bottom:.5rem;letter-spacing:-.01em;
+}
+.sector p{font-size:.82rem;color:var(--muted);line-height:1.65;font-weight:300}
+
+/* ─── REGULATION STRIP ─── */
+.reg-strip{
+  background:var(--sage);
+  padding:3rem;
+  display:flex;align-items:center;justify-content:space-between;gap:2rem;
+  flex-wrap:wrap;
+}
+.reg-text{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.1rem,2vw,1.5rem);
+  font-weight:400;color:var(--cream);
+  letter-spacing:-.01em;max-width:620px;line-height:1.4;
+}
+.reg-text em{font-style:italic}
+.reg-meta{
+  font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(244,238,224,.55);font-weight:500;text-align:right;
+}
+
+/* ─── CONTACT ─── */
+.contact{
+  padding:7rem 3rem;
+  background:var(--white);
+}
+.contact-inner{
+  max-width:1080px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;
+}
+.contact-left h2{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,3.5vw,3rem);
+  font-weight:400;line-height:1.15;letter-spacing:-.025em;
+  margin-bottom:1rem;
+}
+.contact-left h2 em{font-style:italic;color:var(--sage)}
+.contact-left p{
+  font-size:.92rem;color:var(--muted);line-height:1.8;
+  font-weight:300;margin-bottom:2rem;
+}
+.contact-detail{
+  display:flex;align-items:center;gap:.75rem;
+  font-size:.82rem;color:var(--muted);margin-bottom:.75rem;
+}
+.contact-detail a{color:var(--navy);text-decoration:none;font-weight:500}
+.contact-detail a:hover{color:var(--sage)}
+
+/* Form */
+.form-box{
+  background:var(--cream);
+  border-radius:8px;padding:2.5rem;
+}
+.form-title{
+  font-size:1rem;font-weight:600;color:var(--navy);
+  margin-bottom:1.5rem;letter-spacing:-.01em;
+}
+.fg{margin-bottom:1rem}
+.fg label{
+  display:block;font-size:.72rem;letter-spacing:.08em;
+  text-transform:uppercase;font-weight:600;color:var(--muted);margin-bottom:.4rem;
+}
+.fg input,.fg select,.fg textarea{
+  width:100%;padding:.75rem 1rem;
+  background:var(--white);
+  border:1.5px solid transparent;
+  border-radius:4px;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:.9rem;color:var(--navy);
+  outline:none;transition:border-color .2s;resize:none;
+  -webkit-appearance:none;
+}
+.fg input::placeholder,.fg textarea::placeholder{color:var(--muted);opacity:.5}
+.fg input:focus,.fg select:focus,.fg textarea:focus{
+  border-color:var(--sage);
+}
+.fg select{
+  cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%237A8B89'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 1rem center;
+  padding-right:2.5rem;
+}
+.fg-row{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+.form-submit{
+  width:100%;height:48px;margin-top:.5rem;
+  background:var(--navy);color:var(--cream);
+  border:none;border-radius:4px;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:.82rem;font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;
+  cursor:pointer;transition:background .2s,transform .15s;
+  display:flex;align-items:center;justify-content:center;gap:.5rem;
+}
+.form-submit:hover{background:var(--navy2);transform:translateY(-1px)}
+.form-note{
+  font-size:.72rem;color:var(--muted);text-align:center;
+  margin-top:1rem;line-height:1.5;
+}
+
+/* ─── FOOTER ─── */
+footer{
+  border-top:1px solid var(--border);
+  padding:2.5rem 3rem;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:1rem;
+}
+.footer-logo{
+  display:flex;align-items:center;gap:10px;text-decoration:none;
+}
+.footer-logo-text{
+  font-size:.95rem;font-weight:600;color:var(--navy);letter-spacing:-.01em;
+}
+.footer-right{
+  font-size:.72rem;color:var(--muted);letter-spacing:.04em;
+  text-align:right;line-height:1.6;
+}
+.footer-right a{color:var(--muted);text-decoration:none}
+.footer-right a:hover{color:var(--navy)}
+
+/* ─── FADE IN ─── */
+.reveal{
+  opacity:0;transform:translateY(20px);
+  transition:opacity .75s ease,transform .75s ease;
+}
+.reveal.in{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+
+/* ─── MOBILE ─── */
+@media(max-width:820px){
+  nav{padding:0 1.25rem}
+  .nav-links li:not(:last-child){display:none}
+  .hero{padding:8rem 1.5rem 5rem}
+  .numbers{padding:4rem 1.5rem}
+  .numbers-grid{grid-template-columns:1fr}
+  .num-item{border-right:none;border-bottom:1px solid rgba(244,238,224,.08);padding:2rem 0!important}
+  .num-item:last-child{border-bottom:none}
+  .product{padding:5rem 1.5rem}
+  .product-header{flex-direction:column;align-items:flex-start}
+  .bottles-row{grid-template-columns:repeat(2,1fr)}
+  .material-inner{grid-template-columns:1fr;gap:3rem}
+  .material{padding:4rem 1.5rem}
+  .forwho{padding:5rem 1.5rem}
+  .sectors{grid-template-columns:1fr 1fr}
+  .contact{padding:5rem 1.5rem}
+  .contact-inner{grid-template-columns:1fr;gap:3rem}
+  .reg-strip{padding:2rem 1.5rem}
+  .reg-meta{text-align:left}
+  footer{padding:2rem 1.5rem;flex-direction:column;align-items:flex-start}
+  .footer-right{text-align:left}
+  .statement{padding:3.5rem 1.5rem}
+  .fg-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav id="nav">
+  <a href="#" class="nav-logo" aria-label="PaperFumed home">
+    <!-- Logo mark: bottle with paper fold -->
+    <svg class="logo-svg" width="26" height="32" viewBox="0 0 26 32" fill="none" aria-hidden="true">
+      <!-- cap -->
+      <rect x="9" y="0" width="8" height="6" rx="2" fill="#0D1B2A"/>
+      <!-- bottle body with top-right fold cut -->
+      <path d="M2 8 L2 30 Q2 32 4 32 L22 32 Q24 32 24 30 L24 14 L18 8 Z" fill="#0D1B2A"/>
+      <!-- paper fold triangle (lighter) -->
+      <path d="M18 8 L24 14 L18 14 Z" fill="#7A8B89" opacity=".5"/>
+    </svg>
+    <span class="logo-wordmark">PaperFumed</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#product">Product</a></li>
+    <li><a href="#about">About</a></li>
+    <li>
+      <a href="#contact" class="nav-cta">
+        Request Demo
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+
+<!-- ─── HERO ─── -->
+<section class="hero" id="top">
+  <div class="hero-tag reveal"><span></span>Packaging · India · Early Days<span></span></div>
+
+  <h1 class="reveal reveal-delay-1">
+    Something better<br>is being <em>built.</em>
+  </h1>
+
+  <p class="hero-sub reveal reveal-delay-2">
+    PaperFumed is building plastic-free, paper-based packaging for India's hospitality and retail sector. Starting with water bottles.
+  </p>
+
+  <div class="cta-row reveal reveal-delay-3">
+    <a href="#contact" class="btn-primary">
+      Request Demo
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 11L11 1M11 1H4M11 1V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <a href="#product" class="btn-secondary">See the product</a>
+  </div>
+
+  <div class="scroll-hint" aria-hidden="true">
+    <span>Scroll</span>
+    <svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ─── STATEMENT ─── -->
+<div class="statement" id="about">
+  <div class="statement-inner reveal">
+    <h2>Plastic packaging doesn't have to be the default.<br>We're building the <em>alternative</em> for India.</h2>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- ─── NUMBERS ─── -->
+<section class="numbers">
+  <div class="numbers-inner">
+    <div class="numbers-eyebrow reveal"><span></span>The Reality — April 2026</div>
+    <div class="numbers-grid">
+      <div class="num-item reveal">
+        <span class="num-big">#1</span>
+        <p class="num-label">India is the world's largest plastic polluter — generating 9.3–10.2 million tonnes of plastic waste annually, accounting for nearly one-fifth of global emissions.</p>
+        <span class="num-source">Nature Journal · University of Leeds · 2024</span>
+      </div>
+      <div class="num-item reveal reveal-delay-1">
+        <span class="num-big">12<sup>%</sup></span>
+        <p class="num-label">Of India's plastic is actually recycled. The rest — roughly 70% — ends up in rivers, open landfills, and roadsides. Unaccounted for. Unmanaged.</p>
+        <span class="num-source">Centre for Science & Environment · CPCB Data</span>
+      </div>
+      <div class="num-item reveal reveal-delay-2">
+        <span class="num-big">800<sup>yr</sup></span>
+        <p class="num-label">Time for a standard plastic bottle to decompose in a landfill. A paper-based bottle degrades in 2–6 weeks. That's the only difference that matters.</p>
+        <span class="num-source">Global Plastics Research Consensus</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PRODUCT ─── -->
+<section class="product" id="product">
+  <div class="product-inner">
+    <div class="section-eyebrow reveal"><span></span>The Product</div>
+    <div class="product-header">
+      <h2 class="product-h2 reveal">A bottle made from paper.<br>That holds water. <em>Literally.</em></h2>
+      <p class="product-desc reveal reveal-delay-1">Four sizes. Food-safe lining. Designed for commercial volume. No plastic in the construction. Decomposes in weeks, not centuries.</p>
+    </div>
+
+    <!-- 4 bottle sizes -->
+    <div class="bottles-row reveal">
+
+      <!-- 200ml -->
+      <div class="bottle-item">
+        <div class="bottle-drawing">
+          <svg width="60" height="140" viewBox="0 0 60 140" fill="none">
+            <!-- cap -->
+            <rect x="22" y="0" width="16" height="10" rx="3.5" fill="#0D1B2A" opacity=".15"/>
+            <rect x="23" y="1" width="14" height="9" rx="3" fill="#0D1B2A" opacity=".7"/>
+            <!-- neck -->
+            <path d="M20 10 L20 18 L40 18 L40 10" fill="#0D1B2A" opacity=".7"/>
+            <!-- body with fold -->
+            <path d="M10 20 L10 128 Q10 132 14 132 L46 132 Q50 132 50 128 L50 32 L38 20 Z" fill="#0D1B2A"/>
+            <!-- fold triangle -->
+            <path d="M38 20 L50 32 L38 32 Z" fill="#3B5E38" opacity=".5"/>
+            <!-- label area -->
+            <rect x="14" y="52" width="28" height="44" rx="2" fill="rgba(244,238,224,.05)"/>
+            <!-- label text -->
+            <text x="28" y="76" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="5" fill="rgba(244,238,224,.6)">PaperFumed</text>
+            <text x="28" y="88" text-anchor="middle" font-family="sans-serif" font-size="4" fill="rgba(244,238,224,.25)" letter-spacing="1">200 ml</text>
+          </svg>
+        </div>
+        <div class="bottle-info">
+          <span class="bottle-size">200ml</span>
+          <span class="bottle-use">Minibar · Airlines</span>
+        </div>
+      </div>
+
+      <!-- 330ml -->
+      <div class="bottle-item">
+        <div class="bottle-drawing">
+          <svg width="68" height="162" viewBox="0 0 68 162" fill="none">
+            <rect x="25" y="0" width="18" height="11" rx="4" fill="#0D1B2A" opacity=".15"/>
+            <rect x="26" y="1" width="16" height="10" rx="3.5" fill="#0D1B2A" opacity=".7"/>
+            <path d="M23 11 L23 20 L45 20 L45 11" fill="#0D1B2A" opacity=".7"/>
+            <path d="M11 22 L11 148 Q11 153 16 153 L52 153 Q57 153 57 148 L57 36 L43 22 Z" fill="#0D1B2A"/>
+            <path d="M43 22 L57 36 L43 36 Z" fill="#3B5E38" opacity=".5"/>
+            <rect x="16" y="58" width="32" height="52" rx="2" fill="rgba(244,238,224,.05)"/>
+            <text x="32" y="87" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="6" fill="rgba(244,238,224,.65)">PaperFumed</text>
+            <text x="32" y="101" text-anchor="middle" font-family="sans-serif" font-size="4.5" fill="rgba(244,238,224,.25)" letter-spacing="1">330 ml</text>
+          </svg>
+        </div>
+        <div class="bottle-info">
+          <span class="bottle-size">330ml</span>
+          <span class="bottle-use">Cafés · Restaurants</span>
+        </div>
+      </div>
+
+      <!-- 500ml -->
+      <div class="bottle-item">
+        <div class="bottle-drawing">
+          <svg width="76" height="186" viewBox="0 0 76 186" fill="none">
+            <rect x="28" y="0" width="20" height="13" rx="4.5" fill="#0D1B2A" opacity=".15"/>
+            <rect x="29" y="1" width="18" height="12" rx="4" fill="#0D1B2A" opacity=".7"/>
+            <path d="M25 13 L25 23 L51 23 L51 13" fill="#0D1B2A" opacity=".7"/>
+            <path d="M12 25 L12 170 Q12 176 18 176 L58 176 Q64 176 64 170 L64 41 L48 25 Z" fill="#0D1B2A"/>
+            <path d="M48 25 L64 41 L48 41 Z" fill="#3B5E38" opacity=".5"/>
+            <rect x="17" y="65" width="36" height="60" rx="2" fill="rgba(244,238,224,.05)"/>
+            <text x="35" y="97" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="7" fill="rgba(244,238,224,.7)">PaperFumed</text>
+            <text x="35" y="113" text-anchor="middle" font-family="sans-serif" font-size="5" fill="rgba(244,238,224,.28)" letter-spacing="1">500 ml</text>
+          </svg>
+        </div>
+        <div class="bottle-info">
+          <span class="bottle-size">500ml</span>
+          <span class="bottle-use">Hotels · Events</span>
+        </div>
+      </div>
+
+      <!-- 1L -->
+      <div class="bottle-item">
+        <div class="bottle-drawing">
+          <svg width="84" height="210" viewBox="0 0 84 210" fill="none">
+            <rect x="31" y="0" width="22" height="14" rx="5" fill="#0D1B2A" opacity=".15"/>
+            <rect x="32" y="1" width="20" height="13" rx="4.5" fill="#0D1B2A" opacity=".7"/>
+            <path d="M28 14 L28 26 L56 26 L56 14" fill="#0D1B2A" opacity=".7"/>
+            <path d="M13 28 L13 192 Q13 198 20 198 L64 198 Q71 198 71 192 L71 46 L53 28 Z" fill="#0D1B2A"/>
+            <path d="M53 28 L71 46 L53 46 Z" fill="#3B5E38" opacity=".5"/>
+            <rect x="18" y="74" width="40" height="68" rx="2" fill="rgba(244,238,224,.05)"/>
+            <text x="38" y="110" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="7.5" fill="rgba(244,238,224,.72)">PaperFumed</text>
+            <text x="38" y="128" text-anchor="middle" font-family="sans-serif" font-size="5.5" fill="rgba(244,238,224,.28)" letter-spacing="1">1000 ml</text>
+          </svg>
+        </div>
+        <div class="bottle-info">
+          <span class="bottle-size">1000ml</span>
+          <span class="bottle-use">Retail · Corporate</span>
+        </div>
+      </div>
+
+    </div><!-- /bottles-row -->
+  </div>
+</section>
+
+<!-- ─── MATERIAL ─── -->
+<section class="material">
+  <div class="material-inner">
+    <div class="material-left reveal">
+      <div class="section-eyebrow" style="margin-bottom:1.5rem"><span></span>Why Paper</div>
+      <h2>Built from <em>renewable</em><br>materials. Designed<br>for circularity.</h2>
+      <p style="margin-top:1.25rem">Paper-based bottles are made from FSC-certified wood fibre or sugarcane pulp with a food-safe biodegradable lining. They hold water effectively, ship like standard bottles, and decompose without leaving a trace.</p>
+    </div>
+    <div class="material-facts reveal reveal-delay-1">
+      <div class="fact">
+        <span class="fact-num">0%</span>
+        <span class="fact-text">Plastic in the bottle construction. The barrier lining is bio-based.</span>
+      </div>
+      <div class="fact">
+        <span class="fact-num">2–6</span>
+        <span class="fact-text">Weeks to fully decompose, versus 800+ years for a PET plastic bottle.</span>
+      </div>
+      <div class="fact">
+        <span class="fact-num">70%</span>
+        <span class="fact-text">Reduction in plastic content versus a standard PET bottle (Paboco / industry benchmark).</span>
+      </div>
+      <div class="fact">
+        <span class="fact-num">100%</span>
+        <span class="fact-text">Recyclable within the paper stream — no specialist facility required.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WHO IT'S FOR ─── -->
+<section class="forwho" id="sectors">
+  <div class="forwho-inner">
+    <div class="section-eyebrow reveal"><span></span>Who It's For</div>
+    <h2 class="reveal">Made for businesses<br>serving at <em>scale.</em></h2>
+    <div class="sectors reveal">
+      <div class="sector">
+        <svg class="sector-icon" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+          <rect x="4" y="14" width="28" height="18" rx="2" stroke="#0D1B2A" stroke-width="1.5"/>
+          <path d="M12 32V24h12v8" stroke="#0D1B2A" stroke-width="1.5"/>
+          <path d="M4 14l14-10 14 10" stroke="#0D1B2A" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <h3>Hotels &amp; Resorts</h3>
+        <p>In-room amenities, banquet service, and conference supply — all plastic-free and custom-branded.</p>
+      </div>
+      <div class="sector">
+        <svg class="sector-icon" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+          <path d="M6 28 C6 18 10 12 18 10 C26 12 30 18 30 28" stroke="#0D1B2A" stroke-width="1.5" stroke-linecap="round"/>
+          <rect x="10" y="28" width="16" height="4" rx="1" stroke="#0D1B2A" stroke-width="1.5"/>
+          <path d="M18 10V6" stroke="#0D1B2A" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <h3>Cafés &amp; Restaurants</h3>
+        <p>A visible, credible sustainability switch that resonates with guests without changing operations.</p>
+      </div>
+      <div class="sector">
+        <svg class="sector-icon" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+          <rect x="4" y="16" width="28" height="16" rx="2" stroke="#0D1B2A" stroke-width="1.5"/>
+          <path d="M4 22h28" stroke="#0D1B2A" stroke-width="1.5"/>
+          <path d="M10 16V10a8 8 0 0116 0v6" stroke="#0D1B2A" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <h3>Events &amp; Conferences</h3>
+        <p>High-volume, single-use occasions are the worst offenders. PaperFumed scales to meet any event.</p>
+      </div>
+      <div class="sector">
+        <svg class="sector-icon" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+          <rect x="4" y="8" width="28" height="22" rx="2" stroke="#0D1B2A" stroke-width="1.5"/>
+          <path d="M4 14h28M12 14v16M24 14v16" stroke="#0D1B2A" stroke-width="1.5"/>
+        </svg>
+        <h3>Retail &amp; Corporate</h3>
+        <p>White-label and branded bottles for retail shelves, co-working spaces, and ESG-committed offices.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── REGULATION STRIP ─── -->
+<div class="reg-strip reveal">
+  <p class="reg-text">India banned 19 single-use plastic categories on <em>July 1, 2022.</em> Compliance mandates are tightening every year through 2029.</p>
+  <div class="reg-meta">Plastic Waste Management<br>Amendment Rules, 2021 · MOEFCC</div>
+</div>
+
+<!-- ─── CONTACT ─── -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="contact-left reveal">
+      <div class="section-eyebrow" style="margin-bottom:1.5rem"><span></span>Get in Touch</div>
+      <h2>Want to be part of<br>what's being <em>built?</em></h2>
+      <p>We're at day one. If you're in hospitality, retail, or sustainability — and you want to explore what plastic-free packaging could look like for your business — let's talk.</p>
+      <p>No pitch. No commitment. Just a real conversation.</p>
+      <div class="contact-detail">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4l6 5 6-5M2 4h12v9H2V4z" stroke="#0D1B2A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <a href="mailto:paperfumed.ocea23@gmail.com">paperfumed.ocea23@gmail.com</a>
+      </div>
+      <div class="contact-detail">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="7" r="4" stroke="#0D1B2A" stroke-width="1.2"/><path d="M8 11c-4 0-6 1.5-6 2.5h12c0-1-2-2.5-6-2.5z" stroke="#0D1B2A" stroke-width="1.2"/></svg>
+        <span>Bengaluru, India · Early Stage</span>
+      </div>
+    </div>
+
+    <div class="contact-right reveal reveal-delay-1">
+      <div class="form-box">
+        <p class="form-title">Request a demo or conversation</p>
+        <form id="demoForm" onsubmit="submitForm(event)">
+          <div class="fg-row">
+            <div class="fg">
+              <label>Name</label>
+              <input type="text" name="name" placeholder="Your name" required>
+            </div>
+            <div class="fg">
+              <label>Phone</label>
+              <input type="tel" name="phone" placeholder="+91 98765 43210">
+            </div>
+          </div>
+          <div class="fg">
+            <label>Business / Organisation</label>
+            <input type="text" name="business" placeholder="Hotel name, café, company…" required>
+          </div>
+          <div class="fg-row">
+            <div class="fg">
+              <label>Type</label>
+              <select name="type">
+                <option value="">Select…</option>
+                <option>Hotel / Resort</option>
+                <option>Café / Restaurant</option>
+                <option>Event / Venue</option>
+                <option>Retail</option>
+                <option>Corporate</option>
+                <option>Investor / Advisor</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label>City</label>
+              <select name="city">
+                <option value="">Select…</option>
+                <option>Bengaluru</option>
+                <option>Mumbai</option>
+                <option>Delhi / NCR</option>
+                <option>Chennai</option>
+                <option>Hyderabad</option>
+                <option>Pune</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="fg">
+            <label>Message (optional)</label>
+            <textarea name="message" rows="3" placeholder="What you're curious about, your use case, or anything else…"></textarea>
+          </div>
+          <button type="submit" class="form-submit" id="submitBtn">
+            Send Request
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 11L11 1M11 1H4M11 1V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </form>
+        <p class="form-note">
+          We'll respond within 48 hours.<br>
+          Or email directly: <a href="mailto:paperfumed.ocea23@gmail.com" style="color:var(--sage);font-weight:500">paperfumed.ocea23@gmail.com</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <a href="#top" class="footer-logo">
+    <svg width="20" height="24" viewBox="0 0 26 32" fill="none" aria-hidden="true">
+      <rect x="9" y="0" width="8" height="6" rx="2" fill="#0D1B2A"/>
+      <path d="M2 8 L2 30 Q2 32 4 32 L22 32 Q24 32 24 30 L24 14 L18 8 Z" fill="#0D1B2A"/>
+      <path d="M18 8 L24 14 L18 14 Z" fill="#7A8B89" opacity=".5"/>
+    </svg>
+    <span class="footer-logo-text">PaperFumed</span>
+  </a>
+  <div class="footer-right">
+    <p>Packaging · India · Early Days · April 2026</p>
+    <p><a href="mailto:paperfumed.ocea23@gmail.com">paperfumed.ocea23@gmail.com</a></p>
+  </div>
+</footer>
+
+<script>
+// ── Reveal on scroll ──
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Fire hero items on load
+window.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    document.querySelectorAll('.hero .reveal').forEach((el, i) => {
+      setTimeout(() => el.classList.add('in'), i * 120);
+    });
+  }, 80);
+});
+
+// ── Nav shrink on scroll ──
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.style.borderBottomColor = window.scrollY > 40
+    ? 'rgba(13,27,42,.12)'
+    : 'rgba(13,27,42,.06)';
+}, { passive: true });
+
+// ── Form submit ──
+function submitForm(e) {
+  e.preventDefault();
+  const form = e.target;
+  const btn = document.getElementById('submitBtn');
+  const data = new FormData(form);
+
+  // Compose mailto with form data
+  const subject = encodeURIComponent('PaperFumed Demo Request — ' + (data.get('business') || 'Unknown'));
+  const body = encodeURIComponent([
+    'Name: ' + (data.get('name') || '—'),
+    'Phone: ' + (data.get('phone') || '—'),
+    'Business: ' + (data.get('business') || '—'),
+    'Type: ' + (data.get('type') || '—'),
+    'City: ' + (data.get('city') || '—'),
+    '',
+    'Message:',
+    data.get('message') || '(none)',
+  ].join('\n'));
+
+  // Open mail client
+  window.location.href = `mailto:paperfumed.ocea23@gmail.com?subject=${subject}&body=${body}`;
+
+  // UI feedback
+  btn.innerHTML = '✓ Opening your mail app…';
+  btn.style.background = '#3B5E38';
+  btn.disabled = true;
+
+  setTimeout(() => {
+    btn.innerHTML = 'Send Request <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 11L11 1M11 1H4M11 1V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    btn.style.background = '';
+    btn.disabled = false;
+  }, 4000);
+}
+
+// ── Smooth scroll for anchor links ──
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const offset = 72;
+      window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' });
+    }
+  });
+});
+</script>
+</body>
+</html>
