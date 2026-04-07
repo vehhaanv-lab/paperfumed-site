@@ -10,114 +10,112 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400;1,9..144,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#09131D;
-  --bg1:#0B1520;
-  --bg2:#0D1823;
-  --bg3:#0F1C28;
-  --c-head:#EBE6DA;
-  --c-body:rgba(235,230,218,.5);
-  --c-dim:rgba(235,230,218,.22);
-  --c-line:rgba(235,230,218,.08);
-  --c-line2:rgba(235,230,218,.14);
-  --green:#4EAE80;
-  --green-dim:rgba(78,174,128,.2);
-  --ease:cubic-bezier(.16,1,.3,1);
-  --ease2:cubic-bezier(.4,0,.2,1);
+  --bg:    #08121B;
+  --bg1:   #0A1520;
+  --bg2:   #0C1722;
+  --bg3:   #0D1924;
+  --bgw:   #0B1A14;
+  --c1:    #EBE4D5;
+  --c2:    rgba(235,228,213,.52);
+  --c3:    rgba(235,228,213,.22);
+  --c4:    rgba(235,228,213,.1);
+  --c5:    rgba(235,228,213,.06);
+  --g:     #4DB87E;
+  --g2:    #3DA068;
+  --gdim:  rgba(77,184,126,.18);
+  --beige: #C8B99A;
+  --ease:  cubic-bezier(.16,1,.3,1);
+  --ease2: cubic-bezier(.4,0,.2,1);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px;scroll-behavior:smooth}
 body{
   font-family:'Plus Jakarta Sans',sans-serif;
   background:var(--bg);
-  color:var(--c-head);
+  color:var(--c1);
   overflow-x:hidden;
   -webkit-font-smoothing:antialiased;
   cursor:none;
 }
-::selection{background:var(--green);color:var(--bg)}
+::selection{background:var(--g);color:var(--bg)}
 
-/* ── CURSOR ── */
-#cur{
+/* ========= CURSOR ========= */
+#C{
   position:fixed;z-index:9999;pointer-events:none;
-  width:8px;height:8px;border-radius:50%;
-  background:var(--green);
+  width:7px;height:7px;border-radius:50%;
+  background:var(--g);
   transform:translate(-50%,-50%);
-  transition:width .25s var(--ease),height .25s var(--ease),opacity .2s;
-  mix-blend-mode:normal;
+  transition:width .3s var(--ease),height .3s var(--ease),background .2s,border-radius .3s;
+  will-change:transform;
 }
-#cur2{
+#C2{
   position:fixed;z-index:9998;pointer-events:none;
-  width:36px;height:36px;border-radius:50%;
-  border:1px solid rgba(78,174,128,.35);
+  width:32px;height:32px;border-radius:50%;
+  border:1px solid rgba(77,184,126,.3);
   transform:translate(-50%,-50%);
-  transition:all .08s linear;
+  will-change:transform;
 }
-body:hover #cur{opacity:1}
-.cur-big #cur{width:60px;height:60px;background:rgba(78,174,128,.06);border:1px solid rgba(78,174,128,.3)}
-.cur-big #cur2{opacity:0}
+.C-big #C{width:54px;height:54px;background:rgba(77,184,126,.08);border:1px solid rgba(77,184,126,.25);border-radius:50%}
+.C-big #C2{opacity:0}
+.C-text #C::after{
+  content:attr(data-label);
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  font-size:.55rem;letter-spacing:.06em;text-transform:uppercase;
+  font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;
+  color:var(--g);white-space:nowrap;
+}
 
-/* ── LOADER ── */
-#loader{
+/* ========= LOADER ========= */
+#LD{
   position:fixed;inset:0;z-index:5000;
   background:var(--bg);
   display:flex;align-items:center;justify-content:center;
-  transition:opacity .7s var(--ease),transform .7s var(--ease);
+  transition:opacity .8s var(--ease);
 }
-#loader.out{opacity:0;pointer-events:none}
-.load-logo{
+#LD.out{opacity:0;pointer-events:none}
+.ld-inner{
   display:flex;align-items:center;gap:14px;
-  opacity:0;transform:translateY(10px);
-  animation:llogin .6s .15s var(--ease) forwards;
+  opacity:0;transform:translateY(12px);
+  animation:ldin .7s .2s var(--ease) forwards;
 }
-@keyframes llogin{to{opacity:1;transform:translateY(0)}}
-.load-word{
-  font-family:'Plus Jakarta Sans',sans-serif;
-  font-size:1.25rem;font-weight:600;letter-spacing:-.015em;
-  color:var(--c-head);
-}
+@keyframes ldin{to{opacity:1;transform:translateY(0)}}
+.ld-word{font-size:1.1rem;font-weight:600;letter-spacing:-.01em;color:var(--c1)}
 
-/* ── NAV ── */
-#nav{
-  position:fixed;top:0;left:0;right:0;z-index:400;
+/* ========= NAV ========= */
+#N{
+  position:fixed;top:0;left:0;right:0;z-index:300;
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 3.5rem;height:64px;
-  transition:background .5s,border-color .5s,backdrop-filter .5s;
+  padding:0 3.5rem;height:62px;
   border-bottom:1px solid transparent;
+  transition:background .5s,border-color .5s,backdrop-filter .5s;
 }
-#nav.s{
-  background:rgba(9,19,29,.88);
+#N.s{
+  background:rgba(8,18,27,.9);
   backdrop-filter:blur(24px);
   -webkit-backdrop-filter:blur(24px);
-  border-bottom-color:var(--c-line);
+  border-bottom-color:var(--c4);
 }
-.nav-logo{display:flex;align-items:center;gap:11px;text-decoration:none;flex-shrink:0}
-.nav-mark .nm-body,.nav-mark .nm-cap{fill:var(--c-head);transition:fill .3s}
-.nav-mark .nm-fold{fill:rgba(78,174,128,.5);transition:fill .3s}
-.nav-word{
-  font-family:'Plus Jakarta Sans',sans-serif;
-  font-size:.95rem;font-weight:600;letter-spacing:-.015em;
-  color:var(--c-head);
+.n-logo{display:flex;align-items:center;gap:11px;text-decoration:none;cursor:none}
+.n-word{font-size:.92rem;font-weight:600;letter-spacing:-.01em;color:var(--c1)}
+.n-r{display:flex;align-items:center;gap:2rem}
+.n-links{display:flex;gap:2.5rem;list-style:none}
+.n-links a{
+  font-size:.67rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;
+  text-decoration:none;color:var(--c3);transition:color .2s;cursor:none;
 }
-.nav-r{display:flex;align-items:center;gap:2rem}
-.nav-links{display:flex;gap:2.5rem;list-style:none}
-.nav-links a{
-  font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
-  font-weight:500;text-decoration:none;
-  color:var(--c-dim);transition:color .2s;
-}
-.nav-links a:hover{color:var(--c-head)}
-.nav-pill{
+.n-links a:hover{color:var(--c1)}
+.n-btn{
   height:34px;padding:0 1.15rem;
-  border:1px solid var(--c-line2);
-  color:var(--c-head);border-radius:2px;
-  font-family:'Plus Jakarta Sans',sans-serif;
-  font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid rgba(77,184,126,.35);
+  background:rgba(77,184,126,.07);
+  color:var(--g);border-radius:2px;
+  font-size:.67rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
   text-decoration:none;display:inline-flex;align-items:center;gap:.45rem;
-  transition:background .2s,border-color .2s,transform .15s;
+  transition:background .2s,border-color .2s,transform .15s;cursor:none;
 }
-.nav-pill:hover{background:rgba(235,230,218,.07);border-color:var(--c-line2);transform:translateY(-1px)}
+.n-btn:hover{background:rgba(77,184,126,.14);transform:translateY(-1px)}
 
-/* ── HERO ── */
+/* ========= HERO ========= */
 #hero{
   min-height:100vh;
   display:flex;flex-direction:column;
@@ -127,536 +125,468 @@ body:hover #cur{opacity:1}
   position:relative;overflow:hidden;
   background:var(--bg);
 }
-/* Ambient glow */
-.h-glow{
-  position:absolute;pointer-events:none;
-  border-radius:50%;
-}
-.h-glow-a{
-  width:700px;height:400px;top:10%;left:50%;transform:translateX(-50%);
-  background:radial-gradient(ellipse,rgba(78,174,128,.07) 0%,transparent 65%);
-}
-.h-glow-b{
-  width:500px;height:300px;bottom:15%;left:35%;
-  background:radial-gradient(ellipse,rgba(14,40,80,.4) 0%,transparent 70%);
-}
-/* Grain */
-.h-grain{
-  position:absolute;inset:0;pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-  opacity:.032;mix-blend-mode:overlay;
-}
-/* Hero logo — built in SVG (no JPEG, no cutout) */
-.h-logo-wrap{
-  margin-bottom:3.25rem;z-index:2;position:relative;
-  display:flex;align-items:center;gap:14px;
+.h-gA{position:absolute;top:0;left:50%;transform:translateX(-50%);pointer-events:none;width:900px;height:500px;border-radius:50%;background:radial-gradient(ellipse,rgba(77,184,126,.055) 0%,transparent 65%)}
+.h-gB{position:absolute;bottom:10%;right:15%;pointer-events:none;width:400px;height:300px;border-radius:50%;background:radial-gradient(ellipse,rgba(14,45,80,.35) 0%,transparent 70%)}
+.h-grain{position:absolute;inset:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:.033;mix-blend-mode:overlay}
+
+.h-logo{
+  display:flex;align-items:center;gap:13px;
+  margin-bottom:3.5rem;z-index:2;position:relative;
   opacity:0;transform:translateY(14px);
   transition:opacity 1s .1s var(--ease),transform 1s .1s var(--ease);
 }
-.h-logo-wrap.on{opacity:1;transform:translateY(0)}
-.h-logo-icon{width:34px;height:auto}
-.h-logo-text{
-  font-family:'Plus Jakarta Sans',sans-serif;
-  font-size:1.25rem;font-weight:600;letter-spacing:-.015em;
-  color:var(--c-head);
-}
-/* Headline */
-.h-headline{
+.h-logo.on{opacity:1;transform:translateY(0)}
+.h-logo-w{font-size:1.15rem;font-weight:600;letter-spacing:-.01em;color:var(--c1)}
+
+.h-hl{
   font-family:'Fraunces',serif;
-  font-size:clamp(2.8rem,7vw,7.5rem);
-  font-weight:400;line-height:1.03;letter-spacing:-.05em;
-  color:var(--c-head);max-width:860px;
-  position:relative;z-index:2;
-  margin-bottom:2rem;
+  font-size:clamp(3rem,7.5vw,8rem);
+  font-weight:400;line-height:1.02;letter-spacing:-.055em;
+  color:var(--c1);max-width:860px;
+  position:relative;z-index:2;margin-bottom:2rem;
 }
-.h-headline .word{
+.hw{
   display:inline-block;
-  opacity:0;transform:translateY(28px) skewX(-2deg);
-  transition:opacity .7s var(--ease),transform .7s var(--ease);
+  opacity:0;transform:translateY(32px) skewX(-3deg);
+  transition:opacity .65s var(--ease),transform .65s var(--ease);
 }
-.h-headline .word.on{opacity:1;transform:translateY(0) skewX(0)}
-.h-headline .accent{font-style:italic;color:var(--green)}
+.hw.on{opacity:1;transform:translateY(0) skewX(0)}
+.hg{font-style:italic;color:var(--g)}
+
 .h-sub{
-  font-size:1rem;color:var(--c-body);
-  max-width:380px;line-height:1.75;font-weight:300;
+  font-size:1rem;color:var(--c2);
+  max-width:360px;line-height:1.75;font-weight:300;
   margin-bottom:3rem;z-index:2;position:relative;
-  opacity:0;transition:opacity .8s .55s var(--ease);
+  opacity:0;transition:opacity .8s .58s var(--ease);
 }
 .h-sub.on{opacity:1}
-.h-ctas{
+
+.h-btns{
   display:flex;gap:.85rem;flex-wrap:wrap;justify-content:center;
   z-index:2;position:relative;
   opacity:0;transform:translateY(10px);
-  transition:opacity .7s .7s var(--ease),transform .7s .7s var(--ease);
+  transition:opacity .7s .72s var(--ease),transform .7s .72s var(--ease);
 }
-.h-ctas.on{opacity:1;transform:translateY(0)}
-.btn-p{
+.h-btns.on{opacity:1;transform:translateY(0)}
+
+.btn-s{
   height:50px;padding:0 2.25rem;
-  background:var(--c-head);color:var(--bg);
+  background:var(--g);color:var(--bg);
   border-radius:2px;text-decoration:none;
   font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
   display:inline-flex;align-items:center;gap:.55rem;
   transition:background .2s,transform .15s;border:none;cursor:none;
   font-family:'Plus Jakarta Sans',sans-serif;
 }
-.btn-p:hover{background:#D6D0C4;transform:translateY(-2px)}
-.btn-o{
+.btn-s:hover{background:var(--g2);transform:translateY(-2px)}
+.btn-g{
   height:50px;padding:0 1.85rem;
-  border:1px solid var(--c-line2);color:var(--c-body);
+  border:1px solid var(--c4);color:var(--c2);
   border-radius:2px;text-decoration:none;
   font-size:.75rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;
   display:inline-flex;align-items:center;gap:.55rem;
   transition:border-color .2s,color .2s,transform .15s;cursor:none;
 }
-.btn-o:hover{border-color:rgba(235,230,218,.35);color:var(--c-head);transform:translateY(-2px)}
-/* Scroll indicator */
+.btn-g:hover{border-color:rgba(235,228,213,.3);color:var(--c1);transform:translateY(-2px)}
+
 .h-scroll{
   position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
   display:flex;flex-direction:column;align-items:center;gap:.5rem;
-  color:var(--c-dim);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;
-  opacity:0;transition:opacity .8s 1.4s;
-  animation:sbounce 2.8s 1.5s ease-in-out infinite;
+  color:var(--c3);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;
+  opacity:0;transition:opacity .8s 1.5s;
+  animation:sbounce 3s 1.6s ease-in-out infinite;
 }
 .h-scroll.on{opacity:1}
-@keyframes sbounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(9px)}}
+@keyframes sbounce{0%,100%{transform:translateX(-50%) translateY(0)}55%{transform:translateX(-50%) translateY(8px)}}
 
-/* ── MARQUEE ── */
-.mq-wrap{
-  overflow:hidden;background:var(--bg);
-  border-top:1px solid var(--c-line);
-  padding:.85rem 0;
+/* ========= MARQUEE ========= */
+.mq{overflow:hidden;background:var(--bg);border-top:1px solid var(--c4);padding:.9rem 0}
+.mq-t{display:flex;width:max-content;animation:mqa 44s linear infinite}
+.mq-t:hover{animation-play-state:paused}
+.mq-i{
+  font-family:'Fraunces',serif;font-style:italic;font-size:.88rem;
+  color:var(--c3);white-space:nowrap;padding:0 2.25rem;
+  display:flex;align-items:center;gap:2.25rem;
 }
-.mq-track{
-  display:flex;width:max-content;
-  animation:mqa 42s linear infinite;
-  will-change:transform;
-}
-.mq-track:hover{animation-play-state:paused}
-.mq-item{
-  font-family:'Fraunces',serif;font-style:italic;
-  font-size:.92rem;
-  color:var(--c-dim);
-  white-space:nowrap;padding:0 2rem;
-  display:flex;align-items:center;gap:2rem;
-}
-.mq-dot{width:3px;height:3px;border-radius:50%;background:var(--green);flex-shrink:0;opacity:.5}
+.mq-dot{width:3px;height:3px;border-radius:50%;background:var(--g);flex-shrink:0;opacity:.5}
 @keyframes mqa{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* ── MANIFESTO ── */
-#manifesto{
-  padding:7rem 3rem;background:var(--bg);
-  text-align:center;
-}
-.man-inner{max-width:780px;margin:0 auto}
-.man-p{
+/* ========= MANIFESTO ========= */
+#manifesto{padding:7.5rem 3rem;background:var(--bg);text-align:center}
+.mn-inner{max-width:820px;margin:0 auto}
+.mn-p{
   font-family:'Fraunces',serif;
-  font-size:clamp(1.5rem,3vw,2.45rem);
-  font-weight:400;line-height:1.35;letter-spacing:-.03em;
-  color:var(--c-head);
+  font-size:clamp(1.5rem,3vw,2.5rem);
+  font-weight:400;line-height:1.38;letter-spacing:-.03em;color:var(--c1);
 }
-.man-p em{font-style:italic;color:var(--green)}
+.mn-em{
+  display:block;
+  font-style:italic;color:var(--g);
+  margin-top:.6em;
+}
 
-/* ── FILM ── */
-#film{
-  height:360vh;
-  background:var(--bg);
-  position:relative;
-}
-.film-sticky{
-  position:sticky;top:0;height:100vh;
-  display:flex;align-items:center;justify-content:center;
-  overflow:hidden;
-}
-/* background orbs per scene */
-.film-orb{
-  position:absolute;pointer-events:none;
-  width:600px;height:600px;border-radius:50%;
-  background:radial-gradient(ellipse,rgba(78,174,128,.05) 0%,transparent 65%);
-  transition:opacity 1s ease;
-  opacity:0;
-}
-.film-progress{
-  position:absolute;bottom:0;left:0;right:0;height:1px;
-  background:var(--c-line);
-}
-.film-fill{
-  height:100%;background:var(--green);
-  transition:width .08s linear;width:0%;
-}
-.film-scene{
+/* ========= FILM ========= */
+#film{height:390vh;background:var(--bg);position:relative}
+.f-pin{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.f-progress{position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--c4)}
+.f-bar{height:100%;background:var(--g);width:0%;will-change:width}
+.f-scene{
   position:absolute;inset:0;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;padding:3rem;
-  will-change:opacity,transform;
+  text-align:center;padding:3rem 2rem;
+  pointer-events:none;will-change:opacity,transform;
 }
-.film-tag{
-  font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;
-  font-weight:500;color:var(--green);margin-bottom:1.5rem;display:block;
-  opacity:inherit;
-}
-.film-num{
+.f-n{
   font-family:'Fraunces',serif;
-  font-size:clamp(6rem,22vw,20rem);
+  font-size:clamp(5.5rem,22vw,20rem);
   font-weight:400;line-height:.85;letter-spacing:-.07em;
-  color:var(--c-head);display:block;
-  margin-bottom:2.5rem;
+  color:var(--c1);display:block;margin-bottom:2.25rem;
   will-change:transform;
 }
-.film-num sup{
-  font-size:.25em;vertical-align:.25em;letter-spacing:0;
-  color:var(--green);font-weight:300;
-}
-.film-caption{
-  font-size:1rem;color:var(--c-body);
-  line-height:1.78;font-weight:300;
-  max-width:500px;margin:0 auto;
-}
-.film-source{
-  display:block;margin-top:1.25rem;
-  font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--c-dim);opacity:.6;
-}
+.f-n sup{font-size:.26em;vertical-align:.25em;letter-spacing:0;color:var(--g);font-weight:300}
+.f-tag{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500;color:var(--g);margin-bottom:1.35rem;display:block}
+.f-cap{font-size:1rem;color:var(--c2);line-height:1.78;font-weight:300;max-width:480px;margin:0 auto}
+.f-src{display:block;margin-top:1.2rem;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--c3);opacity:.55}
 
-/* ── PRODUCT ── */
-#product{background:var(--bg1);padding-top:0}
-.prod-intro{
-  padding:6.5rem 4rem 5rem;
+/* ========= PRODUCT ========= */
+#product{background:var(--bg1);padding-bottom:5rem}
+
+.p-intro{
+  padding:6.5rem 4rem 0;
   max-width:1100px;margin:0 auto;
   display:flex;align-items:flex-end;justify-content:space-between;
   gap:3rem;flex-wrap:wrap;
 }
-.p-ey{
-  font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;
-  font-weight:500;color:var(--green);margin-bottom:1.25rem;
-  display:flex;align-items:center;gap:.75rem;
+.ey{
+  font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;color:var(--g);
+  display:flex;align-items:center;gap:.7rem;margin-bottom:1.25rem;
 }
-.p-ey::before{content:'';width:18px;height:1px;background:var(--green);flex-shrink:0}
-.prod-h{
+.ey::before{content:'';width:18px;height:1px;background:var(--g);flex-shrink:0}
+.p-h{
   font-family:'Fraunces',serif;
   font-size:clamp(2.2rem,4vw,3.75rem);
   font-weight:400;line-height:1.08;letter-spacing:-.04em;
 }
-.prod-h em{font-style:italic}
-.prod-note{
-  font-size:.88rem;color:var(--c-body);
-  max-width:300px;line-height:1.78;font-weight:300;
-}
-/* Bottle cards — proper product display */
-.prod-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  border-top:1px solid var(--c-line);
-}
-.prod-card{
-  border-right:1px solid var(--c-line);
-  padding:3.5rem 2rem 2.5rem;
-  display:flex;flex-direction:column;
-  cursor:none;
-  background:transparent;
-  transition:background .3s;
-  position:relative;overflow:hidden;
-}
-.prod-card:last-child{border-right:none}
-.prod-card::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(78,174,128,.04) 0%,transparent 60%);
-  opacity:0;transition:opacity .4s;
-}
-.prod-card:hover::before{opacity:1}
-.prod-card:hover .pc-bottle{transform:translateY(-10px)}
-/* Bottle container */
-.pc-bottle-wrap{
-  flex:1;display:flex;align-items:center;justify-content:center;
-  padding:1.5rem 0 2rem;min-height:280px;
-}
-.pc-bottle{
-  position:relative;transition:transform .5s var(--ease);
-  filter:drop-shadow(0 32px 40px rgba(0,0,0,.4));
-}
-.pc-info{border-top:1px solid var(--c-line)}
-.pc-size{
-  font-family:'Fraunces',serif;
-  font-size:2.2rem;font-weight:400;letter-spacing:-.04em;
-  color:var(--c-head);line-height:1;
-  padding:1.25rem 0 .4rem;display:block;
-}
-.pc-label{
-  font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;
-  font-weight:500;color:var(--c-dim);
-}
-/* Bottle SVG with gradient for 3D feel */
-.pc-bottle svg defs .bgrad-main{stop-color:#1A2E42}
-.pc-bottle svg defs .bgrad-light{stop-color:#263D52}
-.pc-bottle svg defs .bgrad-fold{stop-color:#1B4332}
-/* ── BOTTLE SVGs shared styles ── */
-.bsvg{overflow:visible}
+.p-h em{font-style:italic}
+.p-note{font-size:.88rem;color:var(--c2);max-width:300px;line-height:1.78;font-weight:300}
 
-/* ── SCIENCE ── */
-#science{background:var(--bg);padding:7.5rem 4rem}
-.sci-inner{max-width:1100px;margin:0 auto}
+/* Bottle Carousel */
+.bcar{
+  position:relative;
+  margin-top:4.5rem;
+  user-select:none;
+}
+.bcar-track-wrap{
+  overflow:hidden;
+  width:100%;
+}
+.bcar-track{
+  display:flex;
+  transition:transform .6s var(--ease);
+  will-change:transform;
+}
+.bcar-slide{
+  flex:0 0 100%;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  padding:0 4rem 0 6rem;
+  gap:5rem;
+  min-height:580px;
+}
+.bs-visual{
+  display:flex;align-items:center;justify-content:center;
+  padding:4rem;
+  position:relative;
+}
+.bs-visual::before{
+  content:'';position:absolute;
+  width:320px;height:320px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(77,184,126,.06) 0%,transparent 65%);
+  pointer-events:none;
+}
+.bs-svg{
+  filter:drop-shadow(0 40px 60px rgba(0,0,0,.55)) drop-shadow(0 8px 16px rgba(0,0,0,.3));
+  transition:transform .5s var(--ease);
+  position:relative;z-index:1;
+}
+.bcar-slide:hover .bs-svg{transform:translateY(-10px)}
+.bs-info{padding:1rem 0}
+.bs-size{
+  font-family:'Fraunces',serif;
+  font-size:4rem;font-weight:400;letter-spacing:-.05em;
+  color:var(--c1);line-height:1;margin-bottom:.5rem;
+}
+.bs-div{width:28px;height:1px;background:var(--g);margin:1.5rem 0}
+.bs-title{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;color:var(--g);margin-bottom:1.75rem}
+.bs-specs{list-style:none;display:flex;flex-direction:column;gap:.9rem}
+.bs-specs li{
+  font-size:.88rem;color:var(--c2);font-weight:300;line-height:1.55;
+  display:flex;align-items:flex-start;gap:.75rem;
+}
+.bs-specs li::before{
+  content:'';width:4px;height:4px;border-radius:50%;background:var(--g);
+  flex-shrink:0;margin-top:.5rem;
+}
+
+/* Carousel controls */
+.bcar-ctrl{
+  display:flex;align-items:center;justify-content:center;
+  gap:2rem;margin-top:3.5rem;padding:0 4rem;
+}
+.bcar-arrows{display:flex;gap:.75rem}
+.barr{
+  width:40px;height:40px;border-radius:50%;
+  border:1px solid var(--c4);background:transparent;
+  display:flex;align-items:center;justify-content:center;
+  cursor:none;transition:border-color .2s,background .2s,transform .15s;color:var(--c2);
+}
+.barr:hover{border-color:rgba(77,184,126,.4);background:rgba(77,184,126,.07);color:var(--g);transform:scale(1.05)}
+.bcar-dots{display:flex;gap:.65rem;align-items:center}
+.bdot{
+  width:24px;height:1px;background:var(--c4);
+  transition:background .3s,width .3s;cursor:none;
+}
+.bdot.a{background:var(--g);width:40px}
+
+/* Spec strip */
+.spec-strip{
+  max-width:1100px;margin:0 auto;
+  padding:2.5rem 4rem;
+  border-top:1px solid var(--c4);
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:1rem;
+}
+.spec-item{display:flex;align-items:flex-start;gap:.65rem}
+.spec-icon{
+  width:16px;height:16px;border-radius:50%;
+  border:1px solid rgba(77,184,126,.4);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:.1rem;
+}
+.spec-icon svg{display:block}
+.spec-txt{font-size:.75rem;color:var(--c2);font-weight:300;line-height:1.5}
+
+/* ========= SCIENCE ========= */
+#sci{background:var(--bg);padding:7.5rem 4rem}
+.sci-in{max-width:1100px;margin:0 auto}
 .sci-h{
   font-family:'Fraunces',serif;
   font-size:clamp(2.2rem,4vw,3.5rem);
   font-weight:400;line-height:1.1;letter-spacing:-.04em;
-  margin-bottom:5rem;max-width:600px;
+  margin-bottom:5rem;max-width:580px;
 }
 .sci-h em{font-style:italic}
-.sci-grid{
-  display:grid;grid-template-columns:1fr 1fr 1fr;
-  gap:1px;background:var(--c-line);
-  border:1px solid var(--c-line);
+.sci-g{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--c4);border:1px solid var(--c4);
 }
-.sci-card{
-  background:var(--bg);
-  padding:2.75rem 2.5rem;
-  transition:background .25s;
-  position:relative;overflow:hidden;
+.scard{
+  background:var(--bg);padding:2.75rem 2.5rem;
+  transition:background .25s;position:relative;overflow:hidden;
 }
-.sci-card::after{
+.scard::after{
   content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,var(--green),transparent);
-  transform:scaleX(0);transition:transform .4s var(--ease);
+  background:linear-gradient(90deg,transparent,var(--g),transparent);
+  transform:scaleX(0);transition:transform .45s var(--ease);
 }
-.sci-card:hover{background:rgba(78,174,128,.03)}
-.sci-card:hover::after{transform:scaleX(1)}
-.sci-v{
+.scard:hover{background:rgba(77,184,126,.025)}
+.scard:hover::after{transform:scaleX(1)}
+.sv{
   font-family:'Fraunces',serif;
   font-size:2.8rem;font-weight:400;letter-spacing:-.05em;
-  color:var(--green);line-height:1;
-  margin-bottom:.85rem;display:block;
+  color:var(--g);line-height:1;margin-bottom:.85rem;display:block;
 }
-.sci-card h4{
-  font-size:.8rem;font-weight:600;color:var(--c-head);
-  margin-bottom:.65rem;letter-spacing:-.01em;
-}
-.sci-card p{font-size:.8rem;color:var(--c-body);line-height:1.72;font-weight:300}
-.sci-src{
-  font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--c-dim);opacity:.5;margin-top:.6rem;display:block;
-}
+.scard h4{font-size:.8rem;font-weight:600;color:var(--c1);margin-bottom:.65rem;letter-spacing:-.01em}
+.scard p{font-size:.8rem;color:var(--c2);line-height:1.72;font-weight:300}
+.ssrc{font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--c3);opacity:.55;margin-top:.55rem;display:block}
 
-/* ── PHILOSOPHY ── */
+/* ========= PHILOSOPHY ========= */
 #phil{
-  padding:8rem 4rem;background:var(--bg2);
+  padding:9rem 3rem;
+  background:var(--bgw);
   text-align:center;position:relative;overflow:hidden;
 }
-.phil-bg{
-  position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(ellipse 70% 50% at 50% 80%,rgba(27,67,50,.18),transparent);
+/* Warm beige glow on dark forest bg */
+.phil-ga{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  pointer-events:none;
+  width:800px;height:500px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(77,184,126,.08) 0%,transparent 65%);
 }
-.phil-q{
+.phil-qm{
   font-family:'Fraunces',serif;
-  font-size:clamp(1.25rem,3vw,2.15rem);
-  font-weight:400;font-style:italic;
-  line-height:1.4;letter-spacing:-.025em;
-  color:rgba(235,230,218,.65);
-  max-width:720px;margin:0 auto 2.5rem;
+  font-size:8rem;line-height:.7;letter-spacing:0;
+  color:rgba(77,184,126,.12);
+  margin-bottom:1.5rem;display:block;
   position:relative;z-index:1;
 }
-.phil-q::before{
-  content:'\201C';
-  display:block;
+.phil-qt{
   font-family:'Fraunces',serif;
-  font-size:6rem;line-height:.6;
-  color:rgba(78,174,128,.15);
-  margin-bottom:1.5rem;font-style:normal;
+  font-size:clamp(1.5rem,3.2vw,2.5rem);
+  font-weight:400;font-style:italic;
+  line-height:1.38;letter-spacing:-.03em;
+  color:rgba(235,228,213,.75);
+  max-width:760px;margin:0 auto 3rem;
+  position:relative;z-index:1;
 }
 .phil-attr{
-  font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--c-dim);opacity:.5;
-  position:relative;z-index:1;
+  font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(235,228,213,.25);
+  position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:1rem;
 }
+.phil-attr::before,.phil-attr::after{content:'';width:32px;height:1px;background:rgba(77,184,126,.2)}
 
-/* ── REGULATION ── */
+/* ========= REGULATION ========= */
 #reg{
-  background:#163D2C;
+  background:#133326;
   padding:2.75rem 4rem;
   display:flex;align-items:center;justify-content:space-between;
   gap:2rem;flex-wrap:wrap;
 }
-.reg-text{
+.reg-t{
   font-family:'Fraunces',serif;
-  font-size:clamp(1rem,2vw,1.45rem);
-  font-weight:400;line-height:1.4;
-  color:rgba(235,230,218,.8);max-width:660px;
+  font-size:clamp(1rem,2.2vw,1.5rem);
+  font-weight:400;line-height:1.42;
+  color:rgba(235,228,213,.8);max-width:660px;
 }
-.reg-text em{font-style:italic;color:rgba(235,230,218,.95)}
-.reg-meta{
-  font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;
-  color:rgba(235,230,218,.3);text-align:right;
-  white-space:nowrap;
-}
+.reg-t em{font-style:italic;color:rgba(235,228,213,.95)}
+.reg-m{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(235,228,213,.28);text-align:right;white-space:nowrap}
 
-/* ── CONTACT ── */
+/* ========= CONTACT ========= */
 #contact{padding:7.5rem 4rem;background:var(--bg1)}
-.con-inner{
+.con-in{
   max-width:1100px;margin:0 auto;
   display:grid;grid-template-columns:1fr 1fr;gap:7rem;align-items:start;
 }
 .con-h{
   font-family:'Fraunces',serif;
-  font-size:clamp(2rem,3.5vw,3rem);
-  font-weight:400;line-height:1.1;letter-spacing:-.04em;
-  margin-bottom:1.1rem;
+  font-size:clamp(2rem,3.5vw,3.2rem);
+  font-weight:400;line-height:1.1;letter-spacing:-.04em;margin-bottom:1.1rem;
 }
-.con-h em{font-style:italic;color:var(--green)}
-.con-body{
-  font-size:.88rem;color:var(--c-body);
-  line-height:1.8;font-weight:300;margin-bottom:2.25rem;
-}
+.con-h em{font-style:italic;color:var(--g)}
+.con-b{font-size:.88rem;color:var(--c2);line-height:1.8;font-weight:300;margin-bottom:2.25rem}
 .con-a{
   display:inline-flex;align-items:center;gap:.65rem;
-  font-size:.88rem;font-weight:500;color:var(--c-head);
-  text-decoration:none;transition:color .2s;margin-bottom:.8rem;
-  cursor:none;
+  font-size:.88rem;font-weight:500;color:var(--c1);
+  text-decoration:none;transition:color .2s;margin-bottom:.85rem;cursor:none;
 }
-.con-a:hover{color:var(--green)}
-.con-a svg{opacity:.3}
-.con-loc{
-  display:flex;align-items:center;gap:.65rem;
-  font-size:.82rem;color:var(--c-body);font-weight:300;
-}
-.con-loc svg{opacity:.25}
-/* Form */
-.form-box{
-  background:rgba(235,230,218,.04);
-  border:1px solid var(--c-line);
-  border-radius:3px;padding:2.5rem;
-}
-.form-title{
-  font-size:.85rem;font-weight:600;color:var(--c-head);
-  margin-bottom:1.75rem;
-}
+.con-a:hover{color:var(--g)}
+.con-a svg{opacity:.3;flex-shrink:0}
+.con-loc{display:flex;align-items:center;gap:.65rem;font-size:.8rem;color:var(--c2);font-weight:300}
+.con-loc svg{opacity:.25;flex-shrink:0}
+.fbox{background:var(--c5);border:1px solid var(--c4);border-radius:3px;padding:2.5rem}
+.ftitle{font-size:.85rem;font-weight:600;color:var(--c1);margin-bottom:1.75rem}
 .fg{margin-bottom:1rem}
-.fg label{
-  display:block;font-size:.62rem;letter-spacing:.14em;
-  text-transform:uppercase;font-weight:600;
-  color:var(--c-dim);margin-bottom:.45rem;
-}
+.fg label{display:block;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--c3);margin-bottom:.45rem}
 .fg input,.fg select,.fg textarea{
   width:100%;padding:.78rem 1rem;
-  background:rgba(235,230,218,.05);
-  border:1px solid var(--c-line);
-  border-radius:2px;
-  font-family:'Plus Jakarta Sans',sans-serif;
-  font-size:.88rem;color:var(--c-head);
+  background:rgba(235,228,213,.04);border:1px solid var(--c4);border-radius:2px;
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:.88rem;color:var(--c1);
   outline:none;transition:border-color .2s,background .2s;resize:none;
   -webkit-appearance:none;
 }
-.fg input::placeholder,.fg textarea::placeholder{color:var(--c-dim);opacity:.6}
-.fg input:focus,.fg select:focus,.fg textarea:focus{
-  border-color:rgba(78,174,128,.4);
-  background:rgba(78,174,128,.03);
-}
+.fg input::placeholder,.fg textarea::placeholder{color:var(--c3);opacity:.7}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:rgba(77,184,126,.4);background:rgba(77,184,126,.025)}
 .fg select{
   cursor:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='rgba(235,230,218,.3)'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right .9rem center;
-  padding-right:2.25rem;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='rgba(235,228,213,.25)'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right .9rem center;padding-right:2.25rem;
 }
-.fg select option{background:#0B1520;color:var(--c-head)}
-.fg-row{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
-.form-btn{
+.fg select option{background:#0A1520}
+.fg-r{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+.fbtn{
   width:100%;height:50px;margin-top:.25rem;
-  background:var(--c-head);color:var(--bg);
-  border:none;border-radius:2px;
-  font-family:'Plus Jakarta Sans',sans-serif;
-  font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--g);color:var(--bg);border:none;border-radius:2px;
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
   cursor:none;transition:background .2s,transform .15s;
   display:flex;align-items:center;justify-content:center;gap:.5rem;
 }
-.form-btn:hover{background:#D6D0C4;transform:translateY(-1px)}
-.form-btn:disabled{opacity:.45;transform:none}
-.form-note{
-  font-size:.68rem;color:var(--c-dim);text-align:center;
-  margin-top:1.1rem;line-height:1.5;
-}
-.form-note a{color:var(--green);text-decoration:none}
+.fbtn:hover{background:var(--g2);transform:translateY(-1px)}
+.fbtn:disabled{opacity:.45;transform:none}
+.fnote{font-size:.68rem;color:var(--c3);text-align:center;margin-top:1.1rem;line-height:1.5}
+.fnote a{color:var(--g);text-decoration:none}
 
-/* ── FOOTER ── */
+/* ========= FOOTER ========= */
 footer{
-  border-top:1px solid var(--c-line);
-  padding:2rem 4rem;
-  display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:1rem;
+  border-top:1px solid var(--c4);padding:2rem 4rem;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;
   background:var(--bg);
 }
-.foot-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-.foot-name{font-size:.88rem;font-weight:600;color:var(--c-head);letter-spacing:-.01em}
-.foot-r{font-size:.62rem;color:var(--c-dim);opacity:.7;letter-spacing:.04em;text-align:right;line-height:1.65}
-.foot-r a{color:var(--c-dim);text-decoration:none}
-.foot-r a:hover{color:var(--green)}
+.flogo{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:none}
+.fname{font-size:.88rem;font-weight:600;letter-spacing:-.01em;color:var(--c1)}
+.fr{font-size:.62rem;color:var(--c3);opacity:.7;letter-spacing:.04em;text-align:right;line-height:1.65}
+.fr a{color:var(--c3);text-decoration:none}
+.fr a:hover{color:var(--g)}
 
-/* ── REVEALS ── */
-.rv{
-  opacity:0;transform:translateY(24px);
-  transition:opacity .85s var(--ease),transform .85s var(--ease);
-}
+/* ========= REVEALS ========= */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .85s var(--ease),transform .85s var(--ease)}
 .rv.on{opacity:1;transform:translateY(0)}
-.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
-.d4{transition-delay:.32s}.d5{transition-delay:.4s}.d6{transition-delay:.48s}
+.d1{transition-delay:.09s}.d2{transition-delay:.17s}.d3{transition-delay:.25s}
+.d4{transition-delay:.33s}.d5{transition-delay:.41s}.d6{transition-delay:.49s}
 
-/* ── MOBILE ── */
+/* ========= MOBILE ========= */
 @media(max-width:960px){
-  #nav{padding:0 1.5rem}
-  .nav-links{display:none}
+  #N{padding:0 1.5rem}
+  .n-links{display:none}
   #hero{padding:8rem 1.5rem 5rem}
-  .mq-item{font-size:.82rem}
   #manifesto{padding:5rem 1.5rem}
-  #film .film-caption{max-width:90vw}
-  .prod-intro{padding:5rem 1.5rem 3.5rem;flex-direction:column;align-items:flex-start}
-  .prod-grid{grid-template-columns:1fr 1fr;border-left:1px solid var(--c-line)}
-  .prod-card{border-right:none;border-left:none;border-bottom:1px solid var(--c-line)}
-  #science{padding:5rem 1.5rem}
-  .sci-grid{grid-template-columns:1fr 1fr}
+  #film .f-cap{max-width:92vw}
+  .p-intro{padding:5rem 1.5rem 0;flex-direction:column;align-items:flex-start}
+  .bcar-slide{grid-template-columns:1fr;padding:2rem 1.5rem;gap:2.5rem;min-height:auto}
+  .bs-visual{padding:2rem 1rem}
+  .spec-strip{grid-template-columns:1fr 1fr;padding:2rem 1.5rem;gap:1.25rem}
+  #sci{padding:5rem 1.5rem}
+  .sci-g{grid-template-columns:1fr 1fr}
   #phil{padding:5.5rem 1.5rem}
   #reg{padding:2rem 1.5rem;flex-direction:column}
-  .reg-meta{text-align:left}
+  .reg-m{text-align:left}
   #contact{padding:5rem 1.5rem}
-  .con-inner{grid-template-columns:1fr;gap:3.5rem}
+  .con-in{grid-template-columns:1fr;gap:3.5rem}
   footer{padding:1.75rem 1.5rem;flex-direction:column;align-items:flex-start}
-  .foot-r{text-align:left}
-  .fg-row{grid-template-columns:1fr}
+  .fr{text-align:left}
+  .fg-r{grid-template-columns:1fr}
+  .bcar-ctrl{padding:0 1.5rem}
   body{cursor:auto}
-  #cur,#cur2{display:none}
+  #C,#C2{display:none}
 }
-@media(max-width:560px){.sci-grid{grid-template-columns:1fr}.prod-grid{grid-template-columns:1fr}}
+@media(max-width:560px){.sci-g{grid-template-columns:1fr}.spec-strip{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
 
-<!-- CURSOR -->
-<div id="cur"></div>
-<div id="cur2"></div>
+<div id="C"></div>
+<div id="C2"></div>
 
 <!-- LOADER -->
-<div id="loader">
-  <div class="load-logo">
-    <svg width="28" height="36" viewBox="0 0 26 33" fill="none">
-      <rect x="8" y="0" width="10" height="6.5" rx="2" fill="#EBE6DA"/>
-      <path d="M2 8.5 L2 31 Q2 33 4 33 L22 33 Q24 33 24 31 L24 14.5 L16.5 8.5 Z" fill="#EBE6DA"/>
-      <path d="M16.5 8.5 L24 14.5 L16.5 14.5 Z" fill="rgba(78,174,128,.55)"/>
+<div id="LD">
+  <div class="ld-inner">
+    <svg width="26" height="33" viewBox="0 0 26 33" fill="none">
+      <rect x="8" y="0" width="10" height="6.5" rx="2" fill="#EBE4D5"/>
+      <path fill="#EBE4D5" d="M2 8.5L2 31Q2 33 4 33L22 33Q24 33 24 31L24 14.5L16.5 8.5Z"/>
+      <path fill="rgba(77,184,126,.55)" d="M16.5 8.5L24 14.5L16.5 14.5Z"/>
     </svg>
-    <span class="load-word">PaperFumed</span>
+    <span class="ld-word">PaperFumed</span>
   </div>
 </div>
 
 <!-- NAV -->
-<nav id="nav">
-  <a href="#hero" class="nav-logo" style="cursor:none">
-    <svg class="nav-mark" width="22" height="28" viewBox="0 0 26 33" fill="none">
-      <rect x="8" y="0" width="10" height="6.5" rx="2" class="nm-cap" fill="#EBE6DA"/>
-      <path class="nm-body" fill="#EBE6DA" d="M2 8.5 L2 31 Q2 33 4 33 L22 33 Q24 33 24 31 L24 14.5 L16.5 8.5 Z"/>
-      <path class="nm-fold" fill="rgba(78,174,128,.55)" d="M16.5 8.5 L24 14.5 L16.5 14.5 Z"/>
+<nav id="N">
+  <a href="#hero" class="n-logo">
+    <svg width="20" height="26" viewBox="0 0 26 33" fill="none">
+      <rect x="8" y="0" width="10" height="6.5" rx="2" fill="#EBE4D5"/>
+      <path fill="#EBE4D5" d="M2 8.5L2 31Q2 33 4 33L22 33Q24 33 24 31L24 14.5L16.5 8.5Z"/>
+      <path fill="rgba(77,184,126,.55)" d="M16.5 8.5L24 14.5L16.5 14.5Z"/>
     </svg>
-    <span class="nav-word">PaperFumed</span>
+    <span class="n-word">PaperFumed</span>
   </a>
-  <div class="nav-r">
-    <ul class="nav-links">
-      <li><a href="#product" style="cursor:none">Product</a></li>
-      <li><a href="#science" style="cursor:none">Science</a></li>
-      <li><a href="#contact" style="cursor:none">Contact</a></li>
+  <div class="n-r">
+    <ul class="n-links">
+      <li><a href="#product">Product</a></li>
+      <li><a href="#sci">Science</a></li>
     </ul>
-    <a href="#contact" class="nav-pill">
+    <a href="#contact" class="n-btn">
       Get Early Access
       <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
@@ -666,30 +596,30 @@ footer{
 <!-- HERO -->
 <section id="hero">
   <div class="h-grain"></div>
-  <div class="h-glow h-glow-a"></div>
-  <div class="h-glow h-glow-b"></div>
+  <div class="h-gA"></div>
+  <div class="h-gB"></div>
 
-  <div class="h-logo-wrap" id="hLogoWrap">
-    <svg class="h-logo-icon" width="38" height="48" viewBox="0 0 26 33" fill="none">
-      <rect x="8" y="0" width="10" height="6.5" rx="2" fill="#EBE6DA"/>
-      <path fill="#EBE6DA" d="M2 8.5 L2 31 Q2 33 4 33 L22 33 Q24 33 24 31 L24 14.5 L16.5 8.5 Z"/>
-      <path fill="rgba(78,174,128,.55)" d="M16.5 8.5 L24 14.5 L16.5 14.5 Z"/>
+  <div class="h-logo" id="hLogo">
+    <svg width="36" height="46" viewBox="0 0 26 33" fill="none">
+      <rect x="8" y="0" width="10" height="6.5" rx="2" fill="#EBE4D5"/>
+      <path fill="#EBE4D5" d="M2 8.5L2 31Q2 33 4 33L22 33Q24 33 24 31L24 14.5L16.5 8.5Z"/>
+      <path fill="rgba(77,184,126,.55)" d="M16.5 8.5L24 14.5L16.5 14.5Z"/>
     </svg>
-    <span class="h-logo-text">PaperFumed</span>
+    <span class="h-logo-w">PaperFumed</span>
   </div>
 
-  <h1 class="h-headline" id="hHead" aria-label="Exploring what comes after Plastic">
-    <span class="word">Exploring</span>&nbsp;<span class="word">what</span>&nbsp;<span class="word">comes</span><br><span class="word">after</span>&nbsp;<span class="word accent">Plastic.</span>
+  <h1 class="h-hl" id="hHead" aria-label="Exploring what comes after Plastic">
+    <span class="hw">Exploring</span>&nbsp;<span class="hw">what</span>&nbsp;<span class="hw">comes</span><br><span class="hw">after</span>&nbsp;<span class="hw hg">Plastic.</span>
   </h1>
 
   <p class="h-sub" id="hSub">Building paper-based packaging for India.<br>Starting with the water bottle.</p>
 
-  <div class="h-ctas" id="hCtas">
-    <a href="#contact" class="btn-p">
+  <div class="h-btns" id="hBtns">
+    <a href="#contact" class="btn-s">
       Get Early Access
       <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M1 11L11 1M11 1H4M11 1V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
-    <a href="#product" class="btn-o">See the Product</a>
+    <a href="#product" class="btn-g">See the Product</a>
   </div>
 
   <div class="h-scroll" id="hScroll">
@@ -699,307 +629,349 @@ footer{
 </section>
 
 <!-- MARQUEE -->
-<div class="mq-wrap" aria-hidden="true">
-  <div class="mq-track">
-    <span class="mq-item">Paper bottles<span class="mq-dot"></span></span>
-    <span class="mq-item">Plastic-free<span class="mq-dot"></span></span>
-    <span class="mq-item">India-built<span class="mq-dot"></span></span>
-    <span class="mq-item">FSC certified<span class="mq-dot"></span></span>
-    <span class="mq-item">Decomposes in weeks<span class="mq-dot"></span></span>
-    <span class="mq-item">Bio-based barrier<span class="mq-dot"></span></span>
-    <span class="mq-item">Early stage<span class="mq-dot"></span></span>
-    <span class="mq-item">Commercial scale<span class="mq-dot"></span></span>
-    <span class="mq-item">Regulation-safe<span class="mq-dot"></span></span>
-    <span class="mq-item">85% paper<span class="mq-dot"></span></span>
-    <span class="mq-item">Paper bottles<span class="mq-dot"></span></span>
-    <span class="mq-item">Plastic-free<span class="mq-dot"></span></span>
-    <span class="mq-item">India-built<span class="mq-dot"></span></span>
-    <span class="mq-item">FSC certified<span class="mq-dot"></span></span>
-    <span class="mq-item">Decomposes in weeks<span class="mq-dot"></span></span>
-    <span class="mq-item">Bio-based barrier<span class="mq-dot"></span></span>
-    <span class="mq-item">Early stage<span class="mq-dot"></span></span>
-    <span class="mq-item">Commercial scale<span class="mq-dot"></span></span>
-    <span class="mq-item">Regulation-safe<span class="mq-dot"></span></span>
-    <span class="mq-item">85% paper<span class="mq-dot"></span></span>
+<div class="mq" aria-hidden="true">
+  <div class="mq-t">
+    <span class="mq-i">Paper bottles<span class="mq-dot"></span></span>
+    <span class="mq-i">Plastic-free<span class="mq-dot"></span></span>
+    <span class="mq-i">India-built<span class="mq-dot"></span></span>
+    <span class="mq-i">FSC certified<span class="mq-dot"></span></span>
+    <span class="mq-i">Decomposes in weeks<span class="mq-dot"></span></span>
+    <span class="mq-i">Bio-based barrier<span class="mq-dot"></span></span>
+    <span class="mq-i">Early stage<span class="mq-dot"></span></span>
+    <span class="mq-i">Commercial scale<span class="mq-dot"></span></span>
+    <span class="mq-i">Regulation-safe<span class="mq-dot"></span></span>
+    <span class="mq-i">85% paper<span class="mq-dot"></span></span>
+    <span class="mq-i">Paper bottles<span class="mq-dot"></span></span>
+    <span class="mq-i">Plastic-free<span class="mq-dot"></span></span>
+    <span class="mq-i">India-built<span class="mq-dot"></span></span>
+    <span class="mq-i">FSC certified<span class="mq-dot"></span></span>
+    <span class="mq-i">Decomposes in weeks<span class="mq-dot"></span></span>
+    <span class="mq-i">Bio-based barrier<span class="mq-dot"></span></span>
+    <span class="mq-i">Early stage<span class="mq-dot"></span></span>
+    <span class="mq-i">Commercial scale<span class="mq-dot"></span></span>
+    <span class="mq-i">Regulation-safe<span class="mq-dot"></span></span>
+    <span class="mq-i">85% paper<span class="mq-dot"></span></span>
   </div>
 </div>
 
 <!-- MANIFESTO -->
 <section id="manifesto">
-  <div class="man-inner rv">
-    <p class="man-p">Plastic packaging has been the default for sixty years. Not because it was the best material. Because no one built a serious alternative at scale. <em>That is what we are doing.</em></p>
+  <div class="mn-inner rv">
+    <p class="mn-p">
+      Plastic packaging has been the default for sixty years.
+      Not because it was the best material.
+      Because no one built a serious alternative at scale.
+      <span class="mn-em">That is what we are doing.</span>
+    </p>
   </div>
 </section>
 
 <!-- FILM -->
-<section id="film" aria-label="Plastic waste facts">
-  <div class="film-sticky" id="filmPin">
-    <div class="film-orb" id="fo0" style="left:50%;top:50%;transform:translate(-50%,-50%)"></div>
-    <div class="film-progress"><div class="film-fill" id="filmFill"></div></div>
+<section id="film" aria-label="Plastic waste context">
+  <div class="f-pin" id="fPin">
+    <div class="f-progress"><div class="f-bar" id="fBar"></div></div>
 
-    <div class="film-scene" id="fs0">
-      <span class="film-tag">#01 &mdash; The Scale</span>
-      <span class="film-num" id="fn0">#1</span>
-      <p class="film-caption">India is now the world's largest plastic polluter. 9.3 to 10.2 million tonnes of plastic waste generated every year. Nearly one-fifth of all global emissions.</p>
-      <span class="film-source">Nature Journal &middot; University of Leeds &middot; 2024</span>
+    <div class="f-scene" id="fS0">
+      <span class="f-tag">01 &middot; The Scale</span>
+      <span class="f-n" id="fN0">#1</span>
+      <p class="f-cap">India is now the world's largest plastic polluter. 9.3 to 10.2 million tonnes of plastic waste generated every year. Nearly one-fifth of all global emissions.</p>
+      <span class="f-src">Nature Journal &middot; University of Leeds &middot; 2024</span>
     </div>
 
-    <div class="film-scene" id="fs1">
-      <span class="film-tag">#02 &mdash; The Reality</span>
-      <span class="film-num" id="fn1">12<sup>%</sup></span>
-      <p class="film-caption">Of India's plastic is actually recycled after accounting for processing losses. The rest ends up in rivers, open landfills, and roadsides. Unaccounted. Unmanaged.</p>
-      <span class="film-source">Centre for Science &amp; Environment &middot; CPCB</span>
+    <div class="f-scene" id="fS1">
+      <span class="f-tag">02 &middot; The Reality</span>
+      <span class="f-n" id="fN1">12<sup>%</sup></span>
+      <p class="f-cap">Of India's plastic is actually recycled after accounting for processing losses. The rest ends up in rivers, open landfills, and roadsides. Unaccounted. Unmanaged.</p>
+      <span class="f-src">Centre for Science &amp; Environment &middot; CPCB</span>
     </div>
 
-    <div class="film-scene" id="fs2">
-      <span class="film-tag">#03 &mdash; The Problem</span>
-      <span class="film-num" id="fn2">800<sup>yr</sup></span>
-      <p class="film-caption">How long a standard plastic bottle takes to decompose in a landfill. A paper-based bottle degrades in two to six weeks. That difference is everything.</p>
-      <span class="film-source">Global plastics decomposition research</span>
+    <div class="f-scene" id="fS2">
+      <span class="f-tag">03 &middot; The Difference</span>
+      <span class="f-n" id="fN2">800<sup>yr</sup></span>
+      <p class="f-cap">How long a standard plastic bottle takes to decompose in a landfill. A paper-based bottle degrades in two to six weeks. That difference is everything.</p>
+      <span class="f-src">Global plastics decomposition research consensus</span>
     </div>
   </div>
 </section>
 
 <!-- PRODUCT -->
 <section id="product">
-  <div class="prod-intro">
+  <div class="p-intro">
     <div>
-      <div class="p-ey rv">The Product</div>
-      <h2 class="prod-h rv">A paper bottle<br>that <em>holds water.</em></h2>
+      <div class="ey rv">The Product</div>
+      <h2 class="p-h rv">A paper bottle<br>that <em>holds water.</em></h2>
     </div>
-    <p class="prod-note rv d2">85% paper. Bio-based food-safe lining. Recyclable in the paper stream. Decomposes in weeks. Built for commercial volumes.</p>
+    <p class="p-note rv d2">85% paper. Bio-based food-safe lining. Recyclable in the paper stream. Decomposes in weeks. Built for commercial volumes.</p>
   </div>
 
-  <div class="prod-grid rv">
+  <!-- CAROUSEL -->
+  <div class="bcar rv">
+    <div class="bcar-track-wrap">
+      <div class="bcar-track" id="bTrack">
 
-    <!-- 200ml -->
-    <div class="prod-card">
-      <div class="pc-bottle-wrap">
-        <div class="pc-bottle">
-          <svg class="bsvg" width="90" height="220" viewBox="0 0 90 220">
-            <defs>
-              <linearGradient id="bg200" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stop-color="#223344"/>
-                <stop offset="40%" stop-color="#2A3F52"/>
-                <stop offset="100%" stop-color="#1A2B3A"/>
-              </linearGradient>
-              <linearGradient id="bg200h" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stop-color="#2D4558" stop-opacity="0"/>
-                <stop offset="50%" stop-color="#3A5570" stop-opacity="0.6"/>
-                <stop offset="100%" stop-color="#2D4558" stop-opacity="0"/>
-              </linearGradient>
-            </defs>
-            <!-- Cap -->
-            <rect x="30" y="1" width="30" height="14" rx="4" fill="#253545"/>
-            <rect x="32" y="2" width="26" height="12" rx="3" fill="#2E4257"/>
-            <!-- Neck -->
-            <path d="M28 15 L28 26 L62 26 L62 15" fill="#263849"/>
-            <!-- Body -->
-            <path d="M15 28 L15 202 Q15 210 23 210 L67 210 Q75 210 75 202 L75 48 L55 28 Z" fill="url(#bg200)"/>
-            <!-- Fold corner -->
-            <path d="M55 28 L75 48 L55 48 Z" fill="rgba(78,174,128,.22)"/>
-            <!-- Highlight stripe left -->
-            <path d="M20 45 L20 195 Q20 204 25 205 L28 205 L28 45 Z" fill="rgba(255,255,255,.04)"/>
-            <!-- Label zone -->
-            <rect x="21" y="82" width="43" height="72" rx="2" fill="rgba(235,230,218,.04)"/>
-            <!-- Brand -->
-            <text x="42" y="117" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="7" fill="rgba(235,230,218,.5)">PaperFumed</text>
-            <text x="42" y="131" text-anchor="middle" font-family="sans-serif" font-size="5.5" fill="rgba(235,230,218,.18)" letter-spacing="1.5">200 ml</text>
-            <!-- Highlight band -->
-            <rect x="21" y="62" width="43" height="12" rx="0" fill="url(#bg200h)"/>
-            <!-- Bottom detail -->
-            <line x1="28" y1="175" x2="62" y2="175" stroke="rgba(78,174,128,.12)" stroke-width="1"/>
-          </svg>
+        <!-- SLIDE 0: 200ml -->
+        <div class="bcar-slide">
+          <div class="bs-visual">
+            <svg class="bs-svg" width="130" height="310" viewBox="0 0 110 290" fill="none">
+              <defs>
+                <linearGradient id="g200" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#18303F"/>
+                  <stop offset="38%" stop-color="#244555"/>
+                  <stop offset="100%" stop-color="#162838"/>
+                </linearGradient>
+                <linearGradient id="hl200" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#3A6070" stop-opacity="0"/>
+                  <stop offset="50%" stop-color="#4A7888" stop-opacity="0.45"/>
+                  <stop offset="100%" stop-color="#3A6070" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <rect x="36" y="1" width="38" height="16" rx="4.5" fill="#203040"/>
+              <rect x="38" y="2" width="34" height="14" rx="3.5" fill="#2A3F52"/>
+              <path d="M34 17L34 30L76 30L76 17" fill="#243549"/>
+              <path d="M16 32L16 266Q16 274 24 274L86 274Q94 274 94 266L94 52L70 32Z" fill="url(#g200)"/>
+              <path d="M70 32L94 56L70 56Z" fill="rgba(77,184,126,.2)"/>
+              <path d="M22 50L22 258Q22 268 27 269L31 269L31 50Z" fill="rgba(255,255,255,.04)"/>
+              <rect x="22" y="82" width="50" height="74" rx="2" fill="rgba(235,228,213,.04)"/>
+              <rect x="22" y="60" width="50" height="14" fill="url(#hl200)"/>
+              <text x="47" y="118" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="8.5" fill="rgba(235,228,213,.55)">PaperFumed</text>
+              <text x="47" y="134" text-anchor="middle" font-family="sans-serif" font-size="6" fill="rgba(235,228,213,.2)" letter-spacing="1.5">200 ml</text>
+              <line x1="30" y1="226" x2="70" y2="226" stroke="rgba(77,184,126,.14)" stroke-width="1"/>
+            </svg>
+          </div>
+          <div class="bs-info">
+            <div class="bs-size">200ml</div>
+            <div class="bs-div"></div>
+            <div class="bs-title">Compact format</div>
+            <ul class="bs-specs">
+              <li>85% FSC-certified paper construction</li>
+              <li>Bio-based food-safe inner barrier</li>
+              <li>Fully recyclable in the paper stream</li>
+              <li>Decomposes in 2 to 6 weeks</li>
+              <li>Custom brand printing available</li>
+            </ul>
+          </div>
         </div>
-      </div>
-      <div class="pc-info">
-        <span class="pc-size">200ml</span>
-        <span class="pc-label">Compact &middot; Minibar</span>
-      </div>
-    </div>
 
-    <!-- 330ml -->
-    <div class="prod-card">
-      <div class="pc-bottle-wrap">
-        <div class="pc-bottle">
-          <svg class="bsvg" width="100" height="260" viewBox="0 0 100 260">
-            <defs>
-              <linearGradient id="bg330" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stop-color="#1E3042"/>
-                <stop offset="42%" stop-color="#284055"/>
-                <stop offset="100%" stop-color="#192838"/>
-              </linearGradient>
-              <linearGradient id="bg330h" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stop-color="#3A5570" stop-opacity="0"/>
-                <stop offset="50%" stop-color="#4A6882" stop-opacity="0.55"/>
-                <stop offset="100%" stop-color="#3A5570" stop-opacity="0"/>
-              </linearGradient>
-            </defs>
-            <rect x="33" y="1" width="34" height="16" rx="4.5" fill="#253545"/>
-            <rect x="35" y="2" width="30" height="14" rx="3.5" fill="#2E4257"/>
-            <path d="M31 17 L31 30 L69 30 L69 17" fill="#263849"/>
-            <path d="M15 32 L15 240 Q15 250 24 250 L76 250 Q85 250 85 240 L85 57 L63 32 Z" fill="url(#bg330)"/>
-            <path d="M63 32 L85 57 L63 57 Z" fill="rgba(78,174,128,.22)"/>
-            <path d="M21 50 L21 232 Q21 242 26 243 L29 243 L29 50 Z" fill="rgba(255,255,255,.04)"/>
-            <rect x="22" y="100" width="50" height="80" rx="2" fill="rgba(235,230,218,.04)"/>
-            <text x="47" y="140" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="8" fill="rgba(235,230,218,.52)">PaperFumed</text>
-            <text x="47" y="156" text-anchor="middle" font-family="sans-serif" font-size="6" fill="rgba(235,230,218,.18)" letter-spacing="1.5">330 ml</text>
-            <rect x="22" y="72" width="50" height="18" rx="0" fill="url(#bg330h)"/>
-            <line x1="30" y1="208" x2="70" y2="208" stroke="rgba(78,174,128,.12)" stroke-width="1"/>
-          </svg>
+        <!-- SLIDE 1: 330ml -->
+        <div class="bcar-slide">
+          <div class="bs-visual">
+            <svg class="bs-svg" width="140" height="340" viewBox="0 0 116 300" fill="none">
+              <defs>
+                <linearGradient id="g330" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#16303F"/>
+                  <stop offset="40%" stop-color="#224355"/>
+                  <stop offset="100%" stop-color="#142636"/>
+                </linearGradient>
+                <linearGradient id="hl330" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#3A6070" stop-opacity="0"/>
+                  <stop offset="50%" stop-color="#4A7888" stop-opacity="0.42"/>
+                  <stop offset="100%" stop-color="#3A6070" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <rect x="39" y="1" width="38" height="18" rx="5" fill="#1E3040"/>
+              <rect x="41" y="2" width="34" height="16" rx="4" fill="#28415A"/>
+              <path d="M37 19L37 34L79 34L79 19" fill="#223549"/>
+              <path d="M15 36L15 278Q15 288 24 288L92 288Q101 288 101 278L101 58L75 36Z" fill="url(#g330)"/>
+              <path d="M75 36L101 62L75 62Z" fill="rgba(77,184,126,.2)"/>
+              <path d="M22 54L22 270Q22 282 27 283L31 283L31 54Z" fill="rgba(255,255,255,.04)"/>
+              <rect x="22" y="92" width="56" height="82" rx="2" fill="rgba(235,228,213,.04)"/>
+              <rect x="22" y="68" width="56" height="16" fill="url(#hl330)"/>
+              <text x="51" y="131" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="9" fill="rgba(235,228,213,.56)">PaperFumed</text>
+              <text x="51" y="149" text-anchor="middle" font-family="sans-serif" font-size="6.5" fill="rgba(235,228,213,.2)" letter-spacing="1.5">330 ml</text>
+              <line x1="32" y1="244" x2="74" y2="244" stroke="rgba(77,184,126,.14)" stroke-width="1"/>
+            </svg>
+          </div>
+          <div class="bs-info">
+            <div class="bs-size">330ml</div>
+            <div class="bs-div"></div>
+            <div class="bs-title">Standard format</div>
+            <ul class="bs-specs">
+              <li>85% FSC-certified paper construction</li>
+              <li>Bio-based food-safe inner barrier</li>
+              <li>Durable and splash-resistant surface</li>
+              <li>Full surface printing with water-based ink</li>
+              <li>Recyclable as paper packaging</li>
+            </ul>
+          </div>
         </div>
-      </div>
-      <div class="pc-info">
-        <span class="pc-size">330ml</span>
-        <span class="pc-label">Standard &middot; Cafe</span>
-      </div>
-    </div>
 
-    <!-- 500ml -->
-    <div class="prod-card">
-      <div class="pc-bottle-wrap">
-        <div class="pc-bottle">
-          <svg class="bsvg" width="112" height="300" viewBox="0 0 112 300">
-            <defs>
-              <linearGradient id="bg500" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stop-color="#1C2E40"/>
-                <stop offset="42%" stop-color="#263D52"/>
-                <stop offset="100%" stop-color="#172535"/>
-              </linearGradient>
-              <linearGradient id="bg500h" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stop-color="#3A5570" stop-opacity="0"/>
-                <stop offset="50%" stop-color="#4E6E88" stop-opacity="0.5"/>
-                <stop offset="100%" stop-color="#3A5570" stop-opacity="0"/>
-              </linearGradient>
-            </defs>
-            <rect x="37" y="1" width="38" height="18" rx="5" fill="#243444"/>
-            <rect x="39" y="2" width="34" height="16" rx="4" fill="#2D4156"/>
-            <path d="M35 19 L35 35 L77 35 L77 19" fill="#253748"/>
-            <path d="M14 37 L14 276 Q14 288 24 288 L88 288 Q98 288 98 276 L98 66 L72 37 Z" fill="url(#bg500)"/>
-            <path d="M72 37 L98 66 L72 66 Z" fill="rgba(78,174,128,.25)"/>
-            <path d="M20 55 L20 268 Q20 280 26 281 L30 281 L30 55 Z" fill="rgba(255,255,255,.04)"/>
-            <rect x="22" y="112" width="58" height="95" rx="2" fill="rgba(235,230,218,.04)"/>
-            <text x="56" y="158" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="9" fill="rgba(235,230,218,.55)">PaperFumed</text>
-            <text x="56" y="178" text-anchor="middle" font-family="sans-serif" font-size="6.5" fill="rgba(235,230,218,.18)" letter-spacing="1.5">500 ml</text>
-            <rect x="22" y="82" width="58" height="20" rx="0" fill="url(#bg500h)"/>
-            <line x1="32" y1="240" x2="80" y2="240" stroke="rgba(78,174,128,.15)" stroke-width="1"/>
-            <text x="56" y="254" text-anchor="middle" font-family="sans-serif" font-size="5" fill="rgba(78,174,128,.25)" letter-spacing="2">PAPER</text>
-          </svg>
+        <!-- SLIDE 2: 500ml -->
+        <div class="bcar-slide">
+          <div class="bs-visual">
+            <svg class="bs-svg" width="154" height="380" viewBox="0 0 122 330" fill="none">
+              <defs>
+                <linearGradient id="g500" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#14303F"/>
+                  <stop offset="40%" stop-color="#204055"/>
+                  <stop offset="100%" stop-color="#122434"/>
+                </linearGradient>
+                <linearGradient id="hl500" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#3A6070" stop-opacity="0"/>
+                  <stop offset="50%" stop-color="#4A7888" stop-opacity="0.4"/>
+                  <stop offset="100%" stop-color="#3A6070" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <rect x="41" y="1" width="40" height="20" rx="5.5" fill="#1C3040"/>
+              <rect x="43" y="2" width="36" height="18" rx="4.5" fill="#263F58"/>
+              <path d="M39 22L39 38L83 38L83 22" fill="#203549"/>
+              <path d="M14 40L14 305Q14 316 24 316L98 316Q108 316 108 305L108 64L80 40Z" fill="url(#g500)"/>
+              <path d="M80 40L108 68L80 68Z" fill="rgba(77,184,126,.22)"/>
+              <path d="M20 58L20 297Q20 310 26 311L30 311L30 58Z" fill="rgba(255,255,255,.04)"/>
+              <rect x="22" y="100" width="64" height="92" rx="2" fill="rgba(235,228,213,.04)"/>
+              <rect x="22" y="74" width="64" height="18" fill="url(#hl500)"/>
+              <text x="54" y="143" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="10" fill="rgba(235,228,213,.58)">PaperFumed</text>
+              <text x="54" y="163" text-anchor="middle" font-family="sans-serif" font-size="7" fill="rgba(235,228,213,.2)" letter-spacing="1.5">500 ml</text>
+              <line x1="34" y1="266" x2="78" y2="266" stroke="rgba(77,184,126,.16)" stroke-width="1"/>
+              <text x="54" y="281" text-anchor="middle" font-family="sans-serif" font-size="5.5" fill="rgba(77,184,126,.28)" letter-spacing="2">PAPER</text>
+            </svg>
+          </div>
+          <div class="bs-info">
+            <div class="bs-size">500ml</div>
+            <div class="bs-div"></div>
+            <div class="bs-title">Large format</div>
+            <ul class="bs-specs">
+              <li>85% FSC-certified paper construction</li>
+              <li>Bio-based food-safe inner barrier</li>
+              <li>Unique haptic and shelf presence</li>
+              <li>Embossing and debossing available</li>
+              <li>Recyclable as paper packaging</li>
+            </ul>
+          </div>
         </div>
-      </div>
-      <div class="pc-info">
-        <span class="pc-size">500ml</span>
-        <span class="pc-label">Hotel &middot; Events</span>
-      </div>
-    </div>
 
-    <!-- 1000ml -->
-    <div class="prod-card">
-      <div class="pc-bottle-wrap">
-        <div class="pc-bottle">
-          <svg class="bsvg" width="124" height="340" viewBox="0 0 124 340">
-            <defs>
-              <linearGradient id="bg1L" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stop-color="#192B3C"/>
-                <stop offset="42%" stop-color="#233A4F"/>
-                <stop offset="100%" stop-color="#142231"/>
-              </linearGradient>
-              <linearGradient id="bg1Lh" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stop-color="#3A5570" stop-opacity="0"/>
-                <stop offset="50%" stop-color="#4E6E88" stop-opacity="0.48"/>
-                <stop offset="100%" stop-color="#3A5570" stop-opacity="0"/>
-              </linearGradient>
-            </defs>
-            <rect x="41" y="1" width="42" height="20" rx="5.5" fill="#223242"/>
-            <rect x="43" y="2" width="38" height="18" rx="4.5" fill="#2B3F55"/>
-            <path d="M39 21 L39 39 L85 39 L85 21" fill="#233547"/>
-            <path d="M13 41 L13 314 Q13 328 25 328 L99 328 Q111 328 111 314 L111 75 L81 41 Z" fill="url(#bg1L)"/>
-            <path d="M81 41 L111 75 L81 75 Z" fill="rgba(78,174,128,.25)"/>
-            <path d="M20 60 L20 304 Q20 318 27 319 L31 319 L31 60 Z" fill="rgba(255,255,255,.04)"/>
-            <rect x="23" y="126" width="66" height="108" rx="2" fill="rgba(235,230,218,.04)"/>
-            <text x="62" y="178" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="10" fill="rgba(235,230,218,.58)">PaperFumed</text>
-            <text x="62" y="200" text-anchor="middle" font-family="sans-serif" font-size="7" fill="rgba(235,230,218,.18)" letter-spacing="1.5">1000 ml</text>
-            <rect x="23" y="92" width="66" height="22" rx="0" fill="url(#bg1Lh)"/>
-            <line x1="34" y1="272" x2="90" y2="272" stroke="rgba(78,174,128,.15)" stroke-width="1"/>
-            <text x="62" y="288" text-anchor="middle" font-family="sans-serif" font-size="5.5" fill="rgba(78,174,128,.25)" letter-spacing="2">PAPER</text>
-          </svg>
+        <!-- SLIDE 3: 1000ml -->
+        <div class="bcar-slide">
+          <div class="bs-visual">
+            <svg class="bs-svg" width="172" height="420" viewBox="0 0 130 360" fill="none">
+              <defs>
+                <linearGradient id="g1L" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#12303E"/>
+                  <stop offset="40%" stop-color="#1E3E54"/>
+                  <stop offset="100%" stop-color="#102232"/>
+                </linearGradient>
+                <linearGradient id="hl1L" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#3A6070" stop-opacity="0"/>
+                  <stop offset="50%" stop-color="#4A7888" stop-opacity="0.38"/>
+                  <stop offset="100%" stop-color="#3A6070" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <rect x="44" y="1" width="42" height="22" rx="6" fill="#1A3040"/>
+              <rect x="46" y="2" width="38" height="20" rx="5" fill="#243D56"/>
+              <path d="M42 23L42 42L88 42L88 23" fill="#1E3449"/>
+              <path d="M13 44L13 334Q13 347 24 347L106 347Q117 347 117 334L117 72L88 44Z" fill="url(#g1L)"/>
+              <path d="M88 44L117 76L88 76Z" fill="rgba(77,184,126,.22)"/>
+              <path d="M20 62L20 326Q20 340 26 341L31 341L31 62Z" fill="rgba(255,255,255,.04)"/>
+              <rect x="22" y="112" width="72" height="105" rx="2" fill="rgba(235,228,213,.04)"/>
+              <rect x="22" y="84" width="72" height="20" fill="url(#hl1L)"/>
+              <text x="58" y="158" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="11" fill="rgba(235,228,213,.6)">PaperFumed</text>
+              <text x="58" y="180" text-anchor="middle" font-family="sans-serif" font-size="7.5" fill="rgba(235,228,213,.2)" letter-spacing="1.5">1000 ml</text>
+              <line x1="36" y1="296" x2="84" y2="296" stroke="rgba(77,184,126,.16)" stroke-width="1"/>
+              <text x="58" y="313" text-anchor="middle" font-family="sans-serif" font-size="6" fill="rgba(77,184,126,.28)" letter-spacing="2">PAPER</text>
+            </svg>
+          </div>
+          <div class="bs-info">
+            <div class="bs-size">1000ml</div>
+            <div class="bs-div"></div>
+            <div class="bs-title">Bulk format</div>
+            <ul class="bs-specs">
+              <li>85% FSC-certified paper construction</li>
+              <li>Bio-based food-safe inner barrier</li>
+              <li>Durable and splash-resistant surface</li>
+              <li>Full surface brand printing available</li>
+              <li>Bulk order pricing available</li>
+            </ul>
+          </div>
         </div>
-      </div>
-      <div class="pc-info">
-        <span class="pc-size">1000ml</span>
-        <span class="pc-label">Retail &middot; Corporate</span>
-      </div>
+
+      </div><!-- /track -->
     </div>
 
-  </div><!-- /grid -->
+    <!-- Controls -->
+    <div class="bcar-ctrl">
+      <div class="bcar-arrows">
+        <button class="barr" id="bPrev" aria-label="Previous size">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="barr" id="bNext" aria-label="Next size">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <div class="bcar-dots" id="bDots">
+        <div class="bdot a" data-i="0"></div>
+        <div class="bdot" data-i="1"></div>
+        <div class="bdot" data-i="2"></div>
+        <div class="bdot" data-i="3"></div>
+      </div>
+    </div>
+  </div><!-- /bcar -->
 
-  <!-- Spec strip -->
-  <div style="border-top:1px solid var(--c-line);padding:2rem 4rem;display:flex;gap:3rem;flex-wrap:wrap;max-width:1100px;margin:0 auto">
-    <div style="display:flex;align-items:center;gap:.75rem">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="var(--green)" stroke-width="1"/><path d="M4 7l2 2 4-4" stroke="var(--green)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <span style="font-size:.75rem;color:var(--c-dim);font-weight:400">85% FSC-certified paper</span>
+  <!-- Spec strip - 5 items in 5-col grid -->
+  <div class="spec-strip rv">
+    <div class="spec-item">
+      <div class="spec-icon"><svg width="8" height="7" viewBox="0 0 8 7" fill="none"><path d="M1 3.5l2 2 4-4" stroke="var(--g)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <span class="spec-txt">85% FSC-certified paper</span>
     </div>
-    <div style="display:flex;align-items:center;gap:.75rem">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="var(--green)" stroke-width="1"/><path d="M4 7l2 2 4-4" stroke="var(--green)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <span style="font-size:.75rem;color:var(--c-dim);font-weight:400">Bio-based food-safe barrier lining</span>
+    <div class="spec-item">
+      <div class="spec-icon"><svg width="8" height="7" viewBox="0 0 8 7" fill="none"><path d="M1 3.5l2 2 4-4" stroke="var(--g)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <span class="spec-txt">Bio-based food-safe barrier</span>
     </div>
-    <div style="display:flex;align-items:center;gap:.75rem">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="var(--green)" stroke-width="1"/><path d="M4 7l2 2 4-4" stroke="var(--green)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <span style="font-size:.75rem;color:var(--c-dim);font-weight:400">Recyclable in paper stream</span>
+    <div class="spec-item">
+      <div class="spec-icon"><svg width="8" height="7" viewBox="0 0 8 7" fill="none"><path d="M1 3.5l2 2 4-4" stroke="var(--g)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <span class="spec-txt">Recyclable in paper stream</span>
     </div>
-    <div style="display:flex;align-items:center;gap:.75rem">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="var(--green)" stroke-width="1"/><path d="M4 7l2 2 4-4" stroke="var(--green)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <span style="font-size:.75rem;color:var(--c-dim);font-weight:400">Decomposes in 2–6 weeks</span>
+    <div class="spec-item">
+      <div class="spec-icon"><svg width="8" height="7" viewBox="0 0 8 7" fill="none"><path d="M1 3.5l2 2 4-4" stroke="var(--g)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <span class="spec-txt">Decomposes in 2&ndash;6 weeks</span>
     </div>
-    <div style="display:flex;align-items:center;gap:.75rem">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="var(--green)" stroke-width="1"/><path d="M4 7l2 2 4-4" stroke="var(--green)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <span style="font-size:.75rem;color:var(--c-dim);font-weight:400">Custom branding on all sizes</span>
+    <div class="spec-item">
+      <div class="spec-icon"><svg width="8" height="7" viewBox="0 0 8 7" fill="none"><path d="M1 3.5l2 2 4-4" stroke="var(--g)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <span class="spec-txt">Custom branding available</span>
     </div>
   </div>
 
 </section>
 
 <!-- SCIENCE -->
-<section id="science">
-  <div class="sci-inner">
-    <div class="p-ey rv"><span style="display:inline-block;width:18px;height:1px;background:var(--green);margin-right:.75rem;vertical-align:middle"></span>The Science</div>
+<section id="sci">
+  <div class="sci-in">
+    <div class="ey rv">The Science</div>
     <h2 class="sci-h rv">Paper is not a compromise.<br><em>It is the answer.</em></h2>
-    <div class="sci-grid">
-      <div class="sci-card rv">
-        <span class="sci-v">2–6 wk</span>
+    <div class="sci-g">
+      <div class="scard rv">
+        <span class="sv">2&ndash;6 wk</span>
         <h4>Paper decomposes completely</h4>
-        <p>Under natural conditions a paper-based bottle biodegrades in two to six weeks. PET plastic takes four to eight hundred years and fragments into microplastics that persist indefinitely.</p>
-        <span class="sci-src">Global decomposition research consensus</span>
+        <p>Under natural conditions, a paper-based bottle biodegrades in two to six weeks. PET plastic takes four to eight hundred years and then fragments into microplastics that persist indefinitely in soil, water, and human tissue.</p>
+        <span class="ssrc">Global decomposition research consensus</span>
       </div>
-      <div class="sci-card rv d1">
-        <span class="sci-v">68 vs 9%</span>
+      <div class="scard rv d1">
+        <span class="sv">68 vs 9%</span>
         <h4>Paper is actually recycled</h4>
-        <p>The global paper recycling rate is 68%. The rate for plastic is 9%. Paper is recycled at more than seven times the real-world efficiency of plastic using infrastructure already in place.</p>
-        <span class="sci-src">UNEP Plastics Report &middot; FAO Paper Data</span>
+        <p>The global paper recycling rate is 68%. The rate for plastic is 9%. Paper is recycled at more than seven times the efficiency of plastic using infrastructure already in place worldwide.</p>
+        <span class="ssrc">UNEP Plastics Report &middot; FAO Paper Data</span>
       </div>
-      <div class="sci-card rv d2">
-        <span class="sci-v">85%</span>
-        <h4>Paper construction</h4>
-        <p>Leading paper bottles are already 85% paper with a thin bio-based barrier lining. The industry roadmap targets a fully plastic-free construction. PaperFumed is building toward that vision.</p>
-        <span class="sci-src">Paboco Next Gen Paper Bottle &middot; 2024</span>
+      <div class="scard rv d2">
+        <span class="sv">85%</span>
+        <h4>Paper construction today</h4>
+        <p>Leading paper bottles are already 85% paper with a thin bio-based barrier lining weighing under 2 grams. The industry roadmap targets a fully bio-based construction. PaperFumed is building toward that future.</p>
+        <span class="ssrc">Paboco Next Gen Paper Bottle &middot; 2024</span>
       </div>
-      <div class="sci-card rv d3">
-        <span class="sci-v">60%</span>
-        <h4>Lower carbon footprint</h4>
-        <p>Paper-based bottles produce an estimated 60% lower carbon footprint per unit versus virgin PET manufacturing, based on full lifecycle analysis including fiber sourcing, forming, and end-of-life.</p>
-        <span class="sci-src">Industry lifecycle analysis benchmarks</span>
+      <div class="scard rv d3">
+        <span class="sv">60%</span>
+        <h4>Lower carbon in production</h4>
+        <p>Paper-based bottles produce an estimated 60% lower carbon footprint per unit versus virgin PET manufacturing, based on full lifecycle analysis including fiber sourcing, forming, and end-of-life disposal.</p>
+        <span class="ssrc">Industry lifecycle analysis benchmarks</span>
       </div>
-      <div class="sci-card rv d4">
-        <span class="sci-v">FSC</span>
+      <div class="scard rv d4">
+        <span class="sv">FSC</span>
         <h4>Renewable by definition</h4>
-        <p>Paper bottles use FSC-certified wood fiber or agricultural byproducts such as sugarcane pulp. Both are genuinely renewable, replacing fossil-derived petrochemical feedstocks entirely for the outer shell.</p>
-        <span class="sci-src">Forest Stewardship Council</span>
+        <p>Paper bottles are made from FSC-certified wood fiber or agricultural byproducts such as sugarcane pulp. Both are genuinely renewable materials, replacing fossil-derived petrochemical feedstocks for the outer shell.</p>
+        <span class="ssrc">Forest Stewardship Council</span>
       </div>
-      <div class="sci-card rv d5">
-        <span class="sci-v">2022</span>
+      <div class="scard rv d5">
+        <span class="sv">2022</span>
         <h4>India's ban is already active</h4>
-        <p>India banned 19 categories of single-use plastic in July 2022. EPR compliance mandates escalate through 2029. Businesses that don't adapt will face growing regulatory and reputational risk.</p>
-        <span class="sci-src">Plastic Waste Management Rules 2021 &middot; MOEFCC</span>
+        <p>India banned 19 categories of single-use plastic in July 2022. EPR compliance mandates escalate through 2029. Businesses that do not adapt will face growing regulatory and reputational risk.</p>
+        <span class="ssrc">Plastic Waste Management Rules 2021 &middot; MOEFCC</span>
       </div>
     </div>
   </div>
@@ -1007,40 +979,39 @@ footer{
 
 <!-- PHILOSOPHY -->
 <section id="phil">
-  <div class="phil-bg"></div>
-  <blockquote class="phil-q rv">
-    The problem with plastic was never that it existed. The problem was that we stopped looking for what comes after it.
-  </blockquote>
-  <p class="phil-attr rv d1">PaperFumed &nbsp;&mdash;&nbsp; Bengaluru, India</p>
+  <div class="phil-ga"></div>
+  <span class="phil-qm rv">&ldquo;</span>
+  <p class="phil-qt rv">The problem with plastic was never that it existed. The problem was that we stopped looking for what comes after it.</p>
+  <p class="phil-attr rv d1">PaperFumed &middot; Bengaluru, India</p>
 </section>
 
 <!-- REGULATION -->
 <div id="reg" class="rv">
-  <p class="reg-text">India banned 19 categories of single-use plastic on <em>July 1, 2022.</em> Compliance requirements tighten every year through 2029.</p>
-  <div class="reg-meta">Plastic Waste Management<br>Amendment Rules 2021<br>MOEFCC &middot; India</div>
+  <p class="reg-t">India banned 19 categories of single-use plastic on <em>July 1, 2022.</em> Compliance requirements tighten every year through 2029.</p>
+  <div class="reg-m">Plastic Waste Management<br>Amendment Rules 2021<br>MOEFCC &middot; India</div>
 </div>
 
 <!-- CONTACT -->
 <section id="contact">
-  <div class="con-inner">
-    <div class="con-left">
-      <div class="p-ey rv"><span style="display:inline-block;width:18px;height:1px;background:var(--green);margin-right:.75rem;vertical-align:middle"></span>Get in Touch</div>
+  <div class="con-in">
+    <div>
+      <div class="ey rv">Get in Touch</div>
       <h2 class="con-h rv">Want to be part of<br>what comes <em>next?</em></h2>
-      <p class="con-body rv d1">We are at day one. If you are in hospitality, retail, sustainability, or just genuinely curious, we would love to hear from you. No pitch. No commitment.</p>
+      <p class="con-b rv d1">We are at day one. If you are in hospitality, retail, sustainability, or just genuinely curious, we would love to hear from you. No pitch. No commitment.</p>
       <a href="mailto:paperfumed.ocea23@gmail.com" class="con-a rv d2">
         <svg width="15" height="12" viewBox="0 0 15 12" fill="none"><path d="M1 1l6.5 5 6.5-5M1 1h13v10H1V1z" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>
         paperfumed.ocea23@gmail.com
       </a>
-      <div class="con-loc rv d2">
+      <div class="con-loc rv d2" style="margin-top:.85rem">
         <svg width="12" height="14" viewBox="0 0 12 14" fill="none"><circle cx="6" cy="5.5" r="3.2" stroke="currentColor" stroke-width="1"/><path d="M6 9c-3.8 0-5 1.4-5 2.8h10c0-1.4-1.2-2.8-5-2.8z" stroke="currentColor" stroke-width="1"/></svg>
-        Bengaluru, India &nbsp;&middot;&nbsp; Early stage
+        Bengaluru, India &middot; Early stage
       </div>
     </div>
     <div class="rv d1">
-      <div class="form-box">
-        <p class="form-title">Get Early Access</p>
-        <form id="cForm" onsubmit="handleForm(event)">
-          <div class="fg-row">
+      <div class="fbox">
+        <p class="ftitle">Get Early Access</p>
+        <form id="cF" onsubmit="handleForm(event)">
+          <div class="fg-r">
             <div class="fg">
               <label>Name</label>
               <input type="text" name="name" placeholder="Your name" required>
@@ -1065,12 +1036,12 @@ footer{
             <label>Message</label>
             <textarea name="msg" rows="4" placeholder="Tell us what is on your mind..."></textarea>
           </div>
-          <button type="submit" class="form-btn" id="fBtn">
+          <button type="submit" class="fbtn" id="fBtn">
             Get Early Access
             <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M1 11L11 1M11 1H4M11 1V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </form>
-        <p class="form-note">Or email us directly: <a href="mailto:paperfumed.ocea23@gmail.com">paperfumed.ocea23@gmail.com</a></p>
+        <p class="fnote">Or email us: <a href="mailto:paperfumed.ocea23@gmail.com">paperfumed.ocea23@gmail.com</a></p>
       </div>
     </div>
   </div>
@@ -1078,15 +1049,15 @@ footer{
 
 <!-- FOOTER -->
 <footer>
-  <a href="#hero" class="foot-logo" style="cursor:none">
+  <a href="#hero" class="flogo">
     <svg width="20" height="26" viewBox="0 0 26 33" fill="none">
-      <rect x="8" y="0" width="10" height="6.5" rx="2" fill="#EBE6DA"/>
-      <path fill="#EBE6DA" d="M2 8.5 L2 31 Q2 33 4 33 L22 33 Q24 33 24 31 L24 14.5 L16.5 8.5 Z"/>
-      <path fill="rgba(78,174,128,.5)" d="M16.5 8.5 L24 14.5 L16.5 14.5 Z"/>
+      <rect x="8" y="0" width="10" height="6.5" rx="2" fill="#EBE4D5"/>
+      <path fill="#EBE4D5" d="M2 8.5L2 31Q2 33 4 33L22 33Q24 33 24 31L24 14.5L16.5 8.5Z"/>
+      <path fill="rgba(77,184,126,.5)" d="M16.5 8.5L24 14.5L16.5 14.5Z"/>
     </svg>
-    <span class="foot-name">PaperFumed</span>
+    <span class="fname">PaperFumed</span>
   </a>
-  <div class="foot-r">
+  <div class="fr">
     <p>Exploring what comes after Plastic</p>
     <p><a href="mailto:paperfumed.ocea23@gmail.com">paperfumed.ocea23@gmail.com</a></p>
   </div>
@@ -1096,120 +1067,130 @@ footer{
 (function(){
 
 /* ── CURSOR ── */
-const cur = document.getElementById('cur');
-const cur2 = document.getElementById('cur2');
-let mx = -100, my = -100, cx = -100, cy = -100;
-document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-function tickCursor() {
-  if (cur) { cur.style.left = mx + 'px'; cur.style.top = my + 'px'; }
-  cx += (mx - cx) * 0.12;
-  cy += (my - cy) * 0.12;
-  if (cur2) { cur2.style.left = cx + 'px'; cur2.style.top = cy + 'px'; }
-  requestAnimationFrame(tickCursor);
-}
-tickCursor();
-document.querySelectorAll('a,button,input,select,textarea,.prod-card').forEach(el => {
-  el.addEventListener('mouseenter', () => document.body.classList.add('cur-big'));
-  el.addEventListener('mouseleave', () => document.body.classList.remove('cur-big'));
+const C=document.getElementById('C'), C2=document.getElementById('C2');
+let mx=window.innerWidth/2, my=window.innerHeight/2, lx=mx, ly=my;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+(function tick(){
+  if(C){C.style.left=mx+'px';C.style.top=my+'px'}
+  lx+=(mx-lx)*.1; ly+=(my-ly)*.1;
+  if(C2){C2.style.left=lx+'px';C2.style.top=ly+'px'}
+  requestAnimationFrame(tick);
+})();
+document.querySelectorAll('a,button,input,select,textarea,.bcar-slide').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('C-big'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('C-big'));
 });
 
-/* ── LOADER ── */
-window.addEventListener('DOMContentLoaded', () => {
-  setTimeout(() => {
-    document.getElementById('loader').classList.add('out');
-    // Hero reveals
-    document.getElementById('hLogoWrap').classList.add('on');
-    const words = document.querySelectorAll('.h-headline .word');
-    words.forEach((w, i) => setTimeout(() => w.classList.add('on'), 250 + i * 95));
-    setTimeout(() => document.getElementById('hSub').classList.add('on'), 280 + words.length * 95);
-    setTimeout(() => document.getElementById('hCtas').classList.add('on'), 400 + words.length * 95);
-    setTimeout(() => document.getElementById('hScroll').classList.add('on'), 600 + words.length * 95);
-  }, 700);
+/* ── LOADER & HERO REVEALS ── */
+window.addEventListener('DOMContentLoaded',()=>{
+  setTimeout(()=>{
+    document.getElementById('LD').classList.add('out');
+    document.getElementById('hLogo').classList.add('on');
+    const ws=document.querySelectorAll('.hw');
+    ws.forEach((w,i)=>setTimeout(()=>w.classList.add('on'),260+i*90));
+    const t=280+ws.length*90;
+    setTimeout(()=>document.getElementById('hSub').classList.add('on'),t);
+    setTimeout(()=>document.getElementById('hBtns').classList.add('on'),t+120);
+    setTimeout(()=>document.getElementById('hScroll').classList.add('on'),t+300);
+  },720);
 });
 
 /* ── NAV ── */
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => nav.classList.toggle('s', window.scrollY > 40), { passive: true });
+const N=document.getElementById('N');
+window.addEventListener('scroll',()=>N.classList.toggle('s',window.scrollY>50),{passive:true});
 
 /* ── FILM SCROLL ── */
-const film = document.getElementById('film');
-const fill = document.getElementById('filmFill');
-const scenes = ['fs0','fs1','fs2'].map(id => document.getElementById(id));
+const film=document.getElementById('film');
+const fBar=document.getElementById('fBar');
+const scenes=[0,1,2].map(i=>document.getElementById('fS'+i));
+const nums  =[0,1,2].map(i=>document.getElementById('fN'+i));
 
-function getEased(t) {
-  // S-curve easing for smooth cross-fade
-  return t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
-}
-
-function updateFilm() {
-  if (!film) return;
-  const rect = film.getBoundingClientRect();
-  const total = film.offsetHeight - window.innerHeight;
-  const p = Math.max(0, Math.min(1, -rect.top / total));
-  if (fill) fill.style.width = (p * 100) + '%';
-
-  const count = scenes.length;
-  scenes.forEach((s, i) => {
-    if (!s) return;
-    // Center of this scene in 0..1 space
-    const mid = (i + 0.5) / count;
-    // Distance from current progress to this scene's center
-    const dist = Math.abs(p - mid);
-    // Width of each scene's "zone"
-    const zone = 0.5 / count;
-    const raw = Math.max(0, 1 - dist / zone);
-    const op = getEased(Math.min(1, raw));
-    // Subtle parallax: scene drifts as you scroll through it
-    const offset = (p - mid) * -80;
-    s.style.opacity = op;
-    s.style.transform = `translateY(${offset}px)`;
-    // Scale the number for extra depth
-    const numEl = s.querySelector('.film-num');
-    if (numEl) {
-      const sc = 0.85 + op * 0.15;
-      numEl.style.transform = `scale(${sc})`;
-    }
+function filmTick(){
+  if(!film)return;
+  const r=film.getBoundingClientRect();
+  const total=film.offsetHeight-window.innerHeight;
+  // Each scene visible for ~130vh. Transition zone ~40vh.
+  // 390vh total / 3 scenes = 130vh each
+  const p=Math.max(0,Math.min(1,-r.top/total));
+  if(fBar)fBar.style.width=(p*100)+'%';
+  const n=scenes.length;
+  scenes.forEach((s,i)=>{
+    if(!s)return;
+    const mid=(i+.5)/n;
+    const halfW=.5/n; // half the width of each zone
+    const dist=Math.abs(p-mid)/halfW;
+    // Ease: smooth step
+    const t=Math.max(0,1-dist);
+    const op=t*t*(3-2*t); // smoothstep
+    s.style.opacity=op;
+    s.style.transform='translateY('+(p-mid)*-70+'px)';
+    // Number scale
+    const numEl=nums[i];
+    if(numEl){const sc=0.88+op*0.12;numEl.style.transform='scale('+sc+')';}
   });
 }
-window.addEventListener('scroll', updateFilm, { passive: true });
-updateFilm();
+window.addEventListener('scroll',filmTick,{passive:true});
+filmTick();
+
+/* ── BOTTLE CAROUSEL ── */
+const track=document.getElementById('bTrack');
+const dots=document.querySelectorAll('.bdot');
+let cur=0,total=4;
+
+function goTo(idx){
+  idx=Math.max(0,Math.min(total-1,idx));
+  cur=idx;
+  track.style.transform='translateX(-'+idx+'00%)';
+  dots.forEach((d,i)=>d.classList.toggle('a',i===cur));
+}
+
+document.getElementById('bPrev').addEventListener('click',()=>goTo(cur-1));
+document.getElementById('bNext').addEventListener('click',()=>goTo(cur+1));
+dots.forEach(d=>d.addEventListener('click',()=>goTo(+d.dataset.i)));
+
+// Drag / swipe
+let dragX=null;
+const tw=document.querySelector('.bcar-track-wrap');
+tw.addEventListener('mousedown',e=>{dragX=e.clientX;e.preventDefault()});
+tw.addEventListener('touchstart',e=>{dragX=e.touches[0].clientX},{passive:true});
+function endDrag(endX){
+  if(dragX===null)return;
+  const diff=dragX-endX;
+  if(Math.abs(diff)>50)goTo(cur+(diff>0?1:-1));
+  dragX=null;
+}
+tw.addEventListener('mouseup',e=>endDrag(e.clientX));
+tw.addEventListener('mouseleave',e=>{if(dragX!==null)endDrag(e.clientX)});
+tw.addEventListener('touchend',e=>endDrag(e.changedTouches[0].clientX),{passive:true});
 
 /* ── REVEALS ── */
-const ro = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); ro.unobserve(e.target); } });
-}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-document.querySelectorAll('.rv').forEach(el => ro.observe(el));
+const ro=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');ro.unobserve(e.target);}});
+},{threshold:0.1,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
 
 /* ── FORM ── */
-window.handleForm = function(e) {
+window.handleForm=function(e){
   e.preventDefault();
-  const d = new FormData(e.target);
-  const btn = document.getElementById('fBtn');
-  const sub = encodeURIComponent('PaperFumed Early Access' + (d.get('co') ? ' \u2014 ' + d.get('co') : ''));
-  const body = encodeURIComponent(
-    'Name: ' + (d.get('name') || '---') + '\n' +
-    'Company: ' + (d.get('co') || '---') + '\n' +
-    'Interest: ' + (d.get('why') || '---') + '\n\n' +
-    'Message:\n' + (d.get('msg') || '(none)')
-  );
-  window.location.href = 'mailto:paperfumed.ocea23@gmail.com?subject=' + sub + '&body=' + body;
-  btn.innerHTML = '\u2713 Opening mail app\u2026';
-  btn.style.background = '#1B4332';
-  btn.style.color = 'var(--c-head)';
-  btn.disabled = true;
-  setTimeout(() => {
-    btn.innerHTML = 'Get Early Access <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M1 11L11 1M11 1H4M11 1V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-    btn.style.background = '';
-    btn.style.color = '';
-    btn.disabled = false;
-  }, 4500);
+  const d=new FormData(e.target);
+  const btn=document.getElementById('fBtn');
+  const s=encodeURIComponent('PaperFumed Early Access'+(d.get('co')?' \u2013 '+d.get('co'):''));
+  const b=encodeURIComponent('Name: '+(d.get('name')||'---')+'\nCompany: '+(d.get('co')||'---')+'\nInterest: '+(d.get('why')||'---')+'\n\nMessage:\n'+(d.get('msg')||'(none)'));
+  window.location.href='mailto:paperfumed.ocea23@gmail.com?subject='+s+'&body='+b;
+  btn.innerHTML='\u2713 Opening mail app\u2026';
+  btn.style.background='var(--g2)';
+  btn.disabled=true;
+  setTimeout(()=>{
+    btn.innerHTML='Get Early Access <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M1 11L11 1M11 1H4M11 1V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    btn.style.background='';btn.disabled=false;
+  },4500);
 };
 
 /* ── SMOOTH SCROLL ── */
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const t = document.querySelector(a.getAttribute('href'));
-    if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 64, behavior: 'smooth' }); }
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-64,behavior:'smooth'});}
   });
 });
 
