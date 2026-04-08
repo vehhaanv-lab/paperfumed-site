@@ -23,29 +23,18 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 ::selection{background:var(--g);color:var(--bg)}
 
 /* PAGE PROGRESS */
-#pgbar{position:fixed;top:0;left:0;z-index:9999;height:2px;background:linear-gradient(90deg,var(--g),var(--beige));width:0%;transition:width .1s linear;pointer-events:none}
+#pgbar{position:fixed;top:0;left:0;z-index:9999;height:2px;background:linear-gradient(90deg,var(--g),var(--beige));width:0%;pointer-events:none}
 
 /* CURSOR */
-#CUR{position:fixed;z-index:9990;pointer-events:none;width:7px;height:7px;border-radius:50%;background:var(--g);transform:translate(-50%,-50%);transition:width .3s var(--ease),height .3s var(--ease),background .2s}
-#CUR2{position:fixed;z-index:9989;pointer-events:none;width:30px;height:30px;border-radius:50%;border:1px solid rgba(77,184,126,.3);transform:translate(-50%,-50%)}
+#CUR{position:fixed;z-index:9990;pointer-events:none;width:7px;height:7px;border-radius:50%;background:var(--g);transform:translate(-50%,-50%);transition:width .3s var(--ease),height .3s var(--ease)}
+#CUR2{position:fixed;z-index:9989;pointer-events:none;width:30px;height:30px;border-radius:50%;border:1px solid rgba(77,184,126,.28);transform:translate(-50%,-50%)}
 .cbig #CUR{width:50px;height:50px;background:rgba(77,184,126,.07);border:1px solid rgba(77,184,126,.22)}
 .cbig #CUR2{opacity:0}
 
 /* BACK TO TOP */
-#btt{
-  position:fixed;bottom:2rem;right:2rem;z-index:200;
-  width:40px;height:40px;border-radius:50%;
-  border:1px solid rgba(196,170,132,.25);
-  background:rgba(9,14,22,.85);
-  backdrop-filter:blur(10px);
-  color:var(--beige);cursor:none;
-  display:flex;align-items:center;justify-content:center;
-  opacity:0;transform:translateY(8px);
-  transition:opacity .3s,transform .3s,border-color .2s,background .2s;
-  pointer-events:none;
-}
+#btt{position:fixed;bottom:2rem;right:2rem;z-index:200;width:40px;height:40px;border-radius:50%;border:1px solid rgba(196,170,132,.25);background:rgba(9,14,22,.88);backdrop-filter:blur(10px);color:var(--beige);cursor:none;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s,border-color .2s;pointer-events:none}
 #btt.show{opacity:1;transform:translateY(0);pointer-events:auto}
-#btt:hover{border-color:rgba(196,170,132,.5);background:rgba(196,170,132,.08)}
+#btt:hover{border-color:rgba(196,170,132,.5)}
 
 /* LOADER */
 #LD{position:fixed;inset:0;z-index:5000;background:var(--bg);display:flex;align-items:center;justify-content:center;transition:opacity .75s var(--ease)}
@@ -177,9 +166,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .sv{font-family:'Fraunces',serif;font-size:2.8rem;font-weight:400;letter-spacing:-.05em;color:var(--g);line-height:1;margin-bottom:.85rem;display:block}
 .scard h4{font-size:.8rem;font-weight:600;color:var(--c1);margin-bottom:.65rem;letter-spacing:-.01em}
 .scard p{font-size:.8rem;color:var(--c2);line-height:1.72;font-weight:300}
-.ssrc{font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--c3);opacity:.55;margin-top:.55rem;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
-.slink{color:rgba(196,170,132,.5);text-decoration:none;transition:color .2s;display:inline-flex;align-items:center;gap:.25rem;white-space:nowrap;cursor:none}
-.slink:hover{color:var(--beige)}
+.ssrc{font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--c3);opacity:.55;margin-top:.55rem;display:block}
 
 /* PHILOSOPHY */
 #phil{padding:9rem 3rem;background:var(--bg2);text-align:center;position:relative;overflow:hidden}
@@ -201,36 +188,99 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .con-h{font-family:'Fraunces',serif;font-size:clamp(2rem,3.5vw,3.2rem);font-weight:400;line-height:1.1;letter-spacing:-.04em;margin-bottom:1.1rem}
 .con-h em{font-style:italic;color:var(--g)}
 .con-b{font-size:.88rem;color:var(--c2);line-height:1.8;font-weight:300;margin-bottom:2.25rem}
-.con-a{display:block;font-size:.88rem;font-weight:500;color:var(--c1);text-decoration:none;transition:color .2s;margin-bottom:.85rem;cursor:none}
-.con-a:hover{color:var(--g)}
+/* Email link - plain display */
+.con-email{display:flex;align-items:center;gap:.65rem;font-size:.88rem;font-weight:500;color:var(--c1);text-decoration:none;transition:color .2s;margin-bottom:.85rem;cursor:none;width:fit-content}
+.con-email:hover{color:var(--g)}
+.con-email svg{opacity:.3;flex-shrink:0}
 .con-loc{display:flex;align-items:center;gap:.65rem;font-size:.8rem;color:var(--c2);font-weight:300;margin-top:.85rem}
 .con-loc svg{opacity:.25;flex-shrink:0}
+
+/* FORM */
 .fbox{background:var(--c5);border:1px solid var(--c4);border-radius:3px;padding:2.5rem}
 .ftitle{font-size:.85rem;font-weight:600;color:var(--c1);margin-bottom:1.75rem}
 .fg{margin-bottom:1rem}
 .fg label{display:block;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--c3);margin-bottom:.45rem}
 .fg label .req{color:var(--beige);margin-left:2px}
-.fg input,.fg select,.fg textarea{width:100%;padding:.78rem 1rem;background:rgba(235,226,206,.04);border:1px solid var(--c4);border-radius:2px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.88rem;color:var(--c1);outline:none;transition:border-color .2s,background .2s;resize:none;-webkit-appearance:none}
-.fg input::placeholder,.fg textarea::placeholder{color:var(--c3);opacity:.7}
-.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:rgba(196,170,132,.35);background:rgba(196,170,132,.025)}
-.fg select{cursor:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='rgba(235,226,206,.25)'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .9rem center;padding-right:2.25rem}
-.fg select option{background:#09141C}
+/* Input base - dark background, cream text */
+.fg input,
+.fg select,
+.fg textarea{
+  width:100%;
+  padding:.78rem 1rem;
+  background:#0F1922;
+  border:1px solid var(--c4);
+  border-radius:2px;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:.88rem;
+  color:var(--c1);
+  outline:none;
+  transition:border-color .2s;
+  resize:none;
+  -webkit-appearance:none;
+  appearance:none;
+}
+.fg input::placeholder,
+.fg textarea::placeholder{color:rgba(235,226,206,.3)}
+.fg input:focus,
+.fg select:focus,
+.fg textarea:focus{border-color:rgba(196,170,132,.4)}
+/* Fix browser autofill white background */
+.fg input:-webkit-autofill,
+.fg input:-webkit-autofill:hover,
+.fg input:-webkit-autofill:focus,
+.fg input:-webkit-autofill:active{
+  -webkit-box-shadow:0 0 0 1000px #0F1922 inset !important;
+  -webkit-text-fill-color:#EBE2CE !important;
+  caret-color:#EBE2CE;
+}
+.fg select{
+  cursor:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='rgba(235,226,206,.25)'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right .9rem center;
+  padding-right:2.25rem;
+}
+.fg select option{background:#0F1922;color:#EBE2CE}
 .fg-r{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
-.fbtn{width:100%;height:50px;margin-top:.5rem;background:var(--g);color:var(--bg);border:none;border-radius:2px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:none;transition:background .2s,transform .15s;display:flex;align-items:center;justify-content:center;gap:.5rem}
+
+/* Submit button */
+.fbtn{
+  width:100%;height:50px;margin-top:.5rem;
+  background:var(--g);color:var(--bg);
+  border:none;border-radius:2px;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  cursor:none;
+  transition:background .2s,transform .15s;
+  display:flex;align-items:center;justify-content:center;gap:.5rem;
+}
 .fbtn:hover{background:var(--g2);transform:translateY(-1px)}
-.fbtn:disabled{opacity:.45;transform:none;cursor:not-allowed}
-.fnote{font-size:.68rem;color:var(--c3);text-align:center;margin-top:1.1rem;line-height:1.5}
-.fnote a{color:var(--beige);text-decoration:none}
-.form-msg{font-size:.78rem;text-align:center;margin-top:.85rem;padding:.65rem 1rem;border-radius:2px;display:none}
-.form-msg.ok{display:block;background:rgba(77,184,126,.1);color:var(--g);border:1px solid rgba(77,184,126,.2)}
-.form-msg.err{display:block;background:rgba(196,170,132,.08);color:var(--beige);border:1px solid rgba(196,170,132,.2)}
+.fbtn:disabled{opacity:.5;transform:none;cursor:not-allowed}
+
+/* Confirmation state - replaces button */
+.form-confirm{
+  display:none;
+  margin-top:.5rem;
+  padding:1.1rem 1.25rem;
+  background:rgba(77,184,126,.08);
+  border:1px solid rgba(77,184,126,.2);
+  border-radius:2px;
+  text-align:center;
+}
+.form-confirm.show{display:block}
+.form-confirm-icon{font-size:1.4rem;margin-bottom:.5rem;display:block}
+.form-confirm-title{font-size:.85rem;font-weight:600;color:var(--g);margin-bottom:.3rem}
+.form-confirm-sub{font-size:.75rem;color:var(--c2);line-height:1.55}
+
+.fnote{font-size:.68rem;color:var(--c3);text-align:center;margin-top:1rem;line-height:1.5}
+.fnote a{color:var(--beige);text-decoration:none;cursor:none}
 
 /* FOOTER */
 footer{border-top:1px solid var(--c4);padding:2rem 4rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;background:var(--bg)}
 .flogo{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:none}
 .fname{font-size:.88rem;font-weight:600;letter-spacing:-.01em;color:var(--c1)}
 .fr{font-size:.62rem;color:var(--c3);letter-spacing:.04em;text-align:right;line-height:1.65}
-.fr a{color:var(--c3);text-decoration:none}
+.fr a{color:var(--c3);text-decoration:none;cursor:none}
 .fr a:hover{color:var(--beige)}
 
 /* REVEALS */
@@ -253,9 +303,9 @@ footer{border-top:1px solid var(--c4);padding:2rem 4rem;display:flex;align-items
   #manifesto{padding:5rem 1.5rem}
   .prd-top{padding:0 1.5rem 2.5rem;flex-direction:column;align-items:flex-start}
   .prd-slide{grid-template-columns:1fr;padding:0 1.5rem 4rem;gap:2rem;min-height:auto}
-  .prd-visual{min-height:280px}
+  .prd-visual{min-height:260px}
   .prd-specs{padding:1.5rem 0;border-left:none;border-top:1px solid var(--beige2)}
-  .prd-watermark{font-size:8rem;opacity:.025}
+  .prd-watermark{font-size:7rem;opacity:.025}
   .prd-strip{grid-template-columns:1fr 1fr}
   .prd-si{border-right:none;border-bottom:1px solid rgba(196,170,132,.08)}
   #sci{padding:5rem 1.5rem}
@@ -279,11 +329,13 @@ footer{border-top:1px solid var(--c4);padding:2rem 4rem;display:flex;align-items
 <body>
 
 <div id="pgbar"></div>
-<div id="CUR"></div><div id="CUR2"></div>
+<div id="CUR"></div>
+<div id="CUR2"></div>
 <button id="btt" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
   <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 11V3M3 7l4-4 4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </button>
 
+<!-- LOADER -->
 <div id="LD">
   <div class="ld-w">
     <svg width="26" height="33" viewBox="0 0 26 33" fill="none"><rect x="8" y="0" width="10" height="6.5" rx="2" fill="#EBE2CE"/><path fill="#EBE2CE" d="M2 8.5L2 31Q2 33 4 33L22 33Q24 33 24 31L24 14.5L16.5 8.5Z"/><path fill="rgba(77,184,126,.5)" d="M16.5 8.5L24 14.5L16.5 14.5Z"/></svg>
@@ -291,6 +343,7 @@ footer{border-top:1px solid var(--c4);padding:2rem 4rem;display:flex;align-items
   </div>
 </div>
 
+<!-- NAV -->
 <nav id="NAV">
   <a href="#hero" class="n-logo">
     <svg width="20" height="26" viewBox="0 0 26 33" fill="none"><rect x="8" y="0" width="10" height="6.5" rx="2" fill="#EBE2CE"/><path fill="#EBE2CE" d="M2 8.5L2 31Q2 33 4 33L22 33Q24 33 24 31L24 14.5L16.5 8.5Z"/><path fill="rgba(77,184,126,.5)" d="M16.5 8.5L24 14.5L16.5 14.5Z"/></svg>
@@ -305,6 +358,7 @@ footer{border-top:1px solid var(--c4);padding:2rem 4rem;display:flex;align-items
   </div>
 </nav>
 
+<!-- HERO -->
 <section id="hero">
   <div class="h-grain"></div><div class="hgA"></div><div class="hgB"></div>
   <div class="h-logo" id="hLogo">
@@ -320,13 +374,16 @@ footer{border-top:1px solid var(--c4);padding:2rem 4rem;display:flex;align-items
   <div class="h-scroll" id="hScroll"><span>Scroll</span><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1.5v10M2.5 8l4 4 4-4" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 </section>
 
+<!-- MARQUEE -->
 <div class="mq" aria-hidden="true"><div class="mq-t">
   <span class="mq-i">Paper bottles<span class="mq-dot"></span></span><span class="mq-i">Plastic-free<span class="mq-dot"></span></span><span class="mq-i">India-built<span class="mq-dot"></span></span><span class="mq-i">FSC certified<span class="mq-dot"></span></span><span class="mq-i">Decomposes in weeks<span class="mq-dot"></span></span><span class="mq-i">Bio-based barrier<span class="mq-dot"></span></span><span class="mq-i">Early stage<span class="mq-dot"></span></span><span class="mq-i">Commercial scale<span class="mq-dot"></span></span><span class="mq-i">85% paper<span class="mq-dot"></span></span><span class="mq-i">Regulation-safe<span class="mq-dot"></span></span>
   <span class="mq-i">Paper bottles<span class="mq-dot"></span></span><span class="mq-i">Plastic-free<span class="mq-dot"></span></span><span class="mq-i">India-built<span class="mq-dot"></span></span><span class="mq-i">FSC certified<span class="mq-dot"></span></span><span class="mq-i">Decomposes in weeks<span class="mq-dot"></span></span><span class="mq-i">Bio-based barrier<span class="mq-dot"></span></span><span class="mq-i">Early stage<span class="mq-dot"></span></span><span class="mq-i">Commercial scale<span class="mq-dot"></span></span><span class="mq-i">85% paper<span class="mq-dot"></span></span><span class="mq-i">Regulation-safe<span class="mq-dot"></span></span>
 </div></div>
 
+<!-- MANIFESTO -->
 <section id="manifesto"><div class="mn-in rv"><p class="mn-p">Plastic packaging has been the default for sixty years. Not because it was the best material. Because no one built a serious alternative at scale.<span class="mn-em">That is what we are doing.</span></p></div></section>
 
+<!-- FILM -->
 <section id="film">
   <div class="f-pin" id="fPin">
     <div class="f-progress"><div class="f-bar" id="fBar"></div></div>
@@ -336,6 +393,7 @@ footer{border-top:1px solid var(--c4);padding:2rem 4rem;display:flex;align-items
   </div>
 </section>
 
+<!-- PRODUCT -->
 <section id="product">
   <div class="prd-top rv">
     <div>
@@ -345,8 +403,10 @@ footer{border-top:1px solid var(--c4);padding:2rem 4rem;display:flex;align-items
     <div class="prd-nav">
       <button class="prd-arr" id="pPrev" aria-label="Previous"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       <div class="prd-dots" id="pDots">
-        <div class="prd-dot a" data-i="0"></div><div class="prd-dot" data-i="1"></div>
-        <div class="prd-dot" data-i="2"></div><div class="prd-dot" data-i="3"></div>
+        <div class="prd-dot a" data-i="0"></div>
+        <div class="prd-dot" data-i="1"></div>
+        <div class="prd-dot" data-i="2"></div>
+        <div class="prd-dot" data-i="3"></div>
       </div>
       <button class="prd-arr" id="pNext" aria-label="Next"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     </div>
@@ -355,7 +415,8 @@ footer{border-top:1px solid var(--c4);padding:2rem 4rem;display:flex;align-items
   <div class="prd-outer" id="pOuter"><div class="prd-track" id="pTrack">
 
     <!-- 200ml -->
-    <div class="prd-slide"><span class="prd-watermark">200</span>
+    <div class="prd-slide">
+      <span class="prd-watermark">200</span>
       <div class="prd-visual"><div class="prd-glow"></div>
         <svg class="prd-bsvg" width="120" height="294" viewBox="0 0 108 264" fill="none">
           <defs><linearGradient id="g0" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#0E1E2C"/><stop offset="28%" stop-color="#1C3646"/><stop offset="55%" stop-color="#264858"/><stop offset="78%" stop-color="#1C3646"/><stop offset="100%" stop-color="#0E1E2C"/></linearGradient></defs>
@@ -387,7 +448,8 @@ footer{border-top:1px solid var(--c4);padding:2rem 4rem;display:flex;align-items
     </div>
 
     <!-- 330ml -->
-    <div class="prd-slide"><span class="prd-watermark">330</span>
+    <div class="prd-slide">
+      <span class="prd-watermark">330</span>
       <div class="prd-visual"><div class="prd-glow"></div>
         <svg class="prd-bsvg" width="136" height="340" viewBox="0 0 116 298" fill="none">
           <defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#0C1C2C"/><stop offset="28%" stop-color="#1A3444"/><stop offset="55%" stop-color="#244455"/><stop offset="78%" stop-color="#1A3444"/><stop offset="100%" stop-color="#0C1C2C"/></linearGradient></defs>
@@ -419,7 +481,8 @@ footer{border-top:1px solid var(--c4);padding:2rem 4rem;display:flex;align-items
     </div>
 
     <!-- 500ml -->
-    <div class="prd-slide"><span class="prd-watermark">500</span>
+    <div class="prd-slide">
+      <span class="prd-watermark">500</span>
       <div class="prd-visual"><div class="prd-glow"></div>
         <svg class="prd-bsvg" width="154" height="388" viewBox="0 0 128 336" fill="none">
           <defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#0A1A28"/><stop offset="28%" stop-color="#183040"/><stop offset="55%" stop-color="#224050"/><stop offset="78%" stop-color="#183040"/><stop offset="100%" stop-color="#0A1A28"/></linearGradient></defs>
@@ -452,7 +515,8 @@ footer{border-top:1px solid var(--c4);padding:2rem 4rem;display:flex;align-items
     </div>
 
     <!-- 1000ml -->
-    <div class="prd-slide"><span class="prd-watermark">1L</span>
+    <div class="prd-slide">
+      <span class="prd-watermark">1L</span>
       <div class="prd-visual"><div class="prd-glow"></div>
         <svg class="prd-bsvg" width="176" height="450" viewBox="0 0 148 380" fill="none">
           <defs><linearGradient id="g3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#081828"/><stop offset="28%" stop-color="#162C3C"/><stop offset="55%" stop-color="#1E3C4C"/><stop offset="78%" stop-color="#162C3C"/><stop offset="100%" stop-color="#081828"/></linearGradient></defs>
@@ -495,47 +559,25 @@ footer{border-top:1px solid var(--c4);padding:2rem 4rem;display:flex;align-items
   </div>
 </section>
 
+<!-- SCIENCE -->
 <section id="sci">
   <div class="sci-in">
     <div class="sci-hdr">
       <div><div class="ey rv">The Science</div><h2 class="sci-h rv">Paper is not a compromise.<br><em>It is the answer.</em></h2></div>
-      <p class="sci-sub rv d2">Six facts. Each sourced. Each linked. Paper wins on every dimension that matters for packaging at scale.</p>
+      <p class="sci-sub rv d2">Six facts. Each sourced. Paper wins on every dimension that matters for packaging at scale.</p>
     </div>
     <div class="sci-g">
-      <div class="scard rv">
-        <span class="sv">2&ndash;6 wk</span><h4>Paper decomposes completely</h4>
-        <p>Under natural conditions, a paper-based bottle biodegrades in two to six weeks. PET plastic takes four to eight hundred years and then fragments into microplastics that persist indefinitely in soil, water, and human tissue.</p>
-        <span class="ssrc">Decomposition research <a href="https://ocean.si.edu/ocean-life/fish/ocean-plastics" target="_blank" rel="noopener noreferrer" class="slink">View source &#x2197;</a></span>
-      </div>
-      <div class="scard rv d1">
-        <span class="sv">68 vs 9%</span><h4>Paper is actually recycled</h4>
-        <p>The global paper recycling rate is 68%. The rate for plastic is 9%. Paper is recycled at more than seven times the efficiency of plastic using infrastructure already in place worldwide.</p>
-        <span class="ssrc">UNEP &middot; Two Sides <a href="https://www.unep.org/plastic-pollution" target="_blank" rel="noopener noreferrer" class="slink">View source &#x2197;</a></span>
-      </div>
-      <div class="scard rv d2">
-        <span class="sv">85%</span><h4>Paper construction today</h4>
-        <p>Leading paper bottles are already 85% paper with a bio-based barrier lining weighing under 2 grams. The industry roadmap targets fully bio-based construction. PaperFumed is building toward that future.</p>
-        <span class="ssrc">Paboco &middot; 2024 <a href="https://www.paboco.com/bottle" target="_blank" rel="noopener noreferrer" class="slink">View source &#x2197;</a></span>
-      </div>
-      <div class="scard rv d3">
-        <span class="sv">60%</span><h4>Lower carbon in production</h4>
-        <p>Paper-based bottles produce an estimated 60% lower carbon footprint per unit versus virgin PET manufacturing, based on full lifecycle analysis including fiber sourcing, forming, and end-of-life disposal.</p>
-        <span class="ssrc">Paboco sustainability <a href="https://www.paboco.com/sustainability" target="_blank" rel="noopener noreferrer" class="slink">View source &#x2197;</a></span>
-      </div>
-      <div class="scard rv d4">
-        <span class="sv">FSC</span><h4>Renewable by definition</h4>
-        <p>Paper bottles are made from FSC-certified wood fiber or agricultural byproducts such as sugarcane pulp. Both are genuinely renewable, replacing fossil-derived petrochemical feedstocks for the outer shell entirely.</p>
-        <span class="ssrc">Forest Stewardship Council <a href="https://fsc.org/en" target="_blank" rel="noopener noreferrer" class="slink">View source &#x2197;</a></span>
-      </div>
-      <div class="scard rv d5">
-        <span class="sv">2022</span><h4>India's ban is already active</h4>
-        <p>India banned 19 categories of single-use plastic in July 2022. EPR compliance mandates escalate through 2029. Businesses that do not adapt will face growing regulatory and reputational risk.</p>
-        <span class="ssrc">MOEFCC &middot; PIB India <a href="https://pib.gov.in/PressReleasePage.aspx?PRID=1837518" target="_blank" rel="noopener noreferrer" class="slink">View source &#x2197;</a></span>
-      </div>
+      <div class="scard rv"><span class="sv">2&ndash;6 wk</span><h4>Paper decomposes completely</h4><p>Under natural conditions, a paper-based bottle biodegrades in two to six weeks. PET plastic takes four to eight hundred years and then fragments into microplastics that persist indefinitely in soil, water, and human tissue.</p><span class="ssrc">Global decomposition research consensus</span></div>
+      <div class="scard rv d1"><span class="sv">68 vs 9%</span><h4>Paper is actually recycled</h4><p>The global paper recycling rate is 68%. The rate for plastic is 9%. Paper is recycled at more than seven times the efficiency of plastic using infrastructure already in place worldwide.</p><span class="ssrc">UNEP Plastics Report &middot; FAO Paper Data</span></div>
+      <div class="scard rv d2"><span class="sv">85%</span><h4>Paper construction today</h4><p>Leading paper bottles are already 85% paper with a bio-based barrier lining weighing under 2 grams. The industry roadmap targets fully bio-based construction. PaperFumed is building toward that future.</p><span class="ssrc">Paboco Next Gen Paper Bottle &middot; 2024</span></div>
+      <div class="scard rv d3"><span class="sv">60%</span><h4>Lower carbon in production</h4><p>Paper-based bottles produce an estimated 60% lower carbon footprint per unit versus virgin PET manufacturing, based on full lifecycle analysis including fiber sourcing, forming, and end-of-life disposal.</p><span class="ssrc">Industry lifecycle analysis benchmarks</span></div>
+      <div class="scard rv d4"><span class="sv">FSC</span><h4>Renewable by definition</h4><p>Paper bottles are made from FSC-certified wood fiber or agricultural byproducts such as sugarcane pulp. Both are genuinely renewable, replacing fossil-derived petrochemical feedstocks for the outer shell entirely.</p><span class="ssrc">Forest Stewardship Council</span></div>
+      <div class="scard rv d5"><span class="sv">2022</span><h4>India's ban is already active</h4><p>India banned 19 categories of single-use plastic in July 2022. EPR compliance mandates escalate through 2029. Businesses that do not adapt will face growing regulatory and reputational risk.</p><span class="ssrc">Plastic Waste Management Rules 2021 &middot; MOEFCC &middot; PIB India</span></div>
     </div>
   </div>
 </section>
 
+<!-- PHILOSOPHY -->
 <section id="phil">
   <div class="phil-ga"></div>
   <span class="phil-qm rv">&ldquo;</span>
@@ -543,63 +585,82 @@ footer{border-top:1px solid var(--c4);padding:2rem 4rem;display:flex;align-items
   <p class="phil-attr rv d1">PaperFumed &middot; Bengaluru, India</p>
 </section>
 
+<!-- REGULATION -->
 <div id="reg" class="rv">
   <p class="reg-t">India banned 19 categories of single-use plastic on <em>July 1, 2022.</em> Compliance requirements tighten every year through 2029.</p>
   <div class="reg-m">Plastic Waste Management<br>Amendment Rules 2021<br>MOEFCC &middot; India</div>
 </div>
 
+<!-- CONTACT -->
 <section id="contact">
   <div class="con-in">
     <div>
       <div class="ey rv">Get in Touch</div>
       <h2 class="con-h rv">Want to be part of<br>what comes <em>next?</em></h2>
       <p class="con-b rv d1">We are at day one. If you are in hospitality, retail, sustainability, or just genuinely curious, we would love to hear from you. No pitch. No commitment.</p>
-      <a href="mailto:paperfumed.ocea23@gmail.com" class="con-a rv d2">
-        <svg width="14" height="11" viewBox="0 0 15 12" fill="none" style="vertical-align:middle;margin-right:.4rem;opacity:.3"><path d="M1 1l6.5 5 6.5-5M1 1h13v10H1V1z" stroke="#EBE2CE" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>paperfumed.ocea23@gmail.com
+      <!-- Simple mailto link - opens mail client directly -->
+      <a href="mailto:paperfumed.ocea23@gmail.com" class="con-email rv d2">
+        <svg width="15" height="12" viewBox="0 0 15 12" fill="none"><path d="M1 1l6.5 5 6.5-5M1 1h13v10H1V1z" stroke="#EBE2CE" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        paperfumed.ocea23@gmail.com
       </a>
       <div class="con-loc rv d2">
         <svg width="12" height="14" viewBox="0 0 12 14" fill="none"><circle cx="6" cy="5.5" r="3.2" stroke="currentColor" stroke-width="1"/><path d="M6 9c-3.8 0-5 1.4-5 2.8h10c0-1.4-1.2-2.8-5-2.8z" stroke="currentColor" stroke-width="1"/></svg>
         Bengaluru, India &middot; Early stage
       </div>
     </div>
+
     <div class="rv d1">
       <div class="fbox">
         <p class="ftitle">Get Early Access</p>
-        <!--
-          HOW EMAIL WORKS:
-          This form uses Formspree (free) to send messages directly to paperfumed.ocea23@gmail.com.
-          To activate:
-          1. Go to https://formspree.io and create a free account
-          2. Create a new form, enter paperfumed.ocea23@gmail.com as the email
-          3. Copy your form endpoint (looks like: https://formspree.io/f/xxxxxxxx)
-          4. Replace "FORMSPREE_ENDPOINT_HERE" below with your endpoint
-          Until then, submissions fall back to mailto: as a backup.
-        -->
-        <form id="cF" onsubmit="handleForm(event)" data-endpoint="FORMSPREE_ENDPOINT_HERE">
-          <div class="fg-r">
-            <div class="fg"><label>Name <span class="req">*</span></label><input type="text" name="name" placeholder="Your name" required></div>
-            <div class="fg"><label>Company <span class="req">*</span></label><input type="text" name="co" placeholder="Organisation" required></div>
+
+        <div id="formWrap">
+          <form id="cF">
+            <div class="fg-r">
+              <div class="fg">
+                <label>Name <span class="req">*</span></label>
+                <input type="text" id="f-name" placeholder="Your name" autocomplete="name" required>
+              </div>
+              <div class="fg">
+                <label>Company <span class="req">*</span></label>
+                <input type="text" id="f-co" placeholder="Organisation" autocomplete="organization" required>
+              </div>
+            </div>
+            <div class="fg">
+              <label>What brings you here <span class="req">*</span></label>
+              <select id="f-why" required>
+                <option value="">Select one</option>
+                <option value="Potential partner or customer">Potential partner or customer</option>
+                <option value="Investor or advisor">Investor or advisor</option>
+                <option value="Press or media">Press or media</option>
+                <option value="Just curious">Just curious</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label>Message <span class="req">*</span></label>
+              <textarea id="f-msg" rows="4" placeholder="Tell us what is on your mind..." required></textarea>
+            </div>
+            <button type="submit" class="fbtn" id="fBtn">
+              Get Early Access
+              <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M1 11L11 1M11 1H4M11 1V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </form>
+
+          <!-- Confirmation - shown after submit, form hidden -->
+          <div class="form-confirm" id="formConfirm">
+            <span class="form-confirm-icon">&#10003;</span>
+            <div class="form-confirm-title">Message received</div>
+            <div class="form-confirm-sub">Thank you for reaching out. We will get back to you within 48 hours at paperfumed.ocea23@gmail.com</div>
           </div>
-          <div class="fg"><label>What brings you here <span class="req">*</span></label>
-            <select name="why" required>
-              <option value="">Select one</option>
-              <option value="partner">Potential partner or customer</option>
-              <option value="investor">Investor or advisor</option>
-              <option value="press">Press or media</option>
-              <option value="curious">Just curious</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-          <div class="fg"><label>Message <span class="req">*</span></label><textarea name="msg" rows="4" placeholder="Tell us what is on your mind..." required></textarea></div>
-          <button type="submit" class="fbtn" id="fBtn">Get Early Access <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M1 11L11 1M11 1H4M11 1V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        </form>
-        <div class="form-msg" id="formMsg"></div>
+        </div>
+
         <p class="fnote">Or email directly: <a href="mailto:paperfumed.ocea23@gmail.com">paperfumed.ocea23@gmail.com</a></p>
       </div>
     </div>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
   <a href="#hero" class="flogo">
     <svg width="20" height="26" viewBox="0 0 26 33" fill="none"><rect x="8" y="0" width="10" height="6.5" rx="2" fill="#EBE2CE"/><path fill="#EBE2CE" d="M2 8.5L2 31Q2 33 4 33L22 33Q24 33 24 31L24 14.5L16.5 8.5Z"/><path fill="rgba(77,184,126,.5)" d="M16.5 8.5L24 14.5L16.5 14.5Z"/></svg>
@@ -613,210 +674,211 @@ footer{border-top:1px solid var(--c4);padding:2rem 4rem;display:flex;align-items
 
 <script>
 (function(){
-/* SCROLL TO TOP ON LOAD */
-if('scrollRestoration' in history)history.scrollRestoration='manual';
-window.scrollTo(0,0);
+
+/* SCROLL TO TOP ON EVERY LOAD */
+if('scrollRestoration' in history) history.scrollRestoration = 'manual';
+window.addEventListener('load', function(){ window.scrollTo(0, 0); });
 
 /* PAGE PROGRESS BAR */
-const pgbar=document.getElementById('pgbar');
-function updateProgress(){
-  const h=document.body.scrollHeight-window.innerHeight;
-  if(h>0&&pgbar)pgbar.style.width=(window.scrollY/h*100)+'%';
+var pgbar = document.getElementById('pgbar');
+function updatePgbar(){
+  var h = document.body.scrollHeight - window.innerHeight;
+  if(h > 0 && pgbar) pgbar.style.width = (window.scrollY / h * 100) + '%';
 }
-window.addEventListener('scroll',updateProgress,{passive:true});
+window.addEventListener('scroll', updatePgbar, {passive:true});
 
 /* BACK TO TOP */
-const btt=document.getElementById('btt');
-window.addEventListener('scroll',()=>{
-  if(btt)btt.classList.toggle('show',window.scrollY>500);
-},{ passive:true });
+var btt = document.getElementById('btt');
+window.addEventListener('scroll', function(){
+  if(btt) btt.classList.toggle('show', window.scrollY > 500);
+}, {passive:true});
 
 /* CURSOR */
-const CUR=document.getElementById('CUR'),CUR2=document.getElementById('CUR2');
-let mx=window.innerWidth/2,my=window.innerHeight/2,lx=mx,ly=my;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+var CUR = document.getElementById('CUR'), CUR2 = document.getElementById('CUR2');
+var mx = window.innerWidth/2, my = window.innerHeight/2, lx = mx, ly = my;
+document.addEventListener('mousemove', function(e){ mx = e.clientX; my = e.clientY; });
 (function T(){
-  if(CUR){CUR.style.left=mx+'px';CUR.style.top=my+'px'}
-  lx+=(mx-lx)*.1;ly+=(my-ly)*.1;
-  if(CUR2){CUR2.style.left=lx+'px';CUR2.style.top=ly+'px'}
+  if(CUR){ CUR.style.left = mx+'px'; CUR.style.top = my+'px'; }
+  lx += (mx-lx)*0.1; ly += (my-ly)*0.1;
+  if(CUR2){ CUR2.style.left = lx+'px'; CUR2.style.top = ly+'px'; }
   requestAnimationFrame(T);
 })();
-document.querySelectorAll('a,button,input,select,textarea').forEach(el=>{
-  el.addEventListener('mouseenter',()=>document.body.classList.add('cbig'));
-  el.addEventListener('mouseleave',()=>document.body.classList.remove('cbig'));
+document.querySelectorAll('a,button,input,select,textarea').forEach(function(el){
+  el.addEventListener('mouseenter', function(){ document.body.classList.add('cbig'); });
+  el.addEventListener('mouseleave', function(){ document.body.classList.remove('cbig'); });
 });
 
-/* LOADER + HERO */
-window.addEventListener('DOMContentLoaded',()=>{
-  setTimeout(()=>{
+/* LOADER + HERO ANIMATION */
+window.addEventListener('DOMContentLoaded', function(){
+  setTimeout(function(){
     document.getElementById('LD').classList.add('out');
     document.getElementById('hLogo').classList.add('on');
-    const ws=document.querySelectorAll('.hw');
-    ws.forEach((w,i)=>setTimeout(()=>w.classList.add('on'),260+i*90));
-    const t=280+ws.length*90;
-    setTimeout(()=>document.getElementById('hSub').classList.add('on'),t);
-    setTimeout(()=>document.getElementById('hBtns').classList.add('on'),t+120);
-    setTimeout(()=>document.getElementById('hScroll').classList.add('on'),t+300);
-  },750);
+    var ws = document.querySelectorAll('.hw');
+    ws.forEach(function(w,i){ setTimeout(function(){ w.classList.add('on'); }, 260 + i*90); });
+    var t = 280 + ws.length*90;
+    setTimeout(function(){ document.getElementById('hSub').classList.add('on'); }, t);
+    setTimeout(function(){ document.getElementById('hBtns').classList.add('on'); }, t+120);
+    setTimeout(function(){ document.getElementById('hScroll').classList.add('on'); }, t+300);
+  }, 750);
 });
 
 /* NAV */
-const NAV=document.getElementById('NAV');
-window.addEventListener('scroll',()=>NAV.classList.toggle('s',window.scrollY>50),{passive:true});
+var NAV = document.getElementById('NAV');
+window.addEventListener('scroll', function(){ NAV.classList.toggle('s', window.scrollY > 50); }, {passive:true});
 
-/* FILM */
-const film=document.getElementById('film'),fBar=document.getElementById('fBar');
-const fSC=[0,1,2].map(i=>document.getElementById('fS'+i));
-function filmT(){
-  if(!film)return;
-  const r=film.getBoundingClientRect();
-  const total=film.offsetHeight-window.innerHeight;
-  const p=Math.max(0,Math.min(1,-r.top/total));
-  if(fBar)fBar.style.width=(p*100)+'%';
-  fSC.forEach((s,i)=>{
-    if(!s)return;
-    const mid=(i+.5)/fSC.length,hw=.5/fSC.length;
-    const dist=Math.abs(p-mid)/hw;
-    const t=Math.max(0,1-dist);
-    const op=t*t*(3-2*t);
-    s.style.opacity=op;
-    s.style.transform='translateY('+(p-mid)*-70+'px)';
-    const fn=s.querySelector('.f-n');
-    if(fn)fn.style.transform='scale('+(0.88+op*.12)+')';
+/* FILM SCROLL */
+var film = document.getElementById('film');
+var fBar = document.getElementById('fBar');
+var fSC = [0,1,2].map(function(i){ return document.getElementById('fS'+i); });
+function filmTick(){
+  if(!film) return;
+  var r = film.getBoundingClientRect();
+  var total = film.offsetHeight - window.innerHeight;
+  var p = Math.max(0, Math.min(1, -r.top / total));
+  if(fBar) fBar.style.width = (p*100) + '%';
+  fSC.forEach(function(s,i){
+    if(!s) return;
+    var mid = (i+0.5)/fSC.length, hw = 0.5/fSC.length;
+    var dist = Math.abs(p-mid)/hw;
+    var t2 = Math.max(0, 1-dist);
+    var op = t2*t2*(3-2*t2);
+    s.style.opacity = op;
+    s.style.transform = 'translateY('+(p-mid)*-70+'px)';
+    var fn = s.querySelector('.f-n');
+    if(fn) fn.style.transform = 'scale('+(0.88+op*0.12)+')';
   });
 }
-window.addEventListener('scroll',filmT,{passive:true});
-filmT();
+window.addEventListener('scroll', filmTick, {passive:true});
+filmTick();
 
 /* PRODUCT CAROUSEL */
-const track=document.getElementById('pTrack');
-const dots=document.querySelectorAll('#pDots .prd-dot');
-const pPrev=document.getElementById('pPrev');
-const pNext=document.getElementById('pNext');
-const outer=document.getElementById('pOuter');
-const TOTAL=4;
-let cur=0,busy=false;
+var track = document.getElementById('pTrack');
+var dotsEl = document.querySelectorAll('#pDots .prd-dot');
+var pPrev = document.getElementById('pPrev');
+var pNext = document.getElementById('pNext');
+var outer = document.getElementById('pOuter');
+var TOTAL = 4, curSlide = 0, busy = false;
 
-function goTo(idx,instant){
-  if(busy&&!instant)return;
-  idx=((idx%TOTAL)+TOTAL)%TOTAL;
-  cur=idx;
-  busy=true;
+function goTo(idx, instant){
+  if(busy && !instant) return;
+  idx = ((idx % TOTAL) + TOTAL) % TOTAL;
+  curSlide = idx;
+  busy = true;
   if(track){
-    track.style.transition=instant?'none':'transform .65s cubic-bezier(.16,1,.3,1)';
-    track.style.transform='translateX(-'+idx+'00%)';
+    track.style.transition = instant ? 'none' : 'transform .65s cubic-bezier(.16,1,.3,1)';
+    track.style.transform = 'translateX(-' + idx + '00%)';
   }
-  dots.forEach((d,i)=>d.classList.toggle('a',i===cur));
-  setTimeout(()=>{busy=false;},700);
+  dotsEl.forEach(function(d,i){ d.classList.toggle('a', i === curSlide); });
+  setTimeout(function(){ busy = false; }, 700);
 }
 
-if(pPrev)pPrev.addEventListener('click',()=>goTo(cur-1));
-if(pNext)pNext.addEventListener('click',()=>goTo(cur+1));
-dots.forEach(d=>d.addEventListener('click',()=>goTo(+d.dataset.i)));
+pPrev.addEventListener('click', function(){ goTo(curSlide - 1); });
+pNext.addEventListener('click', function(){ goTo(curSlide + 1); });
+dotsEl.forEach(function(d){ d.addEventListener('click', function(){ goTo(+d.dataset.i); }); });
 
-/* Touch / drag swipe */
-let tSX=null,tSY=null,dragging=false;
-if(outer){
-  outer.addEventListener('touchstart',e=>{tSX=e.touches[0].clientX;tSY=e.touches[0].clientY;dragging=false;},{passive:true});
-  outer.addEventListener('touchmove',e=>{
-    if(tSX===null)return;
-    const dx=e.touches[0].clientX-tSX,dy=e.touches[0].clientY-tSY;
-    if(!dragging&&Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>8){dragging=true;}
-    if(dragging)e.preventDefault();
-  },{passive:false});
-  outer.addEventListener('touchend',e=>{
-    if(!dragging||tSX===null){tSX=null;dragging=false;return;}
-    const dx=e.changedTouches[0].clientX-tSX;
-    if(Math.abs(dx)>50)goTo(cur+(dx<0?1:-1));
-    tSX=null;dragging=false;
-  });
-  /* Mouse drag */
-  let mSX=null;
-  outer.addEventListener('mousedown',e=>{mSX=e.clientX;e.preventDefault();});
-  outer.addEventListener('mouseup',e=>{
-    if(mSX===null)return;
-    const dx=e.clientX-mSX;
-    if(Math.abs(dx)>60)goTo(cur+(dx<0?1:-1));
-    mSX=null;
-  });
-  outer.addEventListener('mouseleave',()=>{mSX=null;});
-}
-
-/* Keyboard arrows when product visible */
-document.addEventListener('keydown',e=>{
-  const prod=document.getElementById('product');
-  if(!prod)return;
-  const r=prod.getBoundingClientRect();
-  if(r.top>window.innerHeight||r.bottom<0)return;
-  if(e.key==='ArrowLeft'){e.preventDefault();goTo(cur-1);}
-  if(e.key==='ArrowRight'){e.preventDefault();goTo(cur+1);}
+/* Touch swipe */
+var tSX = null, tSY = null, tDragging = false;
+outer.addEventListener('touchstart', function(e){ tSX = e.touches[0].clientX; tSY = e.touches[0].clientY; tDragging = false; }, {passive:true});
+outer.addEventListener('touchmove', function(e){
+  if(tSX === null) return;
+  var dx = e.touches[0].clientX - tSX, dy = e.touches[0].clientY - tSY;
+  if(!tDragging && Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 8){ tDragging = true; }
+  if(tDragging) e.preventDefault();
+}, {passive:false});
+outer.addEventListener('touchend', function(e){
+  if(!tDragging || tSX === null){ tSX = null; tDragging = false; return; }
+  var dx = e.changedTouches[0].clientX - tSX;
+  if(Math.abs(dx) > 50) goTo(curSlide + (dx < 0 ? 1 : -1));
+  tSX = null; tDragging = false;
 });
 
-goTo(0,true);
+/* Mouse drag */
+var mSX = null;
+outer.addEventListener('mousedown', function(e){ mSX = e.clientX; });
+outer.addEventListener('mouseup', function(e){
+  if(mSX === null) return;
+  var dx = e.clientX - mSX;
+  if(Math.abs(dx) > 60) goTo(curSlide + (dx < 0 ? 1 : -1));
+  mSX = null;
+});
+outer.addEventListener('mouseleave', function(){ mSX = null; });
+
+/* Keyboard */
+document.addEventListener('keydown', function(e){
+  var prod = document.getElementById('product');
+  if(!prod) return;
+  var r = prod.getBoundingClientRect();
+  if(r.top > window.innerHeight || r.bottom < 0) return;
+  if(e.key === 'ArrowLeft'){ e.preventDefault(); goTo(curSlide - 1); }
+  if(e.key === 'ArrowRight'){ e.preventDefault(); goTo(curSlide + 1); }
+});
+
+goTo(0, true);
 
 /* REVEALS */
-const ro=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');ro.unobserve(e.target);}});
-},{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
-document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
+var ro = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){ e.target.classList.add('on'); ro.unobserve(e.target); }
+  });
+}, {threshold:0.08, rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.rv').forEach(function(el){ ro.observe(el); });
 
-/* FORM — Formspree with mailto fallback */
-window.handleForm=async function(e){
+/* FORM - mailto, no page navigation, shows confirmation */
+var cF = document.getElementById('cF');
+var fBtn = document.getElementById('fBtn');
+var formConfirm = document.getElementById('formConfirm');
+
+cF.addEventListener('submit', function(e){
   e.preventDefault();
-  const form=e.target;
-  const btn=document.getElementById('fBtn');
-  const msg=document.getElementById('formMsg');
-  const endpoint=form.dataset.endpoint||'';
-  const d=new FormData(form);
 
-  btn.innerHTML='Sending\u2026';
-  btn.disabled=true;
-  if(msg){msg.className='form-msg';msg.style.display='none';}
+  var name  = document.getElementById('f-name').value.trim();
+  var co    = document.getElementById('f-co').value.trim();
+  var why   = document.getElementById('f-why').value;
+  var msg   = document.getElementById('f-msg').value.trim();
 
-  const useFormspree=endpoint&&!endpoint.includes('FORMSPREE_ENDPOINT_HERE');
+  if(!name || !co || !why || !msg) return; // HTML5 validation handles this
 
-  if(useFormspree){
-    try{
-      const res=await fetch(endpoint,{method:'POST',body:d,headers:{Accept:'application/json'}});
-      if(res.ok){
-        btn.innerHTML='\u2713 Message sent!';
-        btn.style.background='var(--g2)';
-        form.reset();
-        if(msg){msg.textContent='Your message has been sent. We will be in touch within 48 hours.';msg.className='form-msg ok';}
-      }else{
-        throw new Error('server');
-      }
-    }catch{
-      if(msg){msg.textContent='Could not send right now. Please email us directly at paperfumed.ocea23@gmail.com';msg.className='form-msg err';}
-      btn.innerHTML='Get Early Access';
-      btn.disabled=false;
-      return;
-    }
-  }else{
-    /* Mailto fallback */
-    const sub=encodeURIComponent('PaperFumed Early Access \u2013 '+(d.get('co')||''));
-    const body=encodeURIComponent('Name: '+(d.get('name')||'')+'\nCompany: '+(d.get('co')||'')+'\nInterest: '+(d.get('why')||'')+'\n\nMessage:\n'+(d.get('msg')||''));
-    window.location.href='mailto:paperfumed.ocea23@gmail.com?subject='+sub+'&body='+body;
-    btn.innerHTML='\u2713 Opening your mail app';
-    btn.style.background='var(--g2)';
-    if(msg){msg.textContent='Your default mail app should open with the message pre-filled. Just click Send.';msg.className='form-msg ok';}
-  }
+  /* Build mailto string */
+  var subject = encodeURIComponent('PaperFumed Early Access \u2013 ' + co);
+  var body = encodeURIComponent(
+    'Name: ' + name + '\n' +
+    'Company: ' + co + '\n' +
+    'Interest: ' + why + '\n\n' +
+    'Message:\n' + msg
+  );
+  var mailtoLink = 'mailto:paperfumed.ocea23@gmail.com?subject=' + subject + '&body=' + body;
 
-  setTimeout(()=>{
-    btn.innerHTML='Get Early Access <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M1 11L11 1M11 1H4M11 1V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-    btn.style.background='';
-    btn.disabled=false;
-  },5000);
-};
+  /* Open mail client without navigating the page */
+  var tempLink = document.createElement('a');
+  tempLink.href = mailtoLink;
+  tempLink.style.display = 'none';
+  document.body.appendChild(tempLink);
+  tempLink.click();
+  setTimeout(function(){ document.body.removeChild(tempLink); }, 100);
+
+  /* Show confirmation, hide form */
+  cF.style.display = 'none';
+  formConfirm.classList.add('show');
+
+  /* Reset after 8s in case they want to submit again */
+  setTimeout(function(){
+    cF.reset();
+    cF.style.display = 'block';
+    formConfirm.classList.remove('show');
+  }, 8000);
+});
 
 /* SMOOTH SCROLL with nav offset */
-const NH=72;
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',e=>{
-    const h=a.getAttribute('href');
-    if(!h||h==='#'){e.preventDefault();window.scrollTo({top:0,behavior:'smooth'});return;}
-    const t=document.querySelector(h);
-    if(t){e.preventDefault();window.scrollTo({top:Math.max(0,t.getBoundingClientRect().top+window.scrollY-NH),behavior:'smooth'});}
+var NH = 72;
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click', function(e){
+    var h = a.getAttribute('href');
+    if(!h || h === '#'){ e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'}); return; }
+    var t = document.querySelector(h);
+    if(t){
+      e.preventDefault();
+      window.scrollTo({top: Math.max(0, t.getBoundingClientRect().top + window.scrollY - NH), behavior:'smooth'});
+    }
   });
 });
 
