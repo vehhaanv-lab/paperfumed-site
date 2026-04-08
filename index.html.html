@@ -23,11 +23,11 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 ::selection{background:var(--g);color:var(--bg)}
 
 /* PAGE PROGRESS */
-#pgbar{position:fixed;top:0;left:0;z-index:9999;height:2px;background:linear-gradient(90deg,var(--g),var(--beige));width:0%;pointer-events:none}
+#pgbar{position:fixed;top:0;left:0;z-index:9999;height:2px;background:linear-gradient(90deg,var(--g),var(--beige));width:0%;pointer-events:none;transition:width .1s linear}
 
 /* CURSOR */
-#CUR{position:fixed;z-index:9990;pointer-events:none;width:7px;height:7px;border-radius:50%;background:var(--g);transform:translate(-50%,-50%);transition:width .3s var(--ease),height .3s var(--ease)}
-#CUR2{position:fixed;z-index:9989;pointer-events:none;width:30px;height:30px;border-radius:50%;border:1px solid rgba(77,184,126,.28);transform:translate(-50%,-50%)}
+#CUR{position:fixed;z-index:9990;pointer-events:none;width:7px;height:7px;border-radius:50%;background:var(--g);transform:translate(-50%,-50%);transition:width .3s var(--ease),height .3s var(--ease),background .3s}
+#CUR2{position:fixed;z-index:9989;pointer-events:none;width:30px;height:30px;border-radius:50%;border:1px solid rgba(77,184,126,.28);transform:translate(-50%,-50%);transition:opacity .3s}
 .cbig #CUR{width:50px;height:50px;background:rgba(77,184,126,.07);border:1px solid rgba(77,184,126,.22)}
 .cbig #CUR2{opacity:0}
 
@@ -44,8 +44,8 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .ld-n{font-size:1.1rem;font-weight:600;letter-spacing:-.01em;color:var(--c1)}
 
 /* NAV */
-#NAV{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:0 3.5rem;height:64px;border-bottom:1px solid transparent;transition:background .45s,border-color .45s}
-#NAV.s{background:rgba(9,14,22,.92);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-bottom-color:var(--c4)}
+#NAV{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:0 3.5rem;height:68px;border-bottom:1px solid transparent;transition:background .45s,border-color .45s}
+#NAV.s{background:rgba(9,14,22,.94);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-bottom-color:var(--c4)}
 .n-logo{display:flex;align-items:center;gap:11px;text-decoration:none;cursor:none}
 .n-word{font-size:.92rem;font-weight:600;letter-spacing:-.01em;color:var(--c1)}
 .n-r{display:flex;align-items:center;gap:2rem}
@@ -56,9 +56,9 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .n-btn:hover{background:rgba(77,184,126,.16);transform:translateY(-1px)}
 
 /* HERO */
-#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 6rem;position:relative;overflow:hidden;background:var(--bg)}
-.hgA{position:absolute;top:0;left:50%;transform:translateX(-50%);pointer-events:none;width:1000px;height:560px;border-radius:50%;background:radial-gradient(ellipse,rgba(77,184,126,.05) 0%,rgba(196,170,132,.025) 40%,transparent 65%)}
-.hgB{position:absolute;bottom:10%;right:15%;pointer-events:none;width:380px;height:280px;border-radius:50%;background:radial-gradient(ellipse,rgba(196,170,132,.035) 0%,transparent 70%)}
+#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 7rem;position:relative;overflow:hidden;background:var(--bg)}
+.hgA{position:absolute;top:0;left:50%;transform:translateX(-50%);pointer-events:none;width:1000px;height:560px;border-radius:50%;background:radial-gradient(ellipse,rgba(77,184,126,.06) 0%,rgba(196,170,132,.03) 40%,transparent 65%)}
+.hgB{position:absolute;bottom:10%;right:15%;pointer-events:none;width:380px;height:280px;border-radius:50%;background:radial-gradient(ellipse,rgba(196,170,132,.04) 0%,transparent 70%)}
 .h-grain{position:absolute;inset:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:.033;mix-blend-mode:overlay}
 .h-logo{display:flex;align-items:center;gap:13px;margin-bottom:3.5rem;z-index:2;position:relative;opacity:0;transform:translateY(14px);transition:opacity .9s .1s var(--ease),transform .9s .1s var(--ease)}
 .h-logo.on{opacity:1;transform:translateY(0)}
@@ -67,17 +67,20 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .hw{display:inline-block;opacity:0;transform:translateY(32px) skewX(-2deg);transition:opacity .65s var(--ease),transform .65s var(--ease)}
 .hw.on{opacity:1;transform:translateY(0) skewX(0)}
 .hg{font-style:italic;color:var(--g)}
-.h-sub{font-size:1rem;color:var(--c2);max-width:360px;line-height:1.75;font-weight:300;margin-bottom:3rem;z-index:2;position:relative;opacity:0;transition:opacity .8s .58s var(--ease)}
+/* FIXED: sub and btns always have a base transform so they animate correctly */
+.h-sub{font-size:1rem;color:var(--c2);max-width:400px;line-height:1.78;font-weight:300;margin-bottom:3rem;z-index:2;position:relative;opacity:0;transition:opacity .8s var(--ease)}
 .h-sub.on{opacity:1}
-.h-btns{display:flex;gap:.85rem;flex-wrap:wrap;justify-content:center;z-index:2;position:relative;opacity:0;transform:translateY(10px);transition:opacity .7s .72s var(--ease),transform .7s .72s var(--ease)}
+.h-btns{display:flex;gap:.85rem;flex-wrap:wrap;justify-content:center;z-index:2;position:relative;opacity:0;transform:translateY(12px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
 .h-btns.on{opacity:1;transform:translateY(0)}
 .btn-s{height:50px;padding:0 2.25rem;background:var(--g);color:var(--bg);border-radius:2px;text-decoration:none;font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;display:inline-flex;align-items:center;gap:.55rem;transition:background .2s,transform .15s;border:none;cursor:none;font-family:'Plus Jakarta Sans',sans-serif}
 .btn-s:hover{background:var(--g2);transform:translateY(-2px)}
 .btn-g{height:50px;padding:0 1.85rem;border:1px solid var(--c4);color:var(--c2);border-radius:2px;text-decoration:none;font-size:.75rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;display:inline-flex;align-items:center;gap:.55rem;transition:border-color .2s,color .2s,transform .15s;cursor:none}
 .btn-g:hover{border-color:rgba(235,226,206,.28);color:var(--c1);transform:translateY(-2px)}
-.h-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;color:var(--c3);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;opacity:0;transition:opacity .8s 1.5s;animation:sbounce 3s 1.6s ease-in-out infinite}
-.h-scroll.on{opacity:1}
-@keyframes sbounce{0%,100%{transform:translateX(-50%) translateY(0)}55%{transform:translateX(-50%) translateY(8px)}}
+
+/* FIXED: scroll indicator — animation only after .on is added, no CSS conflict */
+.h-scroll{position:absolute;bottom:2.8rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;color:var(--c3);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;opacity:0;transition:opacity .8s var(--ease)}
+.h-scroll.on{opacity:1;animation:sbounce 3.5s .9s ease-in-out infinite}
+@keyframes sbounce{0%,100%{transform:translateX(-50%) translateY(0)}55%{transform:translateX(-50%) translateY(9px)}}
 
 /* MARQUEE */
 .mq{overflow:hidden;background:var(--bg);border-top:1px solid var(--c4);padding:.9rem 0}
@@ -99,7 +102,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .f-pin{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .f-progress{position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--c4)}
 .f-bar{height:100%;background:linear-gradient(90deg,var(--g),var(--beige));width:0%;will-change:width}
-.f-scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:3rem;will-change:opacity,transform}
+.f-scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:3rem;will-change:opacity,transform;pointer-events:none}
 .f-tag{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500;color:var(--beige);margin-bottom:1.35rem;display:block}
 .f-n{font-family:'Fraunces',serif;font-size:clamp(5.5rem,22vw,20rem);font-weight:400;line-height:.85;letter-spacing:-.07em;color:var(--c1);display:block;margin-bottom:2.25rem;will-change:transform}
 .f-n sup{font-size:.26em;vertical-align:.25em;letter-spacing:0;color:var(--g);font-weight:300}
@@ -117,7 +120,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .prd-nav{display:flex;align-items:center;gap:1.5rem;flex-shrink:0;padding-bottom:.25rem}
 .prd-arr{width:42px;height:42px;border-radius:50%;border:1px solid rgba(196,170,132,.25);background:rgba(196,170,132,.05);color:var(--beige);display:flex;align-items:center;justify-content:center;cursor:none;transition:border-color .2s,background .2s,transform .15s;flex-shrink:0}
 .prd-arr:hover{border-color:rgba(196,170,132,.5);background:rgba(196,170,132,.1);transform:scale(1.05)}
-.prd-arr:disabled{opacity:.25;transform:none;pointer-events:none}
 .prd-dots{display:flex;gap:.5rem;align-items:center}
 .prd-dot{width:28px;height:2px;border-radius:1px;background:var(--c4);cursor:none;transition:background .35s,width .35s var(--ease)}
 .prd-dot.a{background:var(--beige);width:44px}
@@ -188,7 +190,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .con-h{font-family:'Fraunces',serif;font-size:clamp(2rem,3.5vw,3.2rem);font-weight:400;line-height:1.1;letter-spacing:-.04em;margin-bottom:1.1rem}
 .con-h em{font-style:italic;color:var(--g)}
 .con-b{font-size:.88rem;color:var(--c2);line-height:1.8;font-weight:300;margin-bottom:2.25rem}
-/* Email link - plain display */
 .con-email{display:flex;align-items:center;gap:.65rem;font-size:.88rem;font-weight:500;color:var(--c1);text-decoration:none;transition:color .2s;margin-bottom:.85rem;cursor:none;width:fit-content}
 .con-email:hover{color:var(--g)}
 .con-email svg{opacity:.3;flex-shrink:0}
@@ -201,7 +202,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .fg{margin-bottom:1rem}
 .fg label{display:block;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--c3);margin-bottom:.45rem}
 .fg label .req{color:var(--beige);margin-left:2px}
-/* Input base - dark background, cream text */
 .fg input,
 .fg select,
 .fg textarea{
@@ -224,14 +224,17 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .fg input:focus,
 .fg select:focus,
 .fg textarea:focus{border-color:rgba(196,170,132,.4)}
-/* Fix browser autofill white background */
+/* Kill browser autofill white background — comprehensive */
 .fg input:-webkit-autofill,
 .fg input:-webkit-autofill:hover,
 .fg input:-webkit-autofill:focus,
-.fg input:-webkit-autofill:active{
+.fg input:-webkit-autofill:active,
+.fg input:-webkit-autofill:first-line{
   -webkit-box-shadow:0 0 0 1000px #0F1922 inset !important;
   -webkit-text-fill-color:#EBE2CE !important;
-  caret-color:#EBE2CE;
+  caret-color:#EBE2CE !important;
+  background-color:#0F1922 !important;
+  color:#EBE2CE !important;
 }
 .fg select{
   cursor:none;
@@ -254,26 +257,43 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
   transition:background .2s,transform .15s;
   display:flex;align-items:center;justify-content:center;gap:.5rem;
 }
-.fbtn:hover{background:var(--g2);transform:translateY(-1px)}
-.fbtn:disabled{opacity:.5;transform:none;cursor:not-allowed}
+.fbtn:hover:not(:disabled){background:var(--g2);transform:translateY(-1px)}
+.fbtn:disabled{opacity:.55;transform:none;pointer-events:none}
 
-/* Confirmation state - replaces button */
+/* Confirmation state */
 .form-confirm{
   display:none;
   margin-top:.5rem;
-  padding:1.1rem 1.25rem;
-  background:rgba(77,184,126,.08);
-  border:1px solid rgba(77,184,126,.2);
+  padding:1.6rem 1.5rem;
+  background:rgba(77,184,126,.07);
+  border:1px solid rgba(77,184,126,.18);
   border-radius:2px;
   text-align:center;
 }
 .form-confirm.show{display:block}
-.form-confirm-icon{font-size:1.4rem;margin-bottom:.5rem;display:block}
-.form-confirm-title{font-size:.85rem;font-weight:600;color:var(--g);margin-bottom:.3rem}
-.form-confirm-sub{font-size:.75rem;color:var(--c2);line-height:1.55}
+.fc-check{width:36px;height:36px;border-radius:50%;border:1px solid rgba(77,184,126,.4);background:rgba(77,184,126,.08);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem}
+.fc-check svg{opacity:.85}
+.form-confirm-title{font-size:.92rem;font-weight:600;color:var(--g);margin-bottom:.45rem;letter-spacing:-.01em}
+.form-confirm-sub{font-size:.78rem;color:var(--c2);line-height:1.65;font-weight:300}
+
+/* Error state */
+.form-error{
+  display:none;
+  margin-top:.75rem;
+  padding:.75rem 1rem;
+  background:rgba(235,100,80,.06);
+  border:1px solid rgba(235,100,80,.2);
+  border-radius:2px;
+  font-size:.78rem;
+  color:rgba(235,180,160,.85);
+  text-align:center;
+  line-height:1.5;
+}
+.form-error.show{display:block}
 
 .fnote{font-size:.68rem;color:var(--c3);text-align:center;margin-top:1rem;line-height:1.5}
 .fnote a{color:var(--beige);text-decoration:none;cursor:none}
+.fnote a:hover{color:var(--c1)}
 
 /* FOOTER */
 footer{border-top:1px solid var(--c4);padding:2rem 4rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;background:var(--bg)}
@@ -371,7 +391,10 @@ footer{border-top:1px solid var(--c4);padding:2rem 4rem;display:flex;align-items
     <a href="#contact" class="btn-s">Get Early Access <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M1 11L11 1M11 1H4M11 1V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     <a href="#product" class="btn-g">See the Product</a>
   </div>
-  <div class="h-scroll" id="hScroll"><span>Scroll</span><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1.5v10M2.5 8l4 4 4-4" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  <div class="h-scroll" id="hScroll">
+    <span>Scroll</span>
+    <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1.5v10M2.5 8l4 4 4-4" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
 </section>
 
 <!-- MARQUEE -->
@@ -598,7 +621,6 @@ footer{border-top:1px solid var(--c4);padding:2rem 4rem;display:flex;align-items
       <div class="ey rv">Get in Touch</div>
       <h2 class="con-h rv">Want to be part of<br>what comes <em>next?</em></h2>
       <p class="con-b rv d1">We are at day one. If you are in hospitality, retail, sustainability, or just genuinely curious, we would love to hear from you. No pitch. No commitment.</p>
-      <!-- Simple mailto link - opens mail client directly -->
       <a href="mailto:paperfumed.ocea23@gmail.com" class="con-email rv d2">
         <svg width="15" height="12" viewBox="0 0 15 12" fill="none"><path d="M1 1l6.5 5 6.5-5M1 1h13v10H1V1z" stroke="#EBE2CE" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>
         paperfumed.ocea23@gmail.com
@@ -614,20 +636,20 @@ footer{border-top:1px solid var(--c4);padding:2rem 4rem;display:flex;align-items
         <p class="ftitle">Get Early Access</p>
 
         <div id="formWrap">
-          <form id="cF">
+          <form id="cF" novalidate>
             <div class="fg-r">
               <div class="fg">
                 <label>Name <span class="req">*</span></label>
-                <input type="text" id="f-name" placeholder="Your name" autocomplete="name" required>
+                <input type="text" id="f-name" name="name" placeholder="Your name" autocomplete="name" required>
               </div>
               <div class="fg">
                 <label>Company <span class="req">*</span></label>
-                <input type="text" id="f-co" placeholder="Organisation" autocomplete="organization" required>
+                <input type="text" id="f-co" name="company" placeholder="Organisation" autocomplete="organization" required>
               </div>
             </div>
             <div class="fg">
               <label>What brings you here <span class="req">*</span></label>
-              <select id="f-why" required>
+              <select id="f-why" name="interest" required>
                 <option value="">Select one</option>
                 <option value="Potential partner or customer">Potential partner or customer</option>
                 <option value="Investor or advisor">Investor or advisor</option>
@@ -638,19 +660,26 @@ footer{border-top:1px solid var(--c4);padding:2rem 4rem;display:flex;align-items
             </div>
             <div class="fg">
               <label>Message <span class="req">*</span></label>
-              <textarea id="f-msg" rows="4" placeholder="Tell us what is on your mind..." required></textarea>
+              <textarea id="f-msg" name="message" rows="4" placeholder="Tell us what is on your mind..." required></textarea>
             </div>
+
             <button type="submit" class="fbtn" id="fBtn">
               Get Early Access
               <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M1 11L11 1M11 1H4M11 1V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
+
+            <div class="form-error" id="formError">
+              Something went wrong. Please email us directly at paperfumed.ocea23@gmail.com
+            </div>
           </form>
 
-          <!-- Confirmation - shown after submit, form hidden -->
+          <!-- Confirmation — shown after successful submit -->
           <div class="form-confirm" id="formConfirm">
-            <span class="form-confirm-icon">&#10003;</span>
+            <div class="fc-check">
+              <svg width="14" height="11" viewBox="0 0 14 11" fill="none"><path d="M1 5.5L5 9.5L13 1.5" stroke="#4DB87E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
             <div class="form-confirm-title">Message received</div>
-            <div class="form-confirm-sub">Thank you for reaching out. We will get back to you within 48 hours at paperfumed.ocea23@gmail.com</div>
+            <div class="form-confirm-sub">We will get back to you within 48 hours. Thank you for reaching out.</div>
           </div>
         </div>
 
@@ -675,11 +704,11 @@ footer{border-top:1px solid var(--c4);padding:2rem 4rem;display:flex;align-items
 <script>
 (function(){
 
-/* SCROLL TO TOP ON EVERY LOAD */
+/* ── SCROLL RESTORATION: always start at top ── */
 if('scrollRestoration' in history) history.scrollRestoration = 'manual';
-window.addEventListener('load', function(){ window.scrollTo(0, 0); });
+window.scrollTo(0, 0);
 
-/* PAGE PROGRESS BAR */
+/* ── PAGE PROGRESS BAR ── */
 var pgbar = document.getElementById('pgbar');
 function updatePgbar(){
   var h = document.body.scrollHeight - window.innerHeight;
@@ -687,198 +716,273 @@ function updatePgbar(){
 }
 window.addEventListener('scroll', updatePgbar, {passive:true});
 
-/* BACK TO TOP */
+/* ── BACK TO TOP ── */
 var btt = document.getElementById('btt');
 window.addEventListener('scroll', function(){
   if(btt) btt.classList.toggle('show', window.scrollY > 500);
 }, {passive:true});
 
-/* CURSOR */
+/* ── CURSOR ── */
 var CUR = document.getElementById('CUR'), CUR2 = document.getElementById('CUR2');
 var mx = window.innerWidth/2, my = window.innerHeight/2, lx = mx, ly = my;
 document.addEventListener('mousemove', function(e){ mx = e.clientX; my = e.clientY; });
-(function T(){
+(function tick(){
   if(CUR){ CUR.style.left = mx+'px'; CUR.style.top = my+'px'; }
-  lx += (mx-lx)*0.1; ly += (my-ly)*0.1;
+  lx += (mx-lx)*0.10; ly += (my-ly)*0.10;
   if(CUR2){ CUR2.style.left = lx+'px'; CUR2.style.top = ly+'px'; }
-  requestAnimationFrame(T);
+  requestAnimationFrame(tick);
 })();
 document.querySelectorAll('a,button,input,select,textarea').forEach(function(el){
   el.addEventListener('mouseenter', function(){ document.body.classList.add('cbig'); });
   el.addEventListener('mouseleave', function(){ document.body.classList.remove('cbig'); });
 });
 
-/* LOADER + HERO ANIMATION */
+/* ── LOADER + HERO ENTRY ── */
 window.addEventListener('DOMContentLoaded', function(){
   setTimeout(function(){
     document.getElementById('LD').classList.add('out');
+
+    // logo
     document.getElementById('hLogo').classList.add('on');
+
+    // headline words staggered
     var ws = document.querySelectorAll('.hw');
-    ws.forEach(function(w,i){ setTimeout(function(){ w.classList.add('on'); }, 260 + i*90); });
-    var t = 280 + ws.length*90;
-    setTimeout(function(){ document.getElementById('hSub').classList.add('on'); }, t);
-    setTimeout(function(){ document.getElementById('hBtns').classList.add('on'); }, t+120);
-    setTimeout(function(){ document.getElementById('hScroll').classList.add('on'); }, t+300);
+    ws.forEach(function(w, i){
+      setTimeout(function(){ w.classList.add('on'); }, 240 + i * 85);
+    });
+
+    // sub, btns, scroll indicator in sequence after words finish
+    var wordsEnd = 240 + ws.length * 85;
+
+    setTimeout(function(){
+      document.getElementById('hSub').classList.add('on');
+    }, wordsEnd + 40);
+
+    setTimeout(function(){
+      document.getElementById('hBtns').classList.add('on');
+    }, wordsEnd + 160);
+
+    // scroll indicator: add class (which also starts its CSS animation)
+    setTimeout(function(){
+      document.getElementById('hScroll').classList.add('on');
+    }, wordsEnd + 380);
+
   }, 750);
 });
 
-/* NAV */
+/* ── NAV scroll class ── */
 var NAV = document.getElementById('NAV');
-window.addEventListener('scroll', function(){ NAV.classList.toggle('s', window.scrollY > 50); }, {passive:true});
+window.addEventListener('scroll', function(){
+  NAV.classList.toggle('s', window.scrollY > 50);
+}, {passive:true});
 
-/* FILM SCROLL */
+/* ── FILM SCROLL (3 scenes, smoothstep cross-fade) ── */
 var film = document.getElementById('film');
 var fBar = document.getElementById('fBar');
 var fSC = [0,1,2].map(function(i){ return document.getElementById('fS'+i); });
+
+function smoothstep(t){ return t*t*(3-2*t); }
+
 function filmTick(){
   if(!film) return;
   var r = film.getBoundingClientRect();
   var total = film.offsetHeight - window.innerHeight;
   var p = Math.max(0, Math.min(1, -r.top / total));
-  if(fBar) fBar.style.width = (p*100) + '%';
-  fSC.forEach(function(s,i){
+  if(fBar) fBar.style.width = (p * 100) + '%';
+
+  fSC.forEach(function(s, i){
     if(!s) return;
-    var mid = (i+0.5)/fSC.length, hw = 0.5/fSC.length;
-    var dist = Math.abs(p-mid)/hw;
-    var t2 = Math.max(0, 1-dist);
-    var op = t2*t2*(3-2*t2);
+    var mid = (i + 0.5) / fSC.length;
+    var hw  = 0.42 / fSC.length; // half-window slightly tighter for crisper cuts
+    var dist = Math.abs(p - mid) / hw;
+    var raw  = Math.max(0, 1 - dist);
+    var op   = smoothstep(raw);
     s.style.opacity = op;
-    s.style.transform = 'translateY('+(p-mid)*-70+'px)';
+    s.style.transform = 'translateY(' + (p - mid) * -65 + 'px)';
     var fn = s.querySelector('.f-n');
-    if(fn) fn.style.transform = 'scale('+(0.88+op*0.12)+')';
+    if(fn) fn.style.transform = 'scale(' + (0.88 + op * 0.12) + ')';
   });
 }
 window.addEventListener('scroll', filmTick, {passive:true});
 filmTick();
 
-/* PRODUCT CAROUSEL */
-var track = document.getElementById('pTrack');
+/* ── PRODUCT CAROUSEL ── */
+var track  = document.getElementById('pTrack');
 var dotsEl = document.querySelectorAll('#pDots .prd-dot');
-var pPrev = document.getElementById('pPrev');
-var pNext = document.getElementById('pNext');
-var outer = document.getElementById('pOuter');
-var TOTAL = 4, curSlide = 0, busy = false;
+var pPrev  = document.getElementById('pPrev');
+var pNext  = document.getElementById('pNext');
+var outer  = document.getElementById('pOuter');
+var TOTAL  = 4, cur = 0, busy = false;
 
 function goTo(idx, instant){
   if(busy && !instant) return;
   idx = ((idx % TOTAL) + TOTAL) % TOTAL;
-  curSlide = idx;
+  cur = idx;
   busy = true;
   if(track){
     track.style.transition = instant ? 'none' : 'transform .65s cubic-bezier(.16,1,.3,1)';
-    track.style.transform = 'translateX(-' + idx + '00%)';
+    track.style.transform  = 'translateX(-' + idx + '00%)';
   }
-  dotsEl.forEach(function(d,i){ d.classList.toggle('a', i === curSlide); });
+  dotsEl.forEach(function(d, i){ d.classList.toggle('a', i === cur); });
   setTimeout(function(){ busy = false; }, 700);
 }
 
-pPrev.addEventListener('click', function(){ goTo(curSlide - 1); });
-pNext.addEventListener('click', function(){ goTo(curSlide + 1); });
-dotsEl.forEach(function(d){ d.addEventListener('click', function(){ goTo(+d.dataset.i); }); });
+pPrev.addEventListener('click', function(){ goTo(cur - 1); });
+pNext.addEventListener('click', function(){ goTo(cur + 1); });
+dotsEl.forEach(function(d){
+  d.addEventListener('click', function(){ goTo(+d.dataset.i); });
+});
 
 /* Touch swipe */
-var tSX = null, tSY = null, tDragging = false;
-outer.addEventListener('touchstart', function(e){ tSX = e.touches[0].clientX; tSY = e.touches[0].clientY; tDragging = false; }, {passive:true});
+var tSX = null, tSY = null, tDrag = false;
+outer.addEventListener('touchstart', function(e){ tSX = e.touches[0].clientX; tSY = e.touches[0].clientY; tDrag = false; }, {passive:true});
 outer.addEventListener('touchmove', function(e){
   if(tSX === null) return;
   var dx = e.touches[0].clientX - tSX, dy = e.touches[0].clientY - tSY;
-  if(!tDragging && Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 8){ tDragging = true; }
-  if(tDragging) e.preventDefault();
+  if(!tDrag && Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 8){ tDrag = true; }
+  if(tDrag) e.preventDefault();
 }, {passive:false});
 outer.addEventListener('touchend', function(e){
-  if(!tDragging || tSX === null){ tSX = null; tDragging = false; return; }
+  if(!tDrag || tSX === null){ tSX = null; tDrag = false; return; }
   var dx = e.changedTouches[0].clientX - tSX;
-  if(Math.abs(dx) > 50) goTo(curSlide + (dx < 0 ? 1 : -1));
-  tSX = null; tDragging = false;
+  if(Math.abs(dx) > 50) goTo(cur + (dx < 0 ? 1 : -1));
+  tSX = null; tDrag = false;
 });
 
 /* Mouse drag */
 var mSX = null;
-outer.addEventListener('mousedown', function(e){ mSX = e.clientX; });
-outer.addEventListener('mouseup', function(e){
+outer.addEventListener('mousedown',  function(e){ mSX = e.clientX; });
+outer.addEventListener('mouseup',    function(e){
   if(mSX === null) return;
   var dx = e.clientX - mSX;
-  if(Math.abs(dx) > 60) goTo(curSlide + (dx < 0 ? 1 : -1));
+  if(Math.abs(dx) > 60) goTo(cur + (dx < 0 ? 1 : -1));
   mSX = null;
 });
 outer.addEventListener('mouseleave', function(){ mSX = null; });
 
-/* Keyboard */
+/* Keyboard (only when product section is in viewport) */
 document.addEventListener('keydown', function(e){
   var prod = document.getElementById('product');
   if(!prod) return;
   var r = prod.getBoundingClientRect();
   if(r.top > window.innerHeight || r.bottom < 0) return;
-  if(e.key === 'ArrowLeft'){ e.preventDefault(); goTo(curSlide - 1); }
-  if(e.key === 'ArrowRight'){ e.preventDefault(); goTo(curSlide + 1); }
+  if(e.key === 'ArrowLeft'){  e.preventDefault(); goTo(cur - 1); }
+  if(e.key === 'ArrowRight'){ e.preventDefault(); goTo(cur + 1); }
 });
 
 goTo(0, true);
 
-/* REVEALS */
+/* ── INTERSECTION OBSERVER REVEALS ── */
 var ro = new IntersectionObserver(function(entries){
   entries.forEach(function(e){
     if(e.isIntersecting){ e.target.classList.add('on'); ro.unobserve(e.target); }
   });
-}, {threshold:0.08, rootMargin:'0px 0px -30px 0px'});
+}, {threshold: 0.08, rootMargin: '0px 0px -30px 0px'});
 document.querySelectorAll('.rv').forEach(function(el){ ro.observe(el); });
 
-/* FORM - mailto, no page navigation, shows confirmation */
-var cF = document.getElementById('cF');
-var fBtn = document.getElementById('fBtn');
+/* ── SMOOTH SCROLL with correct nav offset ── */
+// NAV is 68px tall; add 24px breathing room = 92px total offset
+var NH = 92;
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click', function(e){
+    var h = a.getAttribute('href');
+    if(!h || h === '#'){
+      e.preventDefault();
+      window.scrollTo({top: 0, behavior: 'smooth'});
+      return;
+    }
+    var t = document.querySelector(h);
+    if(t){
+      e.preventDefault();
+      var top = Math.max(0, t.getBoundingClientRect().top + window.scrollY - NH);
+      window.scrollTo({top: top, behavior: 'smooth'});
+    }
+  });
+});
+
+/* ── FORM SUBMISSION via FormSubmit.co (actual email delivery) ── */
+/*
+   HOW IT WORKS:
+   FormSubmit.co is a free service that sends form data to your email.
+   The VERY FIRST submission will send a confirmation email to
+   paperfumed.ocea23@gmail.com - click the link in that email to activate.
+   Every submission after that arrives directly in your inbox.
+*/
+var cF          = document.getElementById('cF');
+var fBtn        = document.getElementById('fBtn');
 var formConfirm = document.getElementById('formConfirm');
+var formError   = document.getElementById('formError');
+
+var ORIGINAL_BTN_HTML = fBtn.innerHTML;
 
 cF.addEventListener('submit', function(e){
   e.preventDefault();
 
-  var name  = document.getElementById('f-name').value.trim();
-  var co    = document.getElementById('f-co').value.trim();
-  var why   = document.getElementById('f-why').value;
-  var msg   = document.getElementById('f-msg').value.trim();
+  var name = document.getElementById('f-name').value.trim();
+  var co   = document.getElementById('f-co').value.trim();
+  var why  = document.getElementById('f-why').value;
+  var msg  = document.getElementById('f-msg').value.trim();
 
-  if(!name || !co || !why || !msg) return; // HTML5 validation handles this
+  // Basic validation
+  formError.classList.remove('show');
+  if(!name || !co || !why || !msg){
+    // highlight empty fields
+    [['f-name', name], ['f-co', co], ['f-why', why], ['f-msg', msg]].forEach(function(pair){
+      var el = document.getElementById(pair[0]);
+      if(!pair[1]){
+        el.style.borderColor = 'rgba(235,100,80,.5)';
+        el.addEventListener('input', function(){ el.style.borderColor = ''; }, {once: true});
+      }
+    });
+    return;
+  }
 
-  /* Build mailto string */
-  var subject = encodeURIComponent('PaperFumed Early Access \u2013 ' + co);
-  var body = encodeURIComponent(
-    'Name: ' + name + '\n' +
-    'Company: ' + co + '\n' +
-    'Interest: ' + why + '\n\n' +
-    'Message:\n' + msg
-  );
-  var mailtoLink = 'mailto:paperfumed.ocea23@gmail.com?subject=' + subject + '&body=' + body;
+  // Disable button and show sending state
+  fBtn.disabled = true;
+  fBtn.innerHTML = 'Sending&hellip;';
 
-  /* Open mail client without navigating the page */
-  var tempLink = document.createElement('a');
-  tempLink.href = mailtoLink;
-  tempLink.style.display = 'none';
-  document.body.appendChild(tempLink);
-  tempLink.click();
-  setTimeout(function(){ document.body.removeChild(tempLink); }, 100);
+  // POST to FormSubmit.co — delivers directly to your Gmail
+  fetch('https://formsubmit.co/ajax/paperfumed.ocea23@gmail.com', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify({
+      name:     name,
+      company:  co,
+      interest: why,
+      message:  msg,
+      _subject: 'PaperFumed Early Access - ' + co,
+      _captcha: 'false',
+      _template:'table',
+      _replyto: '' // leave blank; no email field in form
+    })
+  })
+  .then(function(res){ return res.json(); })
+  .then(function(data){
+    if(data.success === 'true' || data.success === true){
+      // Success: hide form, show confirmation
+      cF.style.display = 'none';
+      formConfirm.classList.add('show');
 
-  /* Show confirmation, hide form */
-  cF.style.display = 'none';
-  formConfirm.classList.add('show');
-
-  /* Reset after 8s in case they want to submit again */
-  setTimeout(function(){
-    cF.reset();
-    cF.style.display = 'block';
-    formConfirm.classList.remove('show');
-  }, 8000);
-});
-
-/* SMOOTH SCROLL with nav offset */
-var NH = 72;
-document.querySelectorAll('a[href^="#"]').forEach(function(a){
-  a.addEventListener('click', function(e){
-    var h = a.getAttribute('href');
-    if(!h || h === '#'){ e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'}); return; }
-    var t = document.querySelector(h);
-    if(t){
-      e.preventDefault();
-      window.scrollTo({top: Math.max(0, t.getBoundingClientRect().top + window.scrollY - NH), behavior:'smooth'});
+      // Reset after 10s in case they want to submit again
+      setTimeout(function(){
+        cF.reset();
+        cF.style.display = '';
+        formConfirm.classList.remove('show');
+        fBtn.disabled = false;
+        fBtn.innerHTML = ORIGINAL_BTN_HTML;
+      }, 10000);
+    } else {
+      throw new Error('FormSubmit returned failure');
     }
+  })
+  .catch(function(){
+    // Network error or service down — restore button, show error
+    fBtn.disabled = false;
+    fBtn.innerHTML = ORIGINAL_BTN_HTML;
+    formError.classList.add('show');
   });
 });
 
