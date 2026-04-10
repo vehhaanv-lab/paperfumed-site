@@ -32,9 +32,17 @@ li{margin-bottom:.35rem}
 footer{border-top:1px solid var(--c4);padding:1.75rem 4rem;display:flex;align-items:center;justify-content:space-between}
 .fr{font-size:.62rem;color:var(--c3);letter-spacing:.04em}
 @media(max-width:768px){nav,footer{padding:0 1.5rem}main{padding:3rem 1.5rem 4rem}}
+@media(hover:none),(pointer:coarse){body{cursor:auto}#CUR,#CUR2{display:none!important}}
+@media(prefers-reduced-motion:reduce){body{cursor:auto}#CUR,#CUR2{display:none!important}}
+#CUR{position:fixed;z-index:9990;pointer-events:none;width:7px;height:7px;border-radius:50%;background:#4DB87E;transform:translate(-50%,-50%);transition:width .3s cubic-bezier(.16,1,.3,1),height .3s cubic-bezier(.16,1,.3,1),background .3s}
+#CUR2{position:fixed;z-index:9989;pointer-events:none;width:30px;height:30px;border-radius:50%;border:1px solid rgba(77,184,126,.28);transform:translate(-50%,-50%);transition:opacity .3s}
+.cbig #CUR{width:50px;height:50px;background:rgba(77,184,126,.07);border:1px solid rgba(77,184,126,.22)}
+.cbig #CUR2{opacity:0}
 </style>
 </head>
 <body>
+<div id="CUR" aria-hidden="true"></div>
+<div id="CUR2" aria-hidden="true"></div>
 <nav>
   <a href="/" class="n-logo">
     <svg width="20" height="26" viewBox="0 0 26 33" fill="none" aria-hidden="true"><rect x="8" y="0" width="10" height="6.5" rx="2" fill="#EBE2CE"/><path fill="#EBE2CE" d="M2 8.5L2 31Q2 33 4 33L22 33Q24 33 24 31L24 14.5L16.5 8.5Z"/><path fill="rgba(77,184,126,.5)" d="M16.5 8.5L24 14.5L16.5 14.5Z"/></svg>
@@ -101,6 +109,25 @@ footer{border-top:1px solid var(--c4);padding:1.75rem 4rem;display:flex;align-it
   var el=document.getElementById('privEmail');
   if(el){var a=document.createElement('a');a.href='mailto:'+e();a.textContent=e();a.style.color='#4DB87E';el.appendChild(a);}
 })();
+</script>
+<script>
+var CUR=document.getElementById('CUR'),CUR2=document.getElementById('CUR2');
+var hasHover=window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+var prefersReducedMotion=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+if(hasHover&&!prefersReducedMotion&&CUR&&CUR2){
+  var mx=window.innerWidth/2,my=window.innerHeight/2,lx=mx,ly=my,px=mx,py=my,plx=lx,ply=ly;
+  document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;},{passive:true});
+  (function tick(){
+    if(Math.abs(mx-px)>0.1||Math.abs(my-py)>0.1){CUR.style.left=mx+'px';CUR.style.top=my+'px';px=mx;py=my;}
+    lx+=(mx-lx)*0.10;ly+=(my-ly)*0.10;
+    if(Math.abs(lx-plx)>0.1||Math.abs(ly-ply)>0.1){CUR2.style.left=lx+'px';CUR2.style.top=ly+'px';plx=lx;ply=ly;}
+    requestAnimationFrame(tick);
+  })();
+  document.querySelectorAll('a,button,input,select,textarea').forEach(function(el){
+    el.addEventListener('mouseenter',function(){document.body.classList.add('cbig');});
+    el.addEventListener('mouseleave',function(){document.body.classList.remove('cbig');});
+  });
+}
 </script>
 </body>
 </html>
