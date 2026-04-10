@@ -40,5 +40,9 @@
   ],
   "rewrites": [
     { "source": "/privacy", "destination": "/privacy.html" }
+  ],
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "dest": "/404.html", "status": 404 }
   ]
 }
