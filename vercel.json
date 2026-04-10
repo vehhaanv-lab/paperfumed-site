@@ -37,5 +37,8 @@
       "destination": "https://paperfumed.vercel.app/$1",
       "permanent": true
     }
+  ],
+  "rewrites": [
+    { "source": "/privacy", "destination": "/privacy.html" }
   ]
 }
