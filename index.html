@@ -34,6 +34,9 @@
 <!-- FIX: &display=swap added to Google Fonts URL — prevents render-blocking -->
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400;1,9..144,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
+<!-- Vercel Web Analytics -->
+<script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
+
 <style>
 :root{
   --bg:#090E16;--bg1:#0A1218;--bg2:#060F0A;
@@ -870,7 +873,7 @@ function updatePgbar(){
 }
 window.addEventListener('scroll',updatePgbar,{passive:true});
 
-/* ─── Back to top ────────────────────────────────────────────────────────── */
+/* ─── Back to top ──────────────────────��─────────────────────────────────── */
 var btt=document.getElementById('btt');
 window.addEventListener('scroll',function(){
   if(btt) btt.classList.toggle('show',window.scrollY>500);
