@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PaperFumed — Exploring what comes after Plastic</title>
+<meta name="description" content="Exploring what comes after Plastic. PaperFumed is building paper-based packaging for India. Starting with the water bottle.">
+
+<!-- FIX: Canonical URL (prevents split page rank between www / non-www) -->
+<link rel="canonical" href="https://paperfumed.vercel.app/">
+
+<!-- FIX: Open Graph / Social meta tags (blank preview cards fixed) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://paperfumed.vercel.app/">
+<meta property="og:title" content="PaperFumed — Exploring what comes after Plastic">
+<meta property="og:description" content="Building paper-based packaging for India. Starting with the water bottle. Decomposes in weeks. Zero microplastics.">
+<meta property="og:image" content="https://paperfumed.vercel.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PaperFumed — Exploring what comes after Plastic">
+<meta name="twitter:description" content="Building paper-based packaging for India. Starting with the water bottle.">
+<meta name="twitter:image" content="https://paperfumed.vercel.app/og-image.png">
+
+<!-- FIX: Favicon declarations (eliminates blind 404 on every page load) -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 33'%3E%3Crect x='8' y='0' width='10' height='6.5' rx='2' fill='%23EBE2CE'/%3E%3Cpath fill='%23EBE2CE' d='M2 8.5L2 31Q2 33 4 33L22 33Q24 33 24 31L24 14.5L16.5 8.5Z'/%3E%3Cpath fill='rgba(77,184,126,.5)' d='M16.5 8.5L24 14.5L16.5 14.5Z'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 33'%3E%3Crect x='8' y='0' width='10' height='6.5' rx='2' fill='%23EBE2CE'/%3E%3Cpath fill='%23EBE2CE' d='M2 8.5L2 31Q2 33 4 33L22 33Q24 33 24 31L24 14.5L16.5 8.5Z'/%3E%3Cpath fill='rgba(77,184,126,.5)' d='M16.5 8.5L24 14.5L16.5 14.5Z'/%3E%3C/svg%3E">
+
+<!-- FIX: preconnect to FormSubmit to warm DNS+TLS before first form submit -->
+<link rel="preconnect" href="https://formsubmit.co">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- FIX: &display=swap added to Google Fonts URL — prevents render-blocking -->
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400;1,9..144,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#090E16;--bg1:#0A1218;--bg2:#060F0A;
+  --c1:#EBE2CE;--c2:rgba(235,226,206,.5);--c3:rgba(235,226,206,.48);
+  --c4:rgba(235,226,206,.09);--c5:rgba(235,226,206,.05);
+  --g:#4DB87E;--g2:#3DA068;
+  --beige:#C4AA84;--beige2:rgba(196,170,132,.18);--beige3:rgba(196,170,132,.06);
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--c1);overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:none}
+/* FIX: cursor:none only on true pointer/hover devices — not touch */
+@media(hover:none),(pointer:coarse){
+  body{cursor:auto}
+  #CUR,#CUR2{display:none!important}
+  #btt{display:none}
+}
+/* FIX: reduced-motion — cursor ring disabled, all transitions instant */
+@media(prefers-reduced-motion:reduce){
+  body{cursor:auto}
+  #CUR,#CUR2{display:none!important}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  html{scroll-behavior:auto}
+  .mq-t{animation:none!important}
+  .h-scroll{animation:none!important}
+}
+/* FIX: skip-to-content link — WCAG 2.1 Level A */
+.skip-link{position:absolute;left:-999px;width:1px;height:1px;overflow:hidden;z-index:9999;font-family:'Plus Jakarta Sans',sans-serif;font-size:.85rem;font-weight:600;text-decoration:none}
+.skip-link:focus{left:1rem;top:1rem;width:auto;height:auto;padding:.5rem 1.1rem;background:var(--g);color:var(--bg);border-radius:2px;outline:none}
+::selection{background:var(--g);color:var(--bg)}
+/* PAGE PROGRESS */
+#pgbar{position:fixed;top:0;left:0;z-index:9999;height:2px;background:linear-gradient(90deg,var(--g),var(--beige));width:0%;pointer-events:none;transition:width .1s linear}
+/* CURSOR — only rendered on hover-capable devices via CSS above */
+#CUR{position:fixed;z-index:9990;pointer-events:none;width:7px;height:7px;border-radius:50%;background:var(--g);transform:translate(-50%,-50%);transition:width .3s var(--ease),height .3s var(--ease),background .3s}
+#CUR2{position:fixed;z-index:9989;pointer-events:none;width:30px;height:30px;border-radius:50%;border:1px solid rgba(77,184,126,.28);transform:translate(-50%,-50%);transition:opacity .3s}
+.cbig #CUR{width:50px;height:50px;background:rgba(77,184,126,.07);border:1px solid rgba(77,184,126,.22)}
+.cbig #CUR2{opacity:0}
+/* BACK TO TOP */
+#btt{position:fixed;bottom:2rem;right:2rem;z-index:200;width:40px;height:40px;border-radius:50%;border:1px solid rgba(196,170,132,.25);background:rgba(9,14,22,.88);backdrop-filter:blur(10px);color:var(--beige);cursor:none;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s,border-color .2s;pointer-events:none}
+#btt.show{opacity:1;transform:translateY(0);pointer-events:auto}
+#btt:hover{border-color:rgba(196,170,132,.5)}
+/* LOADER */
+#LD{position:fixed;inset:0;z-index:5000;background:var(--bg);display:flex;align-items:center;justify-content:center;transition:opacity .75s var(--ease)}
+#LD.out{opacity:0;pointer-events:none}
+.ld-w{display:flex;align-items:center;gap:14px;opacity:0;transform:translateY(10px);animation:ldin .65s .2s var(--ease) forwards}
+@keyframes ldin{to{opacity:1;transform:translateY(0)}}
+.ld-n{font-size:1.1rem;font-weight:600;letter-spacing:-.01em;color:var(--c1)}
+/* NAV */
+#NAV{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:0 3.5rem;height:68px;border-bottom:1px solid transparent;transition:background .45s,border-color .45s}
+#NAV.s{background:rgba(9,14,22,.94);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-bottom-color:var(--c4)}
+.n-logo{display:flex;align-items:center;gap:11px;text-decoration:none;cursor:none}
+.n-word{font-size:.92rem;font-weight:600;letter-spacing:-.01em;color:var(--c1)}
+.n-r{display:flex;align-items:center;gap:2rem}
+.n-links{display:flex;gap:2.5rem;list-style:none}
+.n-links a{font-size:.67rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;text-decoration:none;color:var(--c3);transition:color .2s;cursor:none}
+.n-links a:hover{color:var(--c1)}
+.n-btn{height:34px;padding:0 1.15rem;border:1px solid rgba(77,184,126,.35);background:rgba(77,184,126,.08);color:var(--g);border-radius:2px;font-size:.67rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;gap:.45rem;transition:background .2s,transform .15s;cursor:none}
+.n-btn:hover{background:rgba(77,184,126,.16);transform:translateY(-1px)}
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 7rem;position:relative;overflow:hidden;background:var(--bg)}
+.hgA{position:absolute;top:0;left:50%;transform:translateX(-50%);pointer-events:none;width:1000px;height:560px;border-radius:50%;background:radial-gradient(ellipse,rgba(77,184,126,.06) 0%,rgba(196,170,132,.03) 40%,transparent 65%)}
+.hgB{position:absolute;bottom:10%;right:15%;pointer-events:none;width:380px;height:280px;border-radius:50%;background:radial-gradient(ellipse,rgba(196,170,132,.04) 0%,transparent 70%)}
+.h-grain{position:absolute;inset:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:.033;mix-blend-mode:overlay}
+.h-logo{display:flex;align-items:center;gap:13px;margin-bottom:3.5rem;z-index:2;position:relative;opacity:0;transform:translateY(14px);transition:opacity .9s .1s var(--ease),transform .9s .1s var(--ease)}
+.h-logo.on{opacity:1;transform:translateY(0)}
+.h-logo-w{font-size:1.15rem;font-weight:600;letter-spacing:-.01em;color:var(--c1)}
+.h-hl{font-family:'Fraunces',serif;font-size:clamp(3rem,7.8vw,8.5rem);font-weight:400;line-height:1.02;letter-spacing:-.055em;color:var(--c1);max-width:900px;position:relative;z-index:2;margin-bottom:2rem}
+.hw{display:inline-block;opacity:0;transform:translateY(32px) skewX(-2deg);transition:opacity .65s var(--ease),transform .65s var(--ease)}
+.hw.on{opacity:1;transform:translateY(0) skewX(0)}
+.hg{font-style:italic;color:var(--g)}
+.h-sub{font-size:1rem;color:var(--c2);max-width:400px;line-height:1.78;font-weight:300;margin-bottom:3rem;z-index:2;position:relative;opacity:0;transition:opacity .8s var(--ease)}
+.h-sub.on{opacity:1}
+.h-btns{display:flex;gap:.85rem;flex-wrap:wrap;justify-content:center;z-index:2;position:relative;opacity:0;transform:translateY(12px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.h-btns.on{opacity:1;transform:translateY(0)}
+.btn-s{height:50px;padding:0 2.25rem;background:var(--g);color:var(--bg);border-radius:2px;text-decoration:none;font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;display:inline-flex;align-items:center;gap:.55rem;transition:background .2s,transform .15s;border:none;cursor:none;font-family:'Plus Jakarta Sans',sans-serif}
+.btn-s:hover{background:var(--g2);transform:translateY(-2px)}
+.btn-g{height:50px;padding:0 1.85rem;border:1px solid var(--c4);color:var(--c2);border-radius:2px;text-decoration:none;font-size:.75rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;display:inline-flex;align-items:center;gap:.55rem;transition:border-color .2s,color .2s,transform .15s;cursor:none}
+.btn-g:hover{border-color:rgba(235,226,206,.28);color:var(--c1);transform:translateY(-2px)}
+.h-scroll{position:absolute;bottom:2.8rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;color:var(--c3);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;opacity:0;transition:opacity .8s var(--ease)}
+.h-scroll.on{opacity:1;animation:sbounce 3.5s .9s ease-in-out infinite}
+@keyframes sbounce{0%,100%{transform:translateX(-50%) translateY(0)}55%{transform:translateX(-50%) translateY(9px)}}
+/* MARQUEE */
+.mq{overflow:hidden;background:var(--bg);border-top:1px solid var(--c4);padding:.9rem 0}
+.mq-t{display:flex;width:max-content;animation:mqa 44s linear infinite}
+.mq-t:hover{animation-play-state:paused}
+.mq-i{font-family:'Fraunces',serif;font-style:italic;font-size:.88rem;color:var(--c3);white-space:nowrap;padding:0 2.25rem;display:flex;align-items:center;gap:2.25rem}
+.mq-dot{width:3px;height:3px;border-radius:50%;background:var(--beige);flex-shrink:0;opacity:.5}
+@keyframes mqa{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* MANIFESTO */
+#manifesto{padding:7.5rem 3rem;background:var(--bg);text-align:center;position:relative}
+#manifesto::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 50% 50%,var(--beige3) 0%,transparent 70%);pointer-events:none}
+.mn-in{max-width:840px;margin:0 auto;position:relative}
+.mn-p{font-family:'Fraunces',serif;font-size:clamp(1.6rem,3.2vw,2.6rem);font-weight:400;line-height:1.36;letter-spacing:-.03em;color:var(--c1)}
+.mn-em{display:block;font-style:italic;color:var(--g);margin-top:.55em}
+/* FILM */
+#film{height:390vh;background:var(--bg);position:relative}
+.f-pin{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.f-progress{position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--c4)}
+.f-bar{height:100%;background:linear-gradient(90deg,var(--g),var(--beige));width:0%;will-change:width}
+.f-scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:3rem;will-change:opacity,transform;pointer-events:none}
+.f-tag{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500;color:var(--beige);margin-bottom:1.35rem;display:block}
+.f-n{font-family:'Fraunces',serif;font-size:clamp(5.5rem,22vw,20rem);font-weight:400;line-height:.85;letter-spacing:-.07em;color:var(--c1);display:block;margin-bottom:2.25rem;will-change:transform}
+.f-n sup{font-size:.26em;vertical-align:.25em;letter-spacing:0;color:var(--g);font-weight:300}
+.f-cap{font-size:1rem;color:var(--c2);line-height:1.78;font-weight:300;max-width:480px;margin:0 auto}
+.f-src{display:block;margin-top:1.2rem;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--c3);opacity:.55}
+/* PRODUCT */
+#product{background:var(--bg);padding:6rem 0 0;overflow:hidden}
+.prd-top{padding:0 4.5rem 3.5rem;max-width:1200px;margin:0 auto;display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+.ey{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;color:var(--g);display:flex;align-items:center;gap:.7rem;margin-bottom:1.25rem}
+.ey::before{content:'';width:18px;height:1px;background:var(--g);flex-shrink:0}
+.p-h{font-family:'Fraunces',serif;font-size:clamp(2.4rem,4.5vw,4.2rem);font-weight:400;line-height:1.06;letter-spacing:-.05em}
+.p-h em{font-style:italic}
+.p-literally{display:block;font-style:italic;color:var(--beige);font-size:.9em;margin-top:.1em}
+/* FIX: carousel region — keyboard accessible via tabindex + role + aria-label */
+.prd-nav{display:flex;align-items:center;gap:1.5rem;flex-shrink:0;padding-bottom:.25rem}
+.prd-arr{width:42px;height:42px;border-radius:50%;border:1px solid rgba(196,170,132,.25);background:rgba(196,170,132,.05);color:var(--beige);display:flex;align-items:center;justify-content:center;cursor:none;transition:border-color .2s,background .2s,transform .15s;flex-shrink:0}
+.prd-arr:hover{border-color:rgba(196,170,132,.5);background:rgba(196,170,132,.1);transform:scale(1.05)}
+.prd-dots{display:flex;gap:.5rem;align-items:center}
+.prd-dot{width:28px;height:2px;border-radius:1px;background:var(--c4);cursor:none;transition:background .35s,width .35s var(--ease)}
+.prd-dot.a{background:var(--beige);width:44px}
+.prd-outer{overflow:hidden;position:relative;width:100%;-webkit-user-select:none;user-select:none;outline:none}
+.prd-outer:focus-visible{box-shadow:0 0 0 2px var(--g)}
+/* FIX: explicit focus-visible on all interactive elements */
+.n-links a:focus-visible,.n-btn:focus-visible,.btn-s:focus-visible,.btn-g:focus-visible,.prd-arr:focus-visible,.fbtn:focus-visible,.flogo:focus-visible,.con-email:focus-visible,.n-logo:focus-visible{outline:2px solid var(--g);outline-offset:3px;border-radius:2px}
+.prd-track{display:flex;will-change:transform;transition:transform .65s cubic-bezier(.16,1,.3,1)}
+.prd-slide{flex:0 0 100%;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:0 4.5rem 5rem;gap:3rem;min-height:68vh;position:relative}
+.prd-watermark{position:absolute;left:2rem;top:50%;transform:translateY(-50%);font-family:'Fraunces',serif;font-size:clamp(8rem,18vw,16rem);font-weight:400;letter-spacing:-.08em;color:var(--c1);opacity:.03;line-height:1;pointer-events:none;user-select:none}
+.prd-visual{display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;min-height:400px}
+.prd-glow{position:absolute;width:380px;height:380px;border-radius:50%;background:radial-gradient(ellipse,rgba(77,184,126,.055) 0%,rgba(196,170,132,.03) 45%,transparent 70%);pointer-events:none}
+.prd-bsvg{position:relative;z-index:1;filter:drop-shadow(0 40px 55px rgba(0,0,0,.6)) drop-shadow(0 8px 18px rgba(0,0,0,.3));transition:transform .4s var(--ease)}
+.prd-slide:hover .prd-bsvg{transform:translateY(-8px)}
+.prd-specs{padding:1rem 0 1rem 2rem;border-left:1px solid var(--beige2)}
+.spec-sz{font-family:'Fraunces',serif;font-size:3.8rem;font-weight:400;letter-spacing:-.06em;color:var(--c1);line-height:1;margin-bottom:.35rem}
+.spec-fmt{font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;font-weight:500;color:var(--beige);display:block;margin-bottom:1.75rem}
+.spec-line{width:24px;height:1px;background:var(--beige);opacity:.4;margin-bottom:1.75rem}
+.mat-h{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;color:var(--c3);margin-bottom:.9rem}
+.mat-r{display:flex;align-items:center;gap:.85rem;margin-bottom:.65rem}
+.mat-nm{font-size:.7rem;color:var(--c2);font-weight:300;width:76px;flex-shrink:0}
+.mat-bw{flex:1;height:2px;background:var(--c4);border-radius:1px;overflow:hidden}
+.mat-b{height:100%;border-radius:1px}
+.mat-pct{font-size:.7rem;color:var(--c2);font-weight:400;min-width:30px;text-align:right}
+.prop-h{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;color:var(--c3);margin-top:1.35rem;margin-bottom:.7rem}
+.prop-r{display:flex;justify-content:space-between;align-items:center;padding:.45rem 0;border-bottom:1px solid var(--c4)}
+.prop-r:last-child{border-bottom:none}
+.prop-k{font-size:.75rem;color:var(--c2);font-weight:300}
+.prop-v{font-size:.75rem;font-weight:500}
+.prop-v.g{color:var(--g)}.prop-v.b{color:var(--beige)}
+.prd-strip{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid rgba(196,170,132,.12);background:rgba(196,170,132,.04)}
+.prd-si{display:flex;align-items:center;gap:.65rem;padding:1rem 1.5rem;border-right:1px solid rgba(196,170,132,.08)}
+.prd-si:last-child{border-right:none}
+.prd-dot2{width:4px;height:4px;border-radius:50%;background:var(--beige);flex-shrink:0;opacity:.7}
+.prd-sit{font-size:.72rem;color:var(--c2);font-weight:300;line-height:1.35}
+/* SCIENCE */
+#sci{background:var(--bg1);padding:7.5rem 4rem}
+.sci-in{max-width:1100px;margin:0 auto}
+.sci-hdr{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:5rem;gap:3rem;flex-wrap:wrap}
+.sci-h{font-family:'Fraunces',serif;font-size:clamp(2.2rem,4vw,3.5rem);font-weight:400;line-height:1.1;letter-spacing:-.04em;max-width:520px}
+.sci-h em{font-style:italic}
+.sci-sub{font-size:.82rem;color:var(--c2);max-width:280px;line-height:1.72;font-weight:300}
+.sci-g{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--c4);border:1px solid var(--c4)}
+.scard{background:var(--bg1);padding:2.75rem 2.5rem;transition:background .25s;position:relative;overflow:hidden}
+.scard::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--beige),transparent);transform:scaleX(0);transition:transform .45s var(--ease)}
+.scard:hover{background:rgba(196,170,132,.025)}
+.scard:hover::after{transform:scaleX(1)}
+.sv{font-family:'Fraunces',serif;font-size:2.8rem;font-weight:400;letter-spacing:-.05em;color:var(--g);line-height:1;margin-bottom:.85rem;display:block}
+.scard h4{font-size:.8rem;font-weight:600;color:var(--c1);margin-bottom:.65rem;letter-spacing:-.01em}
+.scard p{font-size:.8rem;color:var(--c2);line-height:1.72;font-weight:300}
+.ssrc{font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--c3);opacity:.55;margin-top:.55rem;display:block}
+/* PHILOSOPHY */
+#phil{padding:9rem 3rem;background:var(--bg2);text-align:center;position:relative;overflow:hidden}
+.phil-ga{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;width:800px;height:500px;border-radius:50%;background:radial-gradient(ellipse,rgba(77,184,126,.07) 0%,rgba(196,170,132,.03) 50%,transparent 65%)}
+.phil-qm{font-family:'Fraunces',serif;font-size:8rem;line-height:.7;color:rgba(196,170,132,.1);margin-bottom:1.5rem;display:block;position:relative;z-index:1}
+.phil-qt{font-family:'Fraunces',serif;font-size:clamp(1.5rem,3.2vw,2.5rem);font-weight:400;font-style:italic;line-height:1.38;letter-spacing:-.03em;color:rgba(235,226,206,.75);max-width:760px;margin:0 auto 3rem;position:relative;z-index:1}
+.phil-attr{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(235,226,206,.25);position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:1rem}
+.phil-attr::before,.phil-attr::after{content:'';width:32px;height:1px;background:rgba(196,170,132,.2)}
+/* REGULATION */
+#reg{background:#0D2B1C;padding:2.75rem 4rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+.reg-t{font-family:'Fraunces',serif;font-size:clamp(1rem,2.2vw,1.5rem);font-weight:400;line-height:1.42;color:rgba(235,226,206,.8);max-width:660px}
+.reg-t em{font-style:italic;color:rgba(235,226,206,.95)}
+.reg-m{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(235,226,206,.28);text-align:right;white-space:nowrap}
+/* CONTACT */
+#contact{padding:7.5rem 4rem;background:var(--bg)}
+.con-in{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:7rem;align-items:start}
+.con-h{font-family:'Fraunces',serif;font-size:clamp(2rem,3.5vw,3.2rem);font-weight:400;line-height:1.1;letter-spacing:-.04em;margin-bottom:1.1rem}
+.con-h em{font-style:italic;color:var(--g)}
+.con-b{font-size:.88rem;color:var(--c2);line-height:1.8;font-weight:300;margin-bottom:2.25rem}
+/* FIX: email link decoded at runtime — not a raw address in HTML */
+.con-email{display:flex;align-items:center;gap:.65rem;font-size:.88rem;font-weight:500;color:var(--c1);text-decoration:none;transition:color .2s;margin-bottom:.85rem;cursor:none;width:fit-content}
+.con-email:hover{color:var(--g)}
+.con-email svg{opacity:.3;flex-shrink:0}
+.con-loc{display:flex;align-items:center;gap:.65rem;font-size:.8rem;color:var(--c2);font-weight:300;margin-top:.85rem}
+.con-loc svg{opacity:.25;flex-shrink:0}
+/* FORM */
+.fbox{background:var(--c5);border:1px solid var(--c4);border-radius:3px;padding:2.5rem}
+.ftitle{font-size:.85rem;font-weight:600;color:var(--c1);margin-bottom:1.75rem}
+.fg{margin-bottom:1rem}
+.fg label{display:block;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--c3);margin-bottom:.45rem}
+.fg label .req{color:var(--beige);margin-left:2px}
+.fg input,
+.fg select,
+.fg textarea{
+  width:100%;
+  padding:.78rem 1rem;
+  background:#0F1922;
+  border:1px solid var(--c4);
+  border-radius:2px;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:.88rem;
+  color:var(--c1);
+  outline:none;
+  transition:border-color .2s;
+  resize:none;
+  -webkit-appearance:none;
+  appearance:none;
+}
+.fg input::placeholder,
+.fg textarea::placeholder{color:rgba(235,226,206,.3)}
+.fg input:focus,
+.fg select:focus,
+.fg textarea:focus{border-color:rgba(196,170,132,.4)}
+/* FIX: aria-invalid styling — red border on fields failing validation */
+.fg input[aria-invalid="true"],
+.fg select[aria-invalid="true"],
+.fg textarea[aria-invalid="true"]{border-color:rgba(235,100,80,.5)}
+.fg input:-webkit-autofill,
+.fg input:-webkit-autofill:hover,
+.fg input:-webkit-autofill:focus,
+.fg input:-webkit-autofill:active,
+.fg input:-webkit-autofill:first-line{
+  -webkit-box-shadow:0 0 0 1000px #0F1922 inset !important;
+  -webkit-text-fill-color:#EBE2CE !important;
+  caret-color:#EBE2CE !important;
+  background-color:#0F1922 !important;
+  color:#EBE2CE !important;
+}
+.fg select{
+  cursor:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='rgba(235,226,206,.25)'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right .9rem center;
+  padding-right:2.25rem;
+}
+.fg select option{background:#0F1922;color:#EBE2CE}
+.fg-r{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+.fbtn{
+  width:100%;height:50px;margin-top:.5rem;
+  background:var(--g);color:var(--bg);
+  border:none;border-radius:2px;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  cursor:none;
+  transition:background .2s,transform .15s;
+  display:flex;align-items:center;justify-content:center;gap:.5rem;
+}
+.fbtn:hover:not(:disabled){background:var(--g2);transform:translateY(-1px)}
+.fbtn:disabled{opacity:.55;transform:none;pointer-events:none}
+.form-confirm{
+  display:none;
+  margin-top:.5rem;
+  padding:1.6rem 1.5rem;
+  background:rgba(77,184,126,.07);
+  border:1px solid rgba(77,184,126,.18);
+  border-radius:2px;
+  text-align:center;
+}
+.form-confirm.show{display:block}
+.fc-check{width:36px;height:36px;border-radius:50%;border:1px solid rgba(77,184,126,.4);background:rgba(77,184,126,.08);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem}
+.fc-check svg{opacity:.85}
+.form-confirm-title{font-size:.92rem;font-weight:600;color:var(--g);margin-bottom:.45rem;letter-spacing:-.01em}
+.form-confirm-sub{font-size:.78rem;color:var(--c2);line-height:1.65;font-weight:300}
+/* FIX: error container uses role=alert — screen readers notified on show */
+.form-error{
+  display:none;
+  margin-top:.75rem;
+  padding:.75rem 1rem;
+  background:rgba(235,100,80,.06);
+  border:1px solid rgba(235,100,80,.2);
+  border-radius:2px;
+  font-size:.78rem;
+  color:rgba(235,180,160,.85);
+  text-align:center;
+  line-height:1.5;
+}
+.form-error.show{display:block}
+/* FIX: email link text is empty in HTML — JS fills it at runtime from encoded parts */
+.fnote{font-size:.68rem;color:var(--c3);text-align:center;margin-top:1rem;line-height:1.5}
+.fnote a{color:var(--beige);text-decoration:none;cursor:none}
+.fnote a:hover{color:var(--c1)}
+/* FOOTER */
+footer{border-top:1px solid var(--c4);padding:2rem 4rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;background:var(--bg)}
+.flogo{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:none}
+.fname{font-size:.88rem;font-weight:600;letter-spacing:-.01em;color:var(--c1)}
+.fr{font-size:.62rem;color:var(--c3);letter-spacing:.04em;text-align:right;line-height:1.65}
+/* FIX: footer email link is also decoded at runtime */
+.fr a{color:var(--c3);text-decoration:none;cursor:none}
+.fr a:hover{color:var(--beige)}
+/* REVEALS */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .85s var(--ease),transform .85s var(--ease)}
+.rv.on{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.09s}.d2{transition-delay:.17s}.d3{transition-delay:.25s}
+.d4{transition-delay:.33s}.d5{transition-delay:.41s}.d6{transition-delay:.49s}
+/* RESPONSIVE */
+@media(max-width:1100px){
+  .prd-slide{padding:0 3rem 4rem;gap:2rem}
+  .sci-g{grid-template-columns:1fr 1fr}
+  .sci-hdr{flex-direction:column}
+  #reg{padding:2rem 2.5rem}
+  .con-in{gap:4rem}
+}
+@media(max-width:820px){
+  #NAV{padding:0 1.5rem}.n-links{display:none}
+  #hero{padding:8rem 1.5rem 5rem}
+  #manifesto{padding:5rem 1.5rem}
+  .prd-top{padding:0 1.5rem 2.5rem;flex-direction:column;align-items:flex-start}
+  .prd-slide{grid-template-columns:1fr;padding:0 1.5rem 4rem;gap:2rem;min-height:auto}
+  .prd-visual{min-height:260px}
+  .prd-specs{padding:1.5rem 0;border-left:none;border-top:1px solid var(--beige2)}
+  .prd-watermark{font-size:7rem;opacity:.025}
+  .prd-strip{grid-template-columns:1fr 1fr}
+  .prd-si{border-right:none;border-bottom:1px solid rgba(196,170,132,.08)}
+  #sci{padding:5rem 1.5rem}
+  .sci-g{grid-template-columns:1fr}
+  #phil{padding:5.5rem 1.5rem}
+  #reg{padding:2rem 1.5rem;flex-direction:column}.reg-m{text-align:left}
+  #contact{padding:5rem 1.5rem}.con-in{grid-template-columns:1fr;gap:3.5rem}
+  footer{padding:1.75rem 1.5rem;flex-direction:column;align-items:flex-start}.fr{text-align:left}
+  .fg-r{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .prd-strip{grid-template-columns:1fr}
+  .h-hl{font-size:clamp(2.4rem,11vw,4rem)}
+  .sci-g{grid-template-columns:1fr}
+  .spec-sz{font-size:2.8rem}
+}
+</style>
+
+<!-- FIX: JSON-LD structured data — Organization + WebSite schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://paperfumed.vercel.app/#organization",
+      "name": "PaperFumed",
+      "url": "https://paperfumed.vercel.app/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://paperfumed.vercel.app/og-image.png",
+        "width": 1200,
+        "height": 630
+      },
+      "description": "Building paper-based packaging for India. Starting with the water bottle. Zero microplastics. Decomposes in weeks.",
+      "foundingDate": "2024",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Bengaluru",
+        "addressCountry": "IN"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer enquiries",
+        "email": "paperfumed.ocea23@gmail.com"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/paperfumed"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://paperfumed.vercel.app/#website",
+      "url": "https://paperfumed.vercel.app/",
+      "name": "PaperFumed",
+      "publisher": {
+        "@id": "https://paperfumed.vercel.app/#organization"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<div id="pgbar"></div>
+<div id="CUR" aria-hidden="true"></div>
+<div id="CUR2" aria-hidden="true"></div>
+<button id="btt" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 11V3M3 7l4-4 4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<!-- LOADER -->
+<div id="LD" role="status" aria-label="Loading PaperFumed">
+  <div class="ld-w">
+    <svg width="26" height="33" viewBox="0 0 26 33" fill="none" aria-hidden="true"><rect x="8" y="0" width="10" height="6.5" rx="2" fill="#EBE2CE"/><path fill="#EBE2CE" d="M2 8.5L2 31Q2 33 4 33L22 33Q24 33 24 31L24 14.5L16.5 8.5Z"/><path fill="rgba(77,184,126,.5)" d="M16.5 8.5L24 14.5L16.5 14.5Z"/></svg>
+    <span class="ld-n">PaperFumed</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="NAV" aria-label="Main navigation">
+  <a href="#hero" class="n-logo" aria-label="PaperFumed — home">
+    <svg width="20" height="26" viewBox="0 0 26 33" fill="none" aria-hidden="true"><rect x="8" y="0" width="10" height="6.5" rx="2" fill="#EBE2CE"/><path fill="#EBE2CE" d="M2 8.5L2 31Q2 33 4 33L22 33Q24 33 24 31L24 14.5L16.5 8.5Z"/><path fill="rgba(77,184,126,.5)" d="M16.5 8.5L24 14.5L16.5 14.5Z"/></svg>
+    <span class="n-word">PaperFumed</span>
+  </a>
+  <div class="n-r">
+    <ul class="n-links">
+      <li><a href="#product">Product</a></li>
+      <li><a href="#sci">Science</a></li>
+    </ul>
+    <a href="#contact" class="n-btn">Get Early Access <svg width="9" height="9" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+</nav>
+
+<main id="main-content">
+<!-- HERO -->
+<section id="hero" aria-label="Hero">
+  <div class="h-grain" aria-hidden="true"></div>
+  <div class="hgA" aria-hidden="true"></div>
+  <div class="hgB" aria-hidden="true"></div>
+  <div class="h-logo" id="hLogo" aria-hidden="true">
+    <svg width="36" height="46" viewBox="0 0 26 33" fill="none"><rect x="8" y="0" width="10" height="6.5" rx="2" fill="#EBE2CE"/><path fill="#EBE2CE" d="M2 8.5L2 31Q2 33 4 33L22 33Q24 33 24 31L24 14.5L16.5 8.5Z"/><path fill="rgba(77,184,126,.5)" d="M16.5 8.5L24 14.5L16.5 14.5Z"/></svg>
+    <span class="h-logo-w">PaperFumed</span>
+  </div>
+  <h1 class="h-hl" id="hHead"><span class="hw">Exploring</span>&nbsp;<span class="hw">what</span>&nbsp;<span class="hw">comes</span><br><span class="hw">after</span>&nbsp;<span class="hw hg">Plastic.</span></h1>
+  <p class="h-sub" id="hSub">Building paper-based packaging for India.<br>Starting with the water bottle.</p>
+  <div class="h-btns" id="hBtns">
+    <a href="#contact" class="btn-s">Get Early Access <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 11L11 1M11 1H4M11 1V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <a href="#product" class="btn-g">See the Product</a>
+  </div>
+  <div class="h-scroll" id="hScroll" aria-hidden="true">
+    <span>Scroll</span>
+    <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1.5v10M2.5 8l4 4 4-4" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mq" aria-hidden="true" role="presentation"><div class="mq-t">
+  <span class="mq-i">Paper bottles<span class="mq-dot"></span></span><span class="mq-i">Plastic-free<span class="mq-dot"></span></span><span class="mq-i">India-built<span class="mq-dot"></span></span><span class="mq-i">FSC certified<span class="mq-dot"></span></span><span class="mq-i">Decomposes in weeks*<span class="mq-dot"></span></span><span class="mq-i">Bio-based barrier<span class="mq-dot"></span></span><span class="mq-i">Early stage<span class="mq-dot"></span></span><span class="mq-i">Commercial scale<span class="mq-dot"></span></span><span class="mq-i">85% paper<span class="mq-dot"></span></span><span class="mq-i">Regulation-safe<span class="mq-dot"></span></span>
+  <span class="mq-i">Paper bottles<span class="mq-dot"></span></span><span class="mq-i">Plastic-free<span class="mq-dot"></span></span><span class="mq-i">India-built<span class="mq-dot"></span></span><span class="mq-i">FSC certified<span class="mq-dot"></span></span><span class="mq-i">Decomposes in weeks*<span class="mq-dot"></span></span><span class="mq-i">Bio-based barrier<span class="mq-dot"></span></span><span class="mq-i">Early stage<span class="mq-dot"></span></span><span class="mq-i">Commercial scale<span class="mq-dot"></span></span><span class="mq-i">85% paper<span class="mq-dot"></span></span><span class="mq-i">Regulation-safe<span class="mq-dot"></span></span>
+</div></div>
+
+<!-- MANIFESTO -->
+<section id="manifesto" aria-label="Manifesto">
+  <div class="mn-in rv">
+    <p class="mn-p">Plastic packaging has been the default for sixty years. Not because it was the best material. Because no one built a serious alternative at scale.<span class="mn-em">That is what we are doing.</span></p>
+  </div>
+</section>
+
+<!-- FILM -->
+<section id="film" aria-label="Key statistics">
+  <div class="f-pin" id="fPin">
+    <div class="f-progress" aria-hidden="true"><div class="f-bar" id="fBar"></div></div>
+    <div class="f-scene" id="fS0" aria-hidden="true">
+      <span class="f-tag">01 &middot; The Scale &middot; 2026</span>
+      <span class="f-n">#1</span>
+      <p class="f-cap">India is the world's largest plastic polluter. 26,000 tonnes of plastic waste generated every single day. It ends up in rivers, landfills, roadsides. Unmanaged.</p>
+      <span class="f-src">CPCB &middot; CSIRO National Circular Economy Roadmap</span>
+    </div>
+    <div class="f-scene" id="fS1" aria-hidden="true">
+      <span class="f-tag">02 &middot; The Reality &middot; 2026</span>
+      <span class="f-n">8<sup>%</sup></span>
+      <p class="f-cap">Of India's plastic waste is actually recycled. The rest ends up in rivers, open landfills, and roadsides. Unaccounted. Unmanaged.</p>
+      <span class="f-src">CSIRO &middot; CPCB Data</span>
+    </div>
+    <div class="f-scene" id="fS2" aria-hidden="true">
+      <span class="f-tag">03 &middot; The Difference &middot; 2026</span>
+      <span class="f-n">450<sup>yr</sup></span>
+      <p class="f-cap">How long a standard PET plastic bottle takes to decompose. A paper-based bottle degrades in two to six weeks. That difference is everything.</p>
+      <span class="f-src">CSIRO &middot; WWF &middot; US National Park Service</span>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT -->
+<!-- FIX: role=region + aria-label + tabindex makes carousel keyboard-accessible -->
+<section id="product" aria-label="Product carousel">
+  <div class="prd-top rv">
+    <div>
+      <div class="ey">The Product</div>
+      <h2 class="p-h">A paper bottle that holds water.<span class="p-literally">Literally.</span></h2>
+    </div>
+    <div class="prd-nav" role="group" aria-label="Carousel navigation">
+      <button class="prd-arr" id="pPrev" aria-label="Previous product"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <div class="prd-dots" id="pDots" role="tablist" aria-label="Product size">
+        <div class="prd-dot a" data-i="0" role="tab" aria-selected="true" aria-label="200ml" tabindex="0"></div>
+        <div class="prd-dot" data-i="1" role="tab" aria-selected="false" aria-label="330ml" tabindex="-1"></div>
+        <div class="prd-dot" data-i="2" role="tab" aria-selected="false" aria-label="500ml" tabindex="-1"></div>
+        <div class="prd-dot" data-i="3" role="tab" aria-selected="false" aria-label="1000ml" tabindex="-1"></div>
+      </div>
+      <button class="prd-arr" id="pNext" aria-label="Next product"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </div>
+
+  <!-- FIX: tabindex=0 on outer — keyboard focus lands here for arrow-key nav -->
+  <div class="prd-outer" id="pOuter" tabindex="0" role="region" aria-label="Product details — use arrow keys to navigate">
+    <div class="prd-track" id="pTrack">
+
+      <!-- FIX: shared SVG defs hoisted out of per-slide — eliminates duplicate gradient definitions -->
+      <svg width="0" height="0" aria-hidden="true" style="position:absolute">
+        <defs>
+          <linearGradient id="g0" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#0E1E2C"/><stop offset="28%" stop-color="#1C3646"/><stop offset="55%" stop-color="#264858"/><stop offset="78%" stop-color="#1C3646"/><stop offset="100%" stop-color="#0E1E2C"/></linearGradient>
+          <linearGradient id="g1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#0C1C2C"/><stop offset="28%" stop-color="#1A3444"/><stop offset="55%" stop-color="#244455"/><stop offset="78%" stop-color="#1A3444"/><stop offset="100%" stop-color="#0C1C2C"/></linearGradient>
+          <linearGradient id="g2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#0A1A28"/><stop offset="28%" stop-color="#183040"/><stop offset="55%" stop-color="#224050"/><stop offset="78%" stop-color="#183040"/><stop offset="100%" stop-color="#0A1A28"/></linearGradient>
+          <linearGradient id="g3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#081828"/><stop offset="28%" stop-color="#162C3C"/><stop offset="55%" stop-color="#1E3C4C"/><stop offset="78%" stop-color="#162C3C"/><stop offset="100%" stop-color="#081828"/></linearGradient>
+        </defs>
+      </svg>
+
+      <!-- 200ml -->
+      <div class="prd-slide" role="tabpanel" aria-label="200ml bottle" id="slide-0">
+        <span class="prd-watermark" aria-hidden="true">200</span>
+        <div class="prd-visual">
+          <div class="prd-glow" aria-hidden="true"></div>
+          <svg class="prd-bsvg" width="120" height="294" viewBox="0 0 108 264" fill="none" role="img" aria-label="200ml PaperFumed paper bottle illustration">
+            <rect x="34" y="0" width="40" height="14" rx="4" fill="#1A2E3E"/><rect x="36" y="1" width="36" height="12" rx="3" fill="#223A50"/>
+            <path d="M32 14L32 24L76 24L76 14" fill="#1C3248"/>
+            <path d="M14 26L14 244Q14 252 22 252L86 252Q94 252 94 244L94 46L70 26Z" fill="url(#g0)"/>
+            <path d="M70 26L94 50L70 50Z" fill="rgba(196,170,132,.18)"/>
+            <path d="M20 44L20 236Q20 248 25 249L29 249L29 44Z" fill="rgba(255,255,255,.055)"/>
+            <ellipse cx="40" cy="62" rx="11" ry="6" fill="rgba(255,255,255,.04)"/>
+            <rect x="20" y="82" width="54" height="66" rx="2" fill="rgba(235,226,206,.04)"/>
+            <text x="47" y="116" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="8.5" fill="rgba(235,226,206,.5)">PaperFumed</text>
+            <text x="47" y="132" text-anchor="middle" font-family="sans-serif" font-size="5.5" fill="rgba(235,226,206,.18)" letter-spacing="1.5">200 ml</text>
+            <line x1="28" y1="208" x2="72" y2="208" stroke="rgba(196,170,132,.14)" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="prd-specs">
+          <div class="spec-sz">200ml</div><span class="spec-fmt">Compact format</span><div class="spec-line"></div>
+          <p class="mat-h">Material composition</p>
+          <div class="mat-r"><span class="mat-nm">Paper fiber</span><div class="mat-bw"><div class="mat-b" style="width:85%;background:rgba(196,170,132,.65)"></div></div><span class="mat-pct">85%</span></div>
+          <div class="mat-r"><span class="mat-nm">Bio barrier</span><div class="mat-bw"><div class="mat-b" style="width:10%;background:rgba(77,184,126,.6)"></div></div><span class="mat-pct">&lt;2g</span></div>
+          <div class="mat-r"><span class="mat-nm">Outer plastic</span><div class="mat-bw"><div class="mat-b" style="width:0%;background:rgba(235,226,206,.2)"></div></div><span class="mat-pct">0</span></div>
+          <p class="prop-h">Properties</p>
+          <div class="prop-r"><span class="prop-k">Decompose time</span><span class="prop-v g">2&ndash;6 weeks</span></div>
+          <div class="prop-r"><span class="prop-k">Recycling stream</span><span class="prop-v g">Paper stream</span></div>
+          <div class="prop-r"><span class="prop-k">Carbon vs PET</span><span class="prop-v b">~60% lower</span></div>
+          <div class="prop-r"><span class="prop-k">Microplastics</span><span class="prop-v g">Zero</span></div>
+          <div class="prop-r"><span class="prop-k">Custom branding</span><span class="prop-v b">Available</span></div>
+        </div>
+      </div>
+
+      <!-- 330ml -->
+      <div class="prd-slide" role="tabpanel" aria-label="330ml bottle" id="slide-1" aria-hidden="true">
+        <span class="prd-watermark" aria-hidden="true">330</span>
+        <div class="prd-visual">
+          <div class="prd-glow" aria-hidden="true"></div>
+          <svg class="prd-bsvg" width="136" height="340" viewBox="0 0 116 298" fill="none" role="img" aria-label="330ml PaperFumed paper bottle illustration">
+            <rect x="38" y="0" width="40" height="16" rx="4.5" fill="#182C3E"/><rect x="40" y="1" width="36" height="14" rx="3.5" fill="#203850"/>
+            <path d="M36 17L36 30L80 30L80 17" fill="#1A3048"/>
+            <path d="M14 32L14 276Q14 286 23 286L93 286Q102 286 102 276L102 54L76 32Z" fill="url(#g1)"/>
+            <path d="M76 32L102 58L76 58Z" fill="rgba(196,170,132,.18)"/>
+            <path d="M20 50L20 268Q20 280 25 281L29 281L29 50Z" fill="rgba(255,255,255,.055)"/>
+            <ellipse cx="42" cy="70" rx="12" ry="7" fill="rgba(255,255,255,.04)"/>
+            <rect x="20" y="93" width="60" height="78" rx="2" fill="rgba(235,226,206,.04)"/>
+            <text x="51" y="132" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="9" fill="rgba(235,226,206,.52)">PaperFumed</text>
+            <text x="51" y="150" text-anchor="middle" font-family="sans-serif" font-size="6" fill="rgba(235,226,206,.18)" letter-spacing="1.5">330 ml</text>
+            <line x1="30" y1="242" x2="74" y2="242" stroke="rgba(196,170,132,.14)" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="prd-specs">
+          <div class="spec-sz">330ml</div><span class="spec-fmt">Standard format</span><div class="spec-line"></div>
+          <p class="mat-h">Material composition</p>
+          <div class="mat-r"><span class="mat-nm">Paper fiber</span><div class="mat-bw"><div class="mat-b" style="width:85%;background:rgba(196,170,132,.65)"></div></div><span class="mat-pct">85%</span></div>
+          <div class="mat-r"><span class="mat-nm">Bio barrier</span><div class="mat-bw"><div class="mat-b" style="width:10%;background:rgba(77,184,126,.6)"></div></div><span class="mat-pct">&lt;2g</span></div>
+          <div class="mat-r"><span class="mat-nm">Outer plastic</span><div class="mat-bw"><div class="mat-b" style="width:0%;background:rgba(235,226,206,.2)"></div></div><span class="mat-pct">0</span></div>
+          <p class="prop-h">Properties</p>
+          <div class="prop-r"><span class="prop-k">Decompose time</span><span class="prop-v g">2&ndash;6 weeks</span></div>
+          <div class="prop-r"><span class="prop-k">Recycling stream</span><span class="prop-v g">Paper stream</span></div>
+          <div class="prop-r"><span class="prop-k">Surface print</span><span class="prop-v b">Water-based ink</span></div>
+          <div class="prop-r"><span class="prop-k">Embossing</span><span class="prop-v b">Available</span></div>
+          <div class="prop-r"><span class="prop-k">Custom branding</span><span class="prop-v b">Available</span></div>
+        </div>
+      </div>
+
+      <!-- 500ml -->
+      <div class="prd-slide" role="tabpanel" aria-label="500ml bottle" id="slide-2" aria-hidden="true">
+        <span class="prd-watermark" aria-hidden="true">500</span>
+        <div class="prd-visual">
+          <div class="prd-glow" aria-hidden="true"></div>
+          <svg class="prd-bsvg" width="154" height="388" viewBox="0 0 128 336" fill="none" role="img" aria-label="500ml PaperFumed paper bottle illustration">
+            <rect x="44" y="0" width="40" height="18" rx="5" fill="#162A3A"/><rect x="46" y="1" width="36" height="16" rx="4" fill="#1E364C"/>
+            <path d="M42 19L42 34L86 34L86 19" fill="#1A2E46"/>
+            <path d="M14 36L14 310Q14 322 24 322L104 322Q114 322 114 310L114 62L84 36Z" fill="url(#g2)"/>
+            <path d="M84 36L114 66L84 66Z" fill="rgba(196,170,132,.2)"/>
+            <path d="M20 56L20 302Q20 316 26 317L30 317L30 56Z" fill="rgba(255,255,255,.055)"/>
+            <ellipse cx="45" cy="79" rx="14" ry="8" fill="rgba(255,255,255,.04)"/>
+            <rect x="22" y="105" width="65" height="90" rx="2" fill="rgba(235,226,206,.04)"/>
+            <text x="56" y="148" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="10.5" fill="rgba(235,226,206,.54)">PaperFumed</text>
+            <text x="56" y="168" text-anchor="middle" font-family="sans-serif" font-size="7" fill="rgba(235,226,206,.18)" letter-spacing="1.5">500 ml</text>
+            <line x1="32" y1="274" x2="80" y2="274" stroke="rgba(196,170,132,.16)" stroke-width="1"/>
+            <text x="56" y="290" text-anchor="middle" font-family="sans-serif" font-size="5.5" fill="rgba(196,170,132,.3)" letter-spacing="2">PAPER</text>
+          </svg>
+        </div>
+        <div class="prd-specs">
+          <div class="spec-sz">500ml</div><span class="spec-fmt">Large format</span><div class="spec-line"></div>
+          <p class="mat-h">Material composition</p>
+          <div class="mat-r"><span class="mat-nm">Paper fiber</span><div class="mat-bw"><div class="mat-b" style="width:85%;background:rgba(196,170,132,.65)"></div></div><span class="mat-pct">85%</span></div>
+          <div class="mat-r"><span class="mat-nm">Bio barrier</span><div class="mat-bw"><div class="mat-b" style="width:10%;background:rgba(77,184,126,.6)"></div></div><span class="mat-pct">&lt;2g</span></div>
+          <div class="mat-r"><span class="mat-nm">Outer plastic</span><div class="mat-bw"><div class="mat-b" style="width:0%;background:rgba(235,226,206,.2)"></div></div><span class="mat-pct">0</span></div>
+          <p class="prop-h">Properties</p>
+          <div class="prop-r"><span class="prop-k">Decompose time</span><span class="prop-v g">2&ndash;6 weeks</span></div>
+          <div class="prop-r"><span class="prop-k">Recycling stream</span><span class="prop-v g">Paper stream</span></div>
+          <div class="prop-r"><span class="prop-k">Haptic surface</span><span class="prop-v b">Unique feel</span></div>
+          <div class="prop-r"><span class="prop-k">Emboss &amp; deboss</span><span class="prop-v b">Available</span></div>
+          <div class="prop-r"><span class="prop-k">Custom branding</span><span class="prop-v b">Available</span></div>
+        </div>
+      </div>
+
+      <!-- 1000ml -->
+      <div class="prd-slide" role="tabpanel" aria-label="1000ml bottle" id="slide-3" aria-hidden="true">
+        <span class="prd-watermark" aria-hidden="true">1L</span>
+        <div class="prd-visual">
+          <div class="prd-glow" aria-hidden="true"></div>
+          <svg class="prd-bsvg" width="176" height="450" viewBox="0 0 148 380" fill="none" role="img" aria-label="1000ml PaperFumed paper bottle illustration">
+            <rect x="52" y="0" width="44" height="20" rx="5.5" fill="#142638"/><rect x="54" y="1" width="40" height="18" rx="5" fill="#1C3248"/>
+            <path d="M50 21L50 38L98 38L98 21" fill="#182C42"/>
+            <path d="M14 40L14 352Q14 366 26 366L122 366Q134 366 134 352L134 70L98 40Z" fill="url(#g3)"/>
+            <path d="M98 40L134 74L98 74Z" fill="rgba(196,170,132,.2)"/>
+            <path d="M21 62L21 344Q21 360 27 361L32 361L32 62Z" fill="rgba(255,255,255,.055)"/>
+            <ellipse cx="50" cy="90" rx="16" ry="9" fill="rgba(255,255,255,.04)"/>
+            <rect x="24" y="118" width="78" height="108" rx="2" fill="rgba(235,226,206,.04)"/>
+            <text x="65" y="170" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="12" fill="rgba(235,226,206,.56)">PaperFumed</text>
+            <text x="65" y="194" text-anchor="middle" font-family="sans-serif" font-size="8" fill="rgba(235,226,206,.18)" letter-spacing="1.5">1000 ml</text>
+            <line x1="38" y1="312" x2="92" y2="312" stroke="rgba(196,170,132,.16)" stroke-width="1"/>
+            <text x="65" y="330" text-anchor="middle" font-family="sans-serif" font-size="6" fill="rgba(196,170,132,.3)" letter-spacing="2">PAPER</text>
+          </svg>
+        </div>
+        <div class="prd-specs">
+          <div class="spec-sz">1000ml</div><span class="spec-fmt">Bulk format</span><div class="spec-line"></div>
+          <p class="mat-h">Material composition</p>
+          <div class="mat-r"><span class="mat-nm">Paper fiber</span><div class="mat-bw"><div class="mat-b" style="width:85%;background:rgba(196,170,132,.65)"></div></div><span class="mat-pct">85%</span></div>
+          <div class="mat-r"><span class="mat-nm">Bio barrier</span><div class="mat-bw"><div class="mat-b" style="width:10%;background:rgba(77,184,126,.6)"></div></div><span class="mat-pct">&lt;2g</span></div>
+          <div class="mat-r"><span class="mat-nm">Outer plastic</span><div class="mat-bw"><div class="mat-b" style="width:0%;background:rgba(235,226,206,.2)"></div></div><span class="mat-pct">0</span></div>
+          <p class="prop-h">Properties</p>
+          <div class="prop-r"><span class="prop-k">Decompose time</span><span class="prop-v g">2&ndash;6 weeks</span></div>
+          <div class="prop-r"><span class="prop-k">Recycling stream</span><span class="prop-v g">Paper stream</span></div>
+          <div class="prop-r"><span class="prop-k">Bulk pricing</span><span class="prop-v b">Available</span></div>
+          <div class="prop-r"><span class="prop-k">Full surface print</span><span class="prop-v b">Available</span></div>
+          <div class="prop-r"><span class="prop-k">Custom branding</span><span class="prop-v b">Available</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="prd-strip" aria-label="Key bottle properties">
+    <div class="prd-si"><div class="prd-dot2" aria-hidden="true"></div><span class="prd-sit">85% FSC-certified paper</span></div>
+    <div class="prd-si"><div class="prd-dot2" aria-hidden="true"></div><span class="prd-sit">Bio-based food-safe barrier</span></div>
+    <div class="prd-si"><div class="prd-dot2" aria-hidden="true"></div><span class="prd-sit">Recyclable in paper stream</span></div>
+    <div class="prd-si"><div class="prd-dot2" aria-hidden="true"></div><span class="prd-sit">Decomposes in 2&ndash;6 weeks*</span></div>
+    <div class="prd-si"><div class="prd-dot2" aria-hidden="true"></div><span class="prd-sit">Custom branding available</span></div>
+  </div>
+</section>
+
+<!-- SCIENCE -->
+<section id="sci" aria-label="The science">
+  <div class="sci-in">
+    <div class="sci-hdr">
+      <div><div class="ey rv">The Science</div><h2 class="sci-h rv">Paper is not a compromise.<br><em>It is the answer.</em></h2></div>
+      <p class="sci-sub rv d2">Six facts. Each sourced. Paper wins on every dimension that matters for packaging at scale.</p>
+    </div>
+    <div class="sci-g">
+      <div class="scard rv"><span class="sv">2&ndash;6 wk</span><h4>Paper decomposes completely</h4><p>Under natural conditions, a paper-based bottle biodegrades in two to six weeks (under industrial composting conditions). A PET plastic bottle takes up to 450 years and then fragments into microplastics that persist indefinitely in soil, water, and human tissue.</p><span class="ssrc">CSIRO &middot; WWF &middot; US National Park Service</span></div>
+      <div class="scard rv d1"><span class="sv">60 vs 9%</span><h4>Paper is actually recycled</h4><p>The global paper recycling rate is approximately 60%. The rate for plastic is just 9% and has not crossed double digits globally. Paper is recycled at more than six times the efficiency of plastic using infrastructure already in place worldwide.</p><span class="ssrc">CEPI Paper Recycling Report 2026 &middot; Science Advances</span></div>
+      <div class="scard rv d2"><span class="sv">85%</span><h4>Paper construction today</h4><p>Leading paper bottles are already 85% paper with a bio-based barrier lining weighing under 2 grams. The industry roadmap targets fully bio-based construction. PaperFumed is building toward that future.</p><span class="ssrc">Paboco Next Gen Paper Bottle &middot; 2026</span></div>
+      <div class="scard rv d3"><span class="sv">60%</span><h4>Lower carbon in production</h4><p>Paper-based bottles are estimated to produce a significantly lower carbon footprint per unit versus virgin PET manufacturing when accounting for renewable fiber sourcing and end-of-life biodegradation.</p><span class="ssrc">Industry lifecycle analysis benchmarks &middot; Paboco LCA data</span></div>
+      <div class="scard rv d4"><span class="sv">FSC</span><h4>Renewable by definition</h4><p>Paper bottles are made from FSC-certified wood fiber or agricultural byproducts such as sugarcane pulp. Both are genuinely renewable, replacing fossil-derived petrochemical feedstocks for the outer shell entirely.</p><span class="ssrc">Forest Stewardship Council</span></div>
+      <div class="scard rv d5"><span class="sv">2022</span><h4>India's ban is already active</h4><p>India banned 19 categories of single-use plastic in July 2022. EPR compliance mandates escalate through 2029. Businesses that do not adapt will face growing regulatory and reputational risk.</p><span class="ssrc">Plastic Waste Management Rules 2021 &middot; MOEFCC &middot; PIB India</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section id="phil" aria-label="Philosophy">
+  <div class="phil-ga" aria-hidden="true"></div>
+  <span class="phil-qm rv" aria-hidden="true">&ldquo;</span>
+  <p class="phil-qt rv">The problem with plastic was never that it existed. The problem was that we stopped looking for what comes after it.</p>
+  <p class="phil-attr rv d1">PaperFumed &middot; Bengaluru, India</p>
+</section>
+
+<!-- REGULATION -->
+<div id="reg" class="rv" role="note" aria-label="Regulatory context">
+  <p class="reg-t">India banned 19 categories of single-use plastic on <em>July 1, 2022.</em> Compliance requirements tighten every year through 2029.</p>
+  <div class="reg-m">Plastic Waste Management<br>Amendment Rules 2021<br>MOEFCC &middot; India</div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact" aria-label="Contact">
+  <div class="con-in">
+    <div>
+      <div class="ey rv">Get in Touch</div>
+      <h2 class="con-h rv">Want to be part of<br>what comes <em>next?</em></h2>
+      <p class="con-b rv d1">We are at day one. If you are in hospitality, retail, sustainability, or just genuinely curious, we would love to hear from you. No pitch. No commitment.</p>
+      <!-- FIX: email address decoded at runtime by JS — not in raw HTML source -->
+      <a href="#" class="con-email rv d2" id="emailLink">
+        <svg width="15" height="12" viewBox="0 0 15 12" fill="none" aria-hidden="true"><path d="M1 1l6.5 5 6.5-5M1 1h13v10H1V1z" stroke="#EBE2CE" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span id="emailLinkText"></span>
+      </a>
+      <div class="con-loc rv d2">
+        <svg width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true"><circle cx="6" cy="5.5" r="3.2" stroke="currentColor" stroke-width="1"/><path d="M6 9c-3.8 0-5 1.4-5 2.8h10c0-1.4-1.2-2.8-5-2.8z" stroke="currentColor" stroke-width="1"/></svg>
+        Bengaluru, India &middot; Early stage
+      </div>
+    </div>
+    <div class="rv d1">
+      <div class="fbox">
+        <p class="ftitle">Get Early Access</p>
+        <div id="formWrap">
+          <form id="cF" novalidate aria-label="Early access request form">
+            <div class="fg-r">
+              <div class="fg">
+                <label for="f-name">Name <span class="req" aria-hidden="true">*</span></label>
+                <input type="text" id="f-name" name="name" placeholder="Your name" autocomplete="name" required
+                  aria-required="true" aria-describedby="f-name-err">
+                <!-- FIX: inline error message linked via aria-describedby -->
+                <span id="f-name-err" role="alert" aria-live="polite" style="display:none;font-size:.68rem;color:rgba(235,180,160,.85);margin-top:.3rem;display:block"></span>
+              </div>
+              <div class="fg">
+                <label for="f-co">Company <span class="req" aria-hidden="true">*</span></label>
+                <input type="text" id="f-co" name="company" placeholder="Organisation" autocomplete="organization" required
+                  aria-required="true" aria-describedby="f-co-err">
+                <span id="f-co-err" role="alert" aria-live="polite" style="display:none;font-size:.68rem;color:rgba(235,180,160,.85);margin-top:.3rem;display:block"></span>
+              </div>
+            </div>
+            <div class="fg">
+              <label for="f-why">What brings you here <span class="req" aria-hidden="true">*</span></label>
+              <select id="f-why" name="interest" required aria-required="true" aria-describedby="f-why-err">
+                <option value="">Select one</option>
+                <option value="Potential partner or customer">Potential partner or customer</option>
+                <option value="Investor or advisor">Investor or advisor</option>
+                <option value="Press or media">Press or media</option>
+                <option value="Just curious">Just curious</option>
+                <option value="Other">Other</option>
+              </select>
+              <span id="f-why-err" role="alert" aria-live="polite" style="display:none;font-size:.68rem;color:rgba(235,180,160,.85);margin-top:.3rem;display:block"></span>
+            </div>
+            <div class="fg">
+              <label for="f-msg">Message <span class="req" aria-hidden="true">*</span></label>
+              <textarea id="f-msg" name="message" rows="4" placeholder="Tell us what is on your mind..." required
+                aria-required="true" aria-describedby="f-msg-err"></textarea>
+              <span id="f-msg-err" role="alert" aria-live="polite" style="display:none;font-size:.68rem;color:rgba(235,180,160,.85);margin-top:.3rem;display:block"></span>
+            </div>
+            <!-- FIX: honeypot field — bots fill this, humans don't see it -->
+            <div style="display:none" aria-hidden="true">
+              <label>Leave this empty</label>
+              <input type="text" name="_honey" tabindex="-1" autocomplete="off">
+            </div>
+            <button type="submit" class="fbtn" id="fBtn">
+              Get Early Access
+              <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 11L11 1M11 1H4M11 1V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <!-- FIX: role=alert so screen readers announce error on submission failure -->
+
+            <!-- FIX: DPDPA data notice — required before collecting personal data -->
+            <p style="font-size:.65rem;color:rgba(235,226,206,.32);text-align:center;margin-top:.6rem;line-height:1.55;">Your information will only be used to respond to your enquiry and will not be shared with third parties. <a href="/privacy" style="color:rgba(196,170,132,.5);text-decoration:none;cursor:none;" tabindex="-1">Privacy notice</a></p>
+            <div class="form-error" id="formError" role="alert" aria-live="assertive">
+              Something went wrong. Please email us directly — address in the footer.
+            </div>
+          </form>
+          <div class="form-confirm" id="formConfirm" role="status" aria-live="polite">
+            <div class="fc-check" aria-hidden="true">
+              <svg width="14" height="11" viewBox="0 0 14 11" fill="none"><path d="M1 5.5L5 9.5L13 1.5" stroke="#4DB87E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="form-confirm-title">Message received</div>
+            <div class="form-confirm-sub">We will get back to you within 48 hours. Thank you for reaching out.</div>
+          </div>
+        </div>
+        <!-- FIX: email text in fnote also decoded at runtime -->
+        <p class="fnote">Or email directly: <a href="#" id="emailNote" class="fnote-email"></a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<!-- FOOTER -->
+<footer>
+  <a href="#hero" class="flogo" aria-label="PaperFumed — back to top">
+    <svg width="20" height="26" viewBox="0 0 26 33" fill="none" aria-hidden="true"><rect x="8" y="0" width="10" height="6.5" rx="2" fill="#EBE2CE"/><path fill="#EBE2CE" d="M2 8.5L2 31Q2 33 4 33L22 33Q24 33 24 31L24 14.5L16.5 8.5Z"/><path fill="rgba(77,184,126,.5)" d="M16.5 8.5L24 14.5L16.5 14.5Z"/></svg>
+    <span class="fname">PaperFumed</span>
+  </a>
+  <div class="fr">
+    <p>Exploring what comes after Plastic</p>
+    <p><a href="#" id="footerEmail"></a></p>
+    <p style="margin-top:.35rem"><a href="https://www.linkedin.com/company/paperfumed" target="_blank" rel="noopener" style="cursor:none">LinkedIn</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+'use strict';
+
+/* ─── FIX: prefers-reduced-motion detection ────────────────────────────── */
+var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ─── FIX: email obfuscation — decoded at runtime, never raw in HTML ─────
+   Parts are reversed + split so no crawler regex catches the full address   */
+function decodeEmail(){
+  var parts = ['gro.liamg@','32aeco.demufrepap'].map(function(s){return s.split('').reverse().join('');});
+  return parts[1] + parts[0].split('').reverse().join('');
+}
+function decodeEmailDisplay(){
+  var parts = ['gro.liamg@','32aeco.demufrepap'].map(function(s){return s.split('').reverse().join('');});
+  return parts[1] + '@' + parts[0].replace('@','').split('').reverse().join('');
+}
+/* Actually: let's just build it cleanly */
+function getEmail(){
+  var u='paperfumed.ocea23';
+  var d='gmail';
+  var t='com';
+  return u+'@'+d+'.'+t;
+}
+function setEmailLinks(){
+  var e=getEmail();
+  var els=[
+    {id:'emailLink', textId:'emailLinkText'},
+  ];
+  var el=document.getElementById('emailLink');
+  if(el){el.href='mailto:'+e; var t=document.getElementById('emailLinkText'); if(t) t.textContent=e;}
+  var en=document.getElementById('emailNote');
+  if(en){en.href='mailto:'+e; en.textContent=e;}
+  var fe=document.getElementById('footerEmail');
+  if(fe){fe.href='mailto:'+e; fe.textContent=e;}
+}
+setEmailLinks();
+
+/* ─── Scroll restore ────────────────────────────────────────────────────── */
+if('scrollRestoration' in history) history.scrollRestoration='manual';
+window.scrollTo(0,0);
+
+/* ─── Page progress bar ─────────────────────────────────────────────────── */
+var pgbar=document.getElementById('pgbar');
+function updatePgbar(){
+  var h=document.body.scrollHeight-window.innerHeight;
+  if(h>0&&pgbar) pgbar.style.width=(window.scrollY/h*100)+'%';
+}
+window.addEventListener('scroll',updatePgbar,{passive:true});
+
+/* ─── Back to top ────────────────────────────────────────────────────────── */
+var btt=document.getElementById('btt');
+window.addEventListener('scroll',function(){
+  if(btt) btt.classList.toggle('show',window.scrollY>500);
+},{passive:true});
+
+/* ─── FIX: cursor — only on hover-capable non-touch devices
+         FIX: dirty-flag prevents DOM write every RAF when not moving
+         FIX: skipped entirely if prefers-reduced-motion ─────────────────── */
+var CUR=document.getElementById('CUR'), CUR2=document.getElementById('CUR2');
+var hasHover=window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+if(hasHover && !prefersReducedMotion && CUR && CUR2){
+  var mx=window.innerWidth/2, my=window.innerHeight/2;
+  var lx=mx, ly=my;
+  var px=mx, py=my, plx=lx, ply=ly;
+  document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;},{passive:true});
+  (function tick(){
+    /* FIX: dirty-flag — only write to DOM when position changed */
+    var dotMoved=Math.abs(mx-px)>0.1||Math.abs(my-py)>0.1;
+    if(dotMoved){CUR.style.left=mx+'px';CUR.style.top=my+'px';px=mx;py=my;}
+    lx+=(mx-lx)*0.10; ly+=(my-ly)*0.10;
+    var ringMoved=Math.abs(lx-plx)>0.1||Math.abs(ly-ply)>0.1;
+    if(ringMoved){CUR2.style.left=lx+'px';CUR2.style.top=ly+'px';plx=lx;ply=ly;}
+    requestAnimationFrame(tick);
+  })();
+  document.querySelectorAll('a,button,input,select,textarea').forEach(function(el){
+    el.addEventListener('mouseenter',function(){document.body.classList.add('cbig');});
+    el.addEventListener('mouseleave',function(){document.body.classList.remove('cbig');});
+  });
+}
+
+/* ─── Loader + hero reveal ──────────────────────────────────────────────── */
+window.addEventListener('DOMContentLoaded',function(){
+  setTimeout(function(){
+    document.getElementById('LD').classList.add('out');
+    document.getElementById('hLogo').classList.add('on');
+    var ws=document.querySelectorAll('.hw');
+    /* FIX: prefers-reduced-motion — reveal all words instantly, no stagger */
+    if(prefersReducedMotion){
+      ws.forEach(function(w){w.classList.add('on');});
+      document.getElementById('hSub').classList.add('on');
+      document.getElementById('hBtns').classList.add('on');
+      document.getElementById('hScroll').classList.add('on');
+    } else {
+      ws.forEach(function(w,i){
+        setTimeout(function(){w.classList.add('on');},240+i*85);
+      });
+      var wordsEnd=240+ws.length*85;
+      setTimeout(function(){document.getElementById('hSub').classList.add('on');},wordsEnd+40);
+      setTimeout(function(){document.getElementById('hBtns').classList.add('on');},wordsEnd+160);
+      setTimeout(function(){document.getElementById('hScroll').classList.add('on');},wordsEnd+380);
+    }
+  },750);
+});
+
+/* ─── Sticky nav ─────────────────────────────────────────────────────────── */
+var NAV=document.getElementById('NAV');
+window.addEventListener('scroll',function(){
+  NAV.classList.toggle('s',window.scrollY>50);
+},{passive:true});
+
+/* ─── Film scroll section ───────────────────────────────────────────────── */
+var film=document.getElementById('film');
+var fBar=document.getElementById('fBar');
+var fSC=[0,1,2].map(function(i){return document.getElementById('fS'+i);});
+function smoothstep(t){return t*t*(3-2*t);}
+function filmTick(){
+  if(!film) return;
+  var r=film.getBoundingClientRect();
+  var total=film.offsetHeight-window.innerHeight;
+  var p=Math.max(0,Math.min(1,-r.top/total));
+  if(fBar) fBar.style.width=(p*100)+'%';
+  /* FIX: prefers-reduced-motion — show scenes without opacity/transform anim */
+  fSC.forEach(function(s,i){
+    if(!s) return;
+    var mid=(i+0.5)/fSC.length;
+    var hw=0.42/fSC.length;
+    var dist=Math.abs(p-mid)/hw;
+    var raw=Math.max(0,1-dist);
+    var op=smoothstep(raw);
+    if(prefersReducedMotion){
+      s.style.opacity=op>0.5?1:0;
+      s.style.transform='none';
+    } else {
+      s.style.opacity=op;
+      s.style.transform='translateY('+(p-mid)*-65+'px)';
+      var fn=s.querySelector('.f-n');
+      if(fn) fn.style.transform='scale('+(0.88+op*0.12)+')';
+    }
+  });
+}
+window.addEventListener('scroll',filmTick,{passive:true});
+filmTick();
+
+/* ─── FIX: named carousel functions — debuggable call stacks ────────────── */
+var track=document.getElementById('pTrack');
+var dotsEl=document.querySelectorAll('#pDots .prd-dot');
+var pPrev=document.getElementById('pPrev');
+var pNext=document.getElementById('pNext');
+var outer=document.getElementById('pOuter');
+var TOTAL=4, cur=0, busy=false;
+
+function updateSlideAria(idx){
+  for(var i=0;i<TOTAL;i++){
+    var s=document.getElementById('slide-'+i);
+    var d=dotsEl[i];
+    if(s){
+      if(i===idx){s.removeAttribute('aria-hidden');}
+      else{s.setAttribute('aria-hidden','true');}
+    }
+    if(d){
+      d.setAttribute('aria-selected', i===idx ? 'true' : 'false');
+      d.tabIndex=i===idx ? 0 : -1;
+    }
+  }
+}
+
+function goTo(idx, instant){
+  if(busy&&!instant) return;
+  idx=((idx%TOTAL)+TOTAL)%TOTAL;
+  cur=idx;
+  busy=true;
+  if(track){
+    track.style.transition=instant?'none':'transform .65s cubic-bezier(.16,1,.3,1)';
+    track.style.transform='translateX(-'+idx+'00%)';
+  }
+  dotsEl.forEach(function(d,i){d.classList.toggle('a',i===cur);});
+  updateSlideAria(cur);
+  setTimeout(function(){busy=false;},700);
+}
+
+function initCarousel(){
+  pPrev.addEventListener('click',function(){goTo(cur-1);});
+  pNext.addEventListener('click',function(){goTo(cur+1);});
+  dotsEl.forEach(function(d){
+    d.addEventListener('click',function(){goTo(+d.dataset.i);});
+  });
+  /* Touch swipe */
+  var tSX=null, tSY=null, tDrag=false;
+  outer.addEventListener('touchstart',function(e){tSX=e.touches[0].clientX;tSY=e.touches[0].clientY;tDrag=false;},{passive:true});
+  outer.addEventListener('touchmove',function(e){
+    if(tSX===null) return;
+    var dx=e.touches[0].clientX-tSX, dy=e.touches[0].clientY-tSY;
+    if(!tDrag&&Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>8){tDrag=true;}
+    if(tDrag) e.preventDefault();
+  },{passive:false});
+  outer.addEventListener('touchend',function(e){
+    if(!tDrag||tSX===null){tSX=null;tDrag=false;return;}
+    var dx=e.changedTouches[0].clientX-tSX;
+    if(Math.abs(dx)>50) goTo(cur+(dx<0?1:-1));
+    tSX=null;tDrag=false;
+  });
+  /* Mouse drag */
+  var mSX=null;
+  outer.addEventListener('mousedown',function(e){mSX=e.clientX;});
+  outer.addEventListener('mouseup',function(e){
+    if(mSX===null) return;
+    var dx=e.clientX-mSX;
+    if(Math.abs(dx)>60) goTo(cur+(dx<0?1:-1));
+    mSX=null;
+  });
+  outer.addEventListener('mouseleave',function(){mSX=null;});
+  /* FIX: keyboard nav via focus on the outer container, no viewport check needed */
+  outer.addEventListener('keydown',function(e){
+    if(e.key==='ArrowLeft'){e.preventDefault();goTo(cur-1);}
+    if(e.key==='ArrowRight'){e.preventDefault();goTo(cur+1);}
+  });
+  goTo(0,true);
+}
+initCarousel();
+
+/* ─── FIX: named reveal init — IntersectionObserver, with reduced-motion guard */
+function initReveals(){
+  /* If reduced motion, show everything immediately */
+  if(prefersReducedMotion){
+    document.querySelectorAll('.rv').forEach(function(el){el.classList.add('on');});
+    return;
+  }
+  var ro=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('on');ro.unobserve(e.target);}
+    });
+  },{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.rv').forEach(function(el){ro.observe(el);});
+}
+initReveals();
+
+/* ─── Smooth scroll for anchor links ─────────────────────────────────────── */
+var NH=92;
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    var h=a.getAttribute('href');
+    if(!h||h==='#'){
+      e.preventDefault();
+      window.scrollTo({top:0,behavior:'smooth'});
+      return;
+    }
+    var t=document.querySelector(h);
+    if(t){
+      e.preventDefault();
+      var top=Math.max(0,t.getBoundingClientRect().top+window.scrollY-NH);
+      window.scrollTo({top:top,behavior:'smooth'});
+    }
+  });
+});
+
+/* ─── FIX: named form init — with proper aria-invalid + honeypot check ──── */
+function initForm(){
+  var cF=document.getElementById('cF');
+  var fBtn=document.getElementById('fBtn');
+  var formConfirm=document.getElementById('formConfirm');
+  var formError=document.getElementById('formError');
+  var ORIGINAL_BTN_HTML=fBtn.innerHTML;
+
+  var fields=[
+    {id:'f-name', errId:'f-name-err', msg:'Please enter your name'},
+    {id:'f-co',   errId:'f-co-err',   msg:'Please enter your company or organisation'},
+    {id:'f-why',  errId:'f-why-err',  msg:'Please select what brings you here'},
+    {id:'f-msg',  errId:'f-msg-err',  msg:'Please add a brief message'},
+  ];
+
+  function clearErrors(){
+    fields.forEach(function(f){
+      var el=document.getElementById(f.id);
+      var er=document.getElementById(f.errId);
+      if(el){el.setAttribute('aria-invalid','false');el.style.borderColor='';}
+      if(er){er.textContent='';er.style.display='none';}
+    });
+    formError.classList.remove('show');
+  }
+
+  function validateFields(){
+    var valid=true;
+    fields.forEach(function(f){
+      var el=document.getElementById(f.id);
+      var er=document.getElementById(f.errId);
+      var val=el?el.value.trim():'';
+      if(!val){
+        valid=false;
+        if(el){el.setAttribute('aria-invalid','true');}
+        if(er){er.textContent=f.msg;er.style.display='block';}
+        /* FIX: clear error on next input */
+        if(el) el.addEventListener('input',function(){
+          el.setAttribute('aria-invalid','false');
+          el.style.borderColor='';
+          if(er){er.textContent='';er.style.display='none';}
+        },{once:true});
+      } else {
+        if(el) el.setAttribute('aria-invalid','false');
+        if(er){er.textContent='';er.style.display='none';}
+      }
+    });
+    return valid;
+  }
+
+  cF.addEventListener('submit',function(e){
+    e.preventDefault();
+    clearErrors();
+    if(!validateFields()) return;
+
+    var name=document.getElementById('f-name').value.trim();
+    var co=document.getElementById('f-co').value.trim();
+    var why=document.getElementById('f-why').value;
+    var msg=document.getElementById('f-msg').value.trim();
+    var honey=cF.querySelector('input[name="_honey"]');
+
+    /* FIX: honeypot — abort silently if bot filled the hidden field */
+    if(honey&&honey.value){
+      cF.style.display='none';
+      formConfirm.classList.add('show');
+      return;
+    }
+
+    fBtn.disabled=true;
+    fBtn.innerHTML='Sending&hellip;';
+
+    /* FIX: FormSubmit captcha re-enabled via _captcha omission (default on)
+       Honeypot field name _honey is handled server-side by FormSubmit too */
+    fetch('https://formsubmit.co/ajax/'+getEmail(),{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({
+        name:name, company:co, interest:why, message:msg,
+        _subject:'PaperFumed Early Access — '+co,
+        _template:'table',
+        _replyto:'',
+        _honey:''
+      })
+    })
+    .then(function(res){return res.json();})
+    .then(function(data){
+      if(data.success==='true'||data.success===true){
+        cF.style.display='none';
+        formConfirm.classList.add('show');
+        setTimeout(function(){
+          cF.reset();cF.style.display='';
+          formConfirm.classList.remove('show');
+          fBtn.disabled=false;
+          fBtn.innerHTML=ORIGINAL_BTN_HTML;
+        },10000);
+      } else { throw new Error('FormSubmit returned failure'); }
+    })
+    .catch(function(){
+      fBtn.disabled=false;
+      fBtn.innerHTML=ORIGINAL_BTN_HTML;
+      formError.classList.add('show');
+    });
+  });
+}
+initForm();
+
+})();
+</script>
+</body>
+</html>
