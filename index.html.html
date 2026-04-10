@@ -67,7 +67,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .hw{display:inline-block;opacity:0;transform:translateY(32px) skewX(-2deg);transition:opacity .65s var(--ease),transform .65s var(--ease)}
 .hw.on{opacity:1;transform:translateY(0) skewX(0)}
 .hg{font-style:italic;color:var(--g)}
-/* FIXED: sub and btns always have a base transform so they animate correctly */
 .h-sub{font-size:1rem;color:var(--c2);max-width:400px;line-height:1.78;font-weight:300;margin-bottom:3rem;z-index:2;position:relative;opacity:0;transition:opacity .8s var(--ease)}
 .h-sub.on{opacity:1}
 .h-btns{display:flex;gap:.85rem;flex-wrap:wrap;justify-content:center;z-index:2;position:relative;opacity:0;transform:translateY(12px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
@@ -76,8 +75,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .btn-s:hover{background:var(--g2);transform:translateY(-2px)}
 .btn-g{height:50px;padding:0 1.85rem;border:1px solid var(--c4);color:var(--c2);border-radius:2px;text-decoration:none;font-size:.75rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;display:inline-flex;align-items:center;gap:.55rem;transition:border-color .2s,color .2s,transform .15s;cursor:none}
 .btn-g:hover{border-color:rgba(235,226,206,.28);color:var(--c1);transform:translateY(-2px)}
-
-/* FIXED: scroll indicator — animation only after .on is added, no CSS conflict */
 .h-scroll{position:absolute;bottom:2.8rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;color:var(--c3);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;opacity:0;transition:opacity .8s var(--ease)}
 .h-scroll.on{opacity:1;animation:sbounce 3.5s .9s ease-in-out infinite}
 @keyframes sbounce{0%,100%{transform:translateX(-50%) translateY(0)}55%{transform:translateX(-50%) translateY(9px)}}
@@ -224,7 +221,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .fg input:focus,
 .fg select:focus,
 .fg textarea:focus{border-color:rgba(196,170,132,.4)}
-/* Kill browser autofill white background — comprehensive */
 .fg input:-webkit-autofill,
 .fg input:-webkit-autofill:hover,
 .fg input:-webkit-autofill:focus,
@@ -246,7 +242,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .fg select option{background:#0F1922;color:#EBE2CE}
 .fg-r{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
 
-/* Submit button */
 .fbtn{
   width:100%;height:50px;margin-top:.5rem;
   background:var(--g);color:var(--bg);
@@ -260,7 +255,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .fbtn:hover:not(:disabled){background:var(--g2);transform:translateY(-1px)}
 .fbtn:disabled{opacity:.55;transform:none;pointer-events:none}
 
-/* Confirmation state */
 .form-confirm{
   display:none;
   margin-top:.5rem;
@@ -276,7 +270,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .form-confirm-title{font-size:.92rem;font-weight:600;color:var(--g);margin-bottom:.45rem;letter-spacing:-.01em}
 .form-confirm-sub{font-size:.78rem;color:var(--c2);line-height:1.65;font-weight:300}
 
-/* Error state */
 .form-error{
   display:none;
   margin-top:.75rem;
@@ -406,13 +399,34 @@ footer{border-top:1px solid var(--c4);padding:2rem 4rem;display:flex;align-items
 <!-- MANIFESTO -->
 <section id="manifesto"><div class="mn-in rv"><p class="mn-p">Plastic packaging has been the default for sixty years. Not because it was the best material. Because no one built a serious alternative at scale.<span class="mn-em">That is what we are doing.</span></p></div></section>
 
-<!-- FILM -->
+<!-- FILM — UPDATED STATS -->
 <section id="film">
   <div class="f-pin" id="fPin">
     <div class="f-progress"><div class="f-bar" id="fBar"></div></div>
-    <div class="f-scene" id="fS0"><span class="f-tag">01 &middot; The Scale</span><span class="f-n">#1</span><p class="f-cap">India is now the world's largest plastic polluter. 9.3 to 10.2 million tonnes of plastic waste generated every year. Nearly one-fifth of all global emissions.</p><span class="f-src">Nature Journal &middot; University of Leeds &middot; 2024</span></div>
-    <div class="f-scene" id="fS1"><span class="f-tag">02 &middot; The Reality</span><span class="f-n">12<sup>%</sup></span><p class="f-cap">Of India's plastic is actually recycled after accounting for processing losses. The rest ends up in rivers, open landfills, and roadsides. Unaccounted. Unmanaged.</p><span class="f-src">Centre for Science &amp; Environment &middot; CPCB</span></div>
-    <div class="f-scene" id="fS2"><span class="f-tag">03 &middot; The Difference</span><span class="f-n">800<sup>yr</sup></span><p class="f-cap">How long a standard plastic bottle takes to decompose in a landfill. A paper-based bottle degrades in two to six weeks. That difference is everything.</p><span class="f-src">Global plastics decomposition research consensus</span></div>
+
+    <!-- Scene 1: Updated from "9.3–10.2 million tonnes/year" to "26,000 tonnes/day" -->
+    <div class="f-scene" id="fS0">
+      <span class="f-tag">01 &middot; The Scale</span>
+      <span class="f-n">#1</span>
+      <p class="f-cap">India is the world's largest plastic polluter. 26,000 tonnes of plastic waste generated every single day. The rest ends up unmanaged &mdash; rivers, landfills, roadsides.</p>
+      <span class="f-src">CPCB &middot; CSIRO National Circular Economy Roadmap &middot; 2023</span>
+    </div>
+
+    <!-- Scene 2: Updated from "12%" to "8%" -->
+    <div class="f-scene" id="fS1">
+      <span class="f-tag">02 &middot; The Reality</span>
+      <span class="f-n">8<sup>%</sup></span>
+      <p class="f-cap">Of India's plastic waste is actually recycled. The rest ends up in rivers, open landfills, and roadsides. Unaccounted. Unmanaged.</p>
+      <span class="f-src">CSIRO &middot; CPCB Data</span>
+    </div>
+
+    <!-- Scene 3: Unchanged -->
+    <div class="f-scene" id="fS2">
+      <span class="f-tag">03 &middot; The Difference</span>
+      <span class="f-n">800<sup>yr</sup></span>
+      <p class="f-cap">How long a standard plastic bottle takes to decompose in a landfill. A paper-based bottle degrades in two to six weeks. That difference is everything.</p>
+      <span class="f-src">Global plastics decomposition research consensus</span>
+    </div>
   </div>
 </section>
 
@@ -634,7 +648,6 @@ footer{border-top:1px solid var(--c4);padding:2rem 4rem;display:flex;align-items
     <div class="rv d1">
       <div class="fbox">
         <p class="ftitle">Get Early Access</p>
-
         <div id="formWrap">
           <form id="cF" novalidate>
             <div class="fg-r">
@@ -662,18 +675,14 @@ footer{border-top:1px solid var(--c4);padding:2rem 4rem;display:flex;align-items
               <label>Message <span class="req">*</span></label>
               <textarea id="f-msg" name="message" rows="4" placeholder="Tell us what is on your mind..." required></textarea>
             </div>
-
             <button type="submit" class="fbtn" id="fBtn">
               Get Early Access
               <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M1 11L11 1M11 1H4M11 1V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
-
             <div class="form-error" id="formError">
               Something went wrong. Please email us directly at paperfumed.ocea23@gmail.com
             </div>
           </form>
-
-          <!-- Confirmation — shown after successful submit -->
           <div class="form-confirm" id="formConfirm">
             <div class="fc-check">
               <svg width="14" height="11" viewBox="0 0 14 11" fill="none"><path d="M1 5.5L5 9.5L13 1.5" stroke="#4DB87E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -682,7 +691,6 @@ footer{border-top:1px solid var(--c4);padding:2rem 4rem;display:flex;align-items
             <div class="form-confirm-sub">We will get back to you within 48 hours. Thank you for reaching out.</div>
           </div>
         </div>
-
         <p class="fnote">Or email directly: <a href="mailto:paperfumed.ocea23@gmail.com">paperfumed.ocea23@gmail.com</a></p>
       </div>
     </div>
@@ -704,11 +712,9 @@ footer{border-top:1px solid var(--c4);padding:2rem 4rem;display:flex;align-items
 <script>
 (function(){
 
-/* ── SCROLL RESTORATION: always start at top ── */
 if('scrollRestoration' in history) history.scrollRestoration = 'manual';
 window.scrollTo(0, 0);
 
-/* ── PAGE PROGRESS BAR ── */
 var pgbar = document.getElementById('pgbar');
 function updatePgbar(){
   var h = document.body.scrollHeight - window.innerHeight;
@@ -716,13 +722,11 @@ function updatePgbar(){
 }
 window.addEventListener('scroll', updatePgbar, {passive:true});
 
-/* ── BACK TO TOP ── */
 var btt = document.getElementById('btt');
 window.addEventListener('scroll', function(){
   if(btt) btt.classList.toggle('show', window.scrollY > 500);
 }, {passive:true});
 
-/* ── CURSOR ── */
 var CUR = document.getElementById('CUR'), CUR2 = document.getElementById('CUR2');
 var mx = window.innerWidth/2, my = window.innerHeight/2, lx = mx, ly = my;
 document.addEventListener('mousemove', function(e){ mx = e.clientX; my = e.clientY; });
@@ -737,46 +741,26 @@ document.querySelectorAll('a,button,input,select,textarea').forEach(function(el)
   el.addEventListener('mouseleave', function(){ document.body.classList.remove('cbig'); });
 });
 
-/* ── LOADER + HERO ENTRY ── */
 window.addEventListener('DOMContentLoaded', function(){
   setTimeout(function(){
     document.getElementById('LD').classList.add('out');
-
-    // logo
     document.getElementById('hLogo').classList.add('on');
-
-    // headline words staggered
     var ws = document.querySelectorAll('.hw');
     ws.forEach(function(w, i){
       setTimeout(function(){ w.classList.add('on'); }, 240 + i * 85);
     });
-
-    // sub, btns, scroll indicator in sequence after words finish
     var wordsEnd = 240 + ws.length * 85;
-
-    setTimeout(function(){
-      document.getElementById('hSub').classList.add('on');
-    }, wordsEnd + 40);
-
-    setTimeout(function(){
-      document.getElementById('hBtns').classList.add('on');
-    }, wordsEnd + 160);
-
-    // scroll indicator: add class (which also starts its CSS animation)
-    setTimeout(function(){
-      document.getElementById('hScroll').classList.add('on');
-    }, wordsEnd + 380);
-
+    setTimeout(function(){ document.getElementById('hSub').classList.add('on'); }, wordsEnd + 40);
+    setTimeout(function(){ document.getElementById('hBtns').classList.add('on'); }, wordsEnd + 160);
+    setTimeout(function(){ document.getElementById('hScroll').classList.add('on'); }, wordsEnd + 380);
   }, 750);
 });
 
-/* ── NAV scroll class ── */
 var NAV = document.getElementById('NAV');
 window.addEventListener('scroll', function(){
   NAV.classList.toggle('s', window.scrollY > 50);
 }, {passive:true});
 
-/* ── FILM SCROLL (3 scenes, smoothstep cross-fade) ── */
 var film = document.getElementById('film');
 var fBar = document.getElementById('fBar');
 var fSC = [0,1,2].map(function(i){ return document.getElementById('fS'+i); });
@@ -789,11 +773,10 @@ function filmTick(){
   var total = film.offsetHeight - window.innerHeight;
   var p = Math.max(0, Math.min(1, -r.top / total));
   if(fBar) fBar.style.width = (p * 100) + '%';
-
   fSC.forEach(function(s, i){
     if(!s) return;
     var mid = (i + 0.5) / fSC.length;
-    var hw  = 0.42 / fSC.length; // half-window slightly tighter for crisper cuts
+    var hw  = 0.42 / fSC.length;
     var dist = Math.abs(p - mid) / hw;
     var raw  = Math.max(0, 1 - dist);
     var op   = smoothstep(raw);
@@ -806,7 +789,6 @@ function filmTick(){
 window.addEventListener('scroll', filmTick, {passive:true});
 filmTick();
 
-/* ── PRODUCT CAROUSEL ── */
 var track  = document.getElementById('pTrack');
 var dotsEl = document.querySelectorAll('#pDots .prd-dot');
 var pPrev  = document.getElementById('pPrev');
@@ -833,7 +815,6 @@ dotsEl.forEach(function(d){
   d.addEventListener('click', function(){ goTo(+d.dataset.i); });
 });
 
-/* Touch swipe */
 var tSX = null, tSY = null, tDrag = false;
 outer.addEventListener('touchstart', function(e){ tSX = e.touches[0].clientX; tSY = e.touches[0].clientY; tDrag = false; }, {passive:true});
 outer.addEventListener('touchmove', function(e){
@@ -849,7 +830,6 @@ outer.addEventListener('touchend', function(e){
   tSX = null; tDrag = false;
 });
 
-/* Mouse drag */
 var mSX = null;
 outer.addEventListener('mousedown',  function(e){ mSX = e.clientX; });
 outer.addEventListener('mouseup',    function(e){
@@ -860,7 +840,6 @@ outer.addEventListener('mouseup',    function(e){
 });
 outer.addEventListener('mouseleave', function(){ mSX = null; });
 
-/* Keyboard (only when product section is in viewport) */
 document.addEventListener('keydown', function(e){
   var prod = document.getElementById('product');
   if(!prod) return;
@@ -872,7 +851,6 @@ document.addEventListener('keydown', function(e){
 
 goTo(0, true);
 
-/* ── INTERSECTION OBSERVER REVEALS ── */
 var ro = new IntersectionObserver(function(entries){
   entries.forEach(function(e){
     if(e.isIntersecting){ e.target.classList.add('on'); ro.unobserve(e.target); }
@@ -880,8 +858,6 @@ var ro = new IntersectionObserver(function(entries){
 }, {threshold: 0.08, rootMargin: '0px 0px -30px 0px'});
 document.querySelectorAll('.rv').forEach(function(el){ ro.observe(el); });
 
-/* ── SMOOTH SCROLL with correct nav offset ── */
-// NAV is 68px tall; add 24px breathing room = 92px total offset
 var NH = 92;
 document.querySelectorAll('a[href^="#"]').forEach(function(a){
   a.addEventListener('click', function(e){
@@ -900,33 +876,20 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a){
   });
 });
 
-/* ── FORM SUBMISSION via FormSubmit.co (actual email delivery) ── */
-/*
-   HOW IT WORKS:
-   FormSubmit.co is a free service that sends form data to your email.
-   The VERY FIRST submission will send a confirmation email to
-   paperfumed.ocea23@gmail.com - click the link in that email to activate.
-   Every submission after that arrives directly in your inbox.
-*/
 var cF          = document.getElementById('cF');
 var fBtn        = document.getElementById('fBtn');
 var formConfirm = document.getElementById('formConfirm');
 var formError   = document.getElementById('formError');
-
 var ORIGINAL_BTN_HTML = fBtn.innerHTML;
 
 cF.addEventListener('submit', function(e){
   e.preventDefault();
-
   var name = document.getElementById('f-name').value.trim();
   var co   = document.getElementById('f-co').value.trim();
   var why  = document.getElementById('f-why').value;
   var msg  = document.getElementById('f-msg').value.trim();
-
-  // Basic validation
   formError.classList.remove('show');
   if(!name || !co || !why || !msg){
-    // highlight empty fields
     [['f-name', name], ['f-co', co], ['f-why', why], ['f-msg', msg]].forEach(function(pair){
       var el = document.getElementById(pair[0]);
       if(!pair[1]){
@@ -936,50 +899,31 @@ cF.addEventListener('submit', function(e){
     });
     return;
   }
-
-  // Disable button and show sending state
   fBtn.disabled = true;
   fBtn.innerHTML = 'Sending&hellip;';
-
-  // POST to FormSubmit.co — delivers directly to your Gmail
   fetch('https://formsubmit.co/ajax/paperfumed.ocea23@gmail.com', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    },
+    headers: {'Content-Type': 'application/json','Accept': 'application/json'},
     body: JSON.stringify({
-      name:     name,
-      company:  co,
-      interest: why,
-      message:  msg,
+      name: name, company: co, interest: why, message: msg,
       _subject: 'PaperFumed Early Access - ' + co,
-      _captcha: 'false',
-      _template:'table',
-      _replyto: '' // leave blank; no email field in form
+      _captcha: 'false', _template: 'table', _replyto: ''
     })
   })
   .then(function(res){ return res.json(); })
   .then(function(data){
     if(data.success === 'true' || data.success === true){
-      // Success: hide form, show confirmation
       cF.style.display = 'none';
       formConfirm.classList.add('show');
-
-      // Reset after 10s in case they want to submit again
       setTimeout(function(){
-        cF.reset();
-        cF.style.display = '';
+        cF.reset(); cF.style.display = '';
         formConfirm.classList.remove('show');
         fBtn.disabled = false;
         fBtn.innerHTML = ORIGINAL_BTN_HTML;
       }, 10000);
-    } else {
-      throw new Error('FormSubmit returned failure');
-    }
+    } else { throw new Error('FormSubmit returned failure'); }
   })
   .catch(function(){
-    // Network error or service down — restore button, show error
     fBtn.disabled = false;
     fBtn.innerHTML = ORIGINAL_BTN_HTML;
     formError.classList.add('show');
