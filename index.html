@@ -66,7 +66,8 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
   .h-scroll{animation:none!important}
 }
 /* FIX: skip-to-content link — WCAG 2.1 Level A */
-.skip-link{position:absolute;left:-999px;width:1px;height:1px;overflow:hidden;z-index:9999;font-family:'Plus Jakarta Sans',sans-serif;font-size:.85rem;font-weight:600;text-decoration:none}
+/* FIX: cursor:none added — consistent with site-wide cursor:none on body */
+.skip-link{position:absolute;left:-999px;width:1px;height:1px;overflow:hidden;z-index:9999;cursor:none;font-family:'Plus Jakarta Sans',sans-serif;font-size:.85rem;font-weight:600;text-decoration:none}
 .skip-link:focus{left:1rem;top:1rem;width:auto;height:auto;padding:.5rem 1.1rem;background:var(--g);color:var(--bg);border-radius:2px;outline:none}
 ::selection{background:var(--g);color:var(--bg)}
 /* PAGE PROGRESS */
@@ -827,17 +828,7 @@ footer{border-top:1px solid var(--c4);padding:2rem 4rem;display:flex;align-items
 /* ─── FIX: prefers-reduced-motion detection ────────────────────────────── */
 var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* ─── FIX: email obfuscation — decoded at runtime, never raw in HTML ─────
-   Parts are reversed + split so no crawler regex catches the full address   */
-function decodeEmail(){
-  var parts = ['gro.liamg@','32aeco.demufrepap'].map(function(s){return s.split('').reverse().join('');});
-  return parts[1] + parts[0].split('').reverse().join('');
-}
-function decodeEmailDisplay(){
-  var parts = ['gro.liamg@','32aeco.demufrepap'].map(function(s){return s.split('').reverse().join('');});
-  return parts[1] + '@' + parts[0].replace('@','').split('').reverse().join('');
-}
-/* Actually: let's just build it cleanly */
+/* ─── email built cleanly at runtime ──────────────────────────────────── */
 function getEmail(){
   var u='paperfumed.ocea23';
   var d='gmail';
@@ -846,9 +837,6 @@ function getEmail(){
 }
 function setEmailLinks(){
   var e=getEmail();
-  var els=[
-    {id:'emailLink', textId:'emailLinkText'},
-  ];
   var el=document.getElementById('emailLink');
   if(el){el.href='mailto:'+e; var t=document.getElementById('emailLinkText'); if(t) t.textContent=e;}
   var en=document.getElementById('emailNote');
