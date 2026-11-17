@@ -461,6 +461,17 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
 .how-band p.hl{font-size:23px;line-height:1.6;font-weight:600;color:#33422d;margin:0 auto;max-width:760px}
 .imgcap{font-size:12.5px;letter-spacing:.1em;color:#6e6759;font-weight:600;text-transform:uppercase;margin:12px 0 60px}
 @media(max-width:900px){.prob-nums{gap:38px}.prob-nums .n{font-size:38px}.sec h2{font-size:27px}}
+
+/* ---------- mobile sticky CTA ---------- */
+.pf-sticky{position:fixed;left:0;right:0;bottom:0;z-index:80;display:none;
+  padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));
+  background:rgba(251,248,240,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-top:1px solid var(--line)}
+.pf-sticky a{display:flex;align-items:center;justify-content:center;
+  background:var(--ink);color:var(--cream);font-weight:700;font-size:14px;
+  text-decoration:none;padding:13px 20px;border-radius:999px}
+.pf-sticky a:active{background:var(--moss)}
+@media(max-width:768px){.pf-sticky.on{display:block}}
 </style>
 <link rel="stylesheet" href="/vendors/cookieconsent.css">
 </head>
@@ -718,5 +729,24 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
 </script>
 <script defer src="/vendors/cookieconsent.umd.js"></script>
 <script defer src="/vendors/consent-config.js"></script>
+<div class="pf-sticky" id="pfSticky"><a href="/#contact">Get in touch</a></div>
+<script>
+(function(){
+  var s = document.getElementById('pfSticky');
+  if(!s) return;
+  var c = document.getElementById('contact');
+  function upd(){
+    var show = scrollY > innerHeight * 0.75;
+    if(c && show){
+      var r = c.getBoundingClientRect();
+      if(r.top < innerHeight && r.bottom > 0){ show = false; }
+    }
+    s.classList.toggle('on', show);
+  }
+  addEventListener('scroll', upd, {passive:true});
+  addEventListener('resize', upd);
+  upd();
+})();
+</script>
 </body>
 </html>
