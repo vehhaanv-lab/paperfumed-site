@@ -460,6 +460,7 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
 .imgcap{font-size:12.5px;letter-spacing:.1em;color:#6e6759;font-weight:600;text-transform:uppercase;margin:12px 0 60px}
 @media(max-width:900px){.prob-nums{gap:38px}.prob-nums .n{font-size:38px}.sec h2{font-size:27px}}
 </style>
+<link rel="stylesheet" href="/vendors/cookieconsent.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to main content</a>
@@ -490,7 +491,10 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
     <p style="font-size:16px;line-height:1.75;color:#3d4a38">If you tick &ldquo;Email me research updates&rdquo;, we record your email address and the time you agreed from the form email that reaches Vehhaan&rsquo;s inbox, and keep them in a private updates list, so we can send occasional updates when there is real news and show that you asked for them. Unticked means we only ever reply to your message. Every update email carries an unsubscribe line; one reply and you are off the list.</p>
 
     <h2 style="font-size:24px;font-weight:800;margin:44px 0 14px">The visit counter</h2>
-    <p style="font-size:16px;line-height:1.75;color:#3d4a38">Vercel Web Analytics counts page views anonymously so we can see whether anyone is reading. For each visit it records the page, the time, the referring site if any, approximate location (country, region, city), and device, browser and OS type. It sets no cookies, collects no personal identifiers, and cannot identify or follow you across sites; visitors appear as a temporary anonymous hash that is discarded after 24 hours, and we only ever see aggregated statistics.</p>
+    <p style="font-size:16px;line-height:1.75;color:#3d4a38">Vercel Web Analytics counts page views anonymously so we can see whether anyone is reading. It runs only if you choose &ldquo;Allow&rdquo; in the cookie notice; choose &ldquo;No thanks&rdquo; and it never loads and nothing is counted. For each visit it records the page, the time, the referring site if any, approximate location (country, region, city), and device, browser and OS type. It sets no cookies, collects no personal identifiers, and cannot identify or follow you across sites; visitors appear as a temporary anonymous hash that is discarded after 24 hours, and we only ever see aggregated statistics. You can change your choice any time from the Cookie settings link at the bottom of every page.</p>
+<h2 style="font-size:24px;font-weight:800;margin:44px 0 14px">The one cookie we set</h2>
+<p style="font-size:16px;line-height:1.75;color:#3d4a38">One small first-party cookie, <b>pf_consent</b>, remembers the choice you make in the cookie notice, so we do not ask on every visit. It holds only that choice, it is not used to identify or follow you, and it expires after about 6 months. The visit counter itself sets no cookies.</p>
+
 
     <h2 style="font-size:24px;font-weight:800;margin:44px 0 14px">Who this site is for</h2>
     <p style="font-size:16px;line-height:1.75;color:#3d4a38">This site is intended for people aged 18 and over. We do not knowingly collect information from children.</p>
@@ -507,40 +511,10 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
 <footer>
   <div class="foot-min">
     <span><b>PAPERFUMED</b></span>
-    <span><a href="https://www.linkedin.com/company/paperfumed" target="_blank" rel="noopener">LinkedIn</a> &middot; <a href="mailto:paperfumed.ocea23@gmail.com">paperfumed.ocea23@gmail.com</a> &middot; <a class="act" href="/privacy">Privacy</a></span>
+    <span><a href="https://www.linkedin.com/company/paperfumed" target="_blank" rel="noopener">LinkedIn</a> &middot; <a href="mailto:paperfumed.ocea23@gmail.com">paperfumed.ocea23@gmail.com</a> &middot; <a class="act" href="/privacy">Privacy</a> &middot; <a href="#" data-cc="show-preferencesModal">Cookie settings</a></span>
     <span>EARLY STAGE &middot; 2026</span>
   </div>
 </footer>
-<div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Storage notice" hidden>
-  <div class="cb-top">
-    <svg class="cb-plane" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2.5 12.8L21 3.5l-6.2 17-3.6-7.2-8.7-.5z" fill="#5c6e4a"/><path d="M11.2 13.3L21 3.5l-9.8 8.6v1.2z" fill="#7a8a6d"/></svg>
-    <div>
-      <h2>No cookies here</h2>
-      <p>This site sets no cookies. An anonymous page-view counter (Vercel Web Analytics) notes which pages are visited, roughly where from and on what device - it uses no cookies, collects no personal data and cannot identify you. The only personal data we collect is what you type into the contact form: it reaches our inbox today, and will be stored in Supabase (Sydney region) once our backend ships. The detail: <a href="/privacy" style="color:#5c6e4a;font-weight:700">what we store</a>. We save this one acknowledgement on your device so we do not ask twice.</p>
-    </div>
-  </div>
-  <div class="cb-row">
-    <button class="cb-btn cb-allow" id="cbGot" type="button">Got it</button>
-  </div>
-</div>
-<script>
-(function(){
-  var KEY = 'pf-consent';
-  var b = document.getElementById('cookieBanner');
-  if (!b) return;
-  var saved = null;
-  try { saved = localStorage.getItem(KEY); } catch (e) {}
-  if (!saved) {
-    b.hidden = false;
-    requestAnimationFrame(function(){ requestAnimationFrame(function(){ b.classList.add('show'); }); });
-  }
-  document.getElementById('cbGot').addEventListener('click', function(){
-    try { localStorage.setItem(KEY, 'ack'); } catch (e) {}
-    b.classList.remove('show');
-    setTimeout(function(){ b.hidden = true; }, 650);
-  });
-})();
-</script>
 <script>
 (function(){
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -659,7 +633,7 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
   }
 })();
 </script>
-<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
-<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/vendors/cookieconsent.umd.js"></script>
+<script defer src="/vendors/consent-config.js"></script>
 </body>
 </html>
