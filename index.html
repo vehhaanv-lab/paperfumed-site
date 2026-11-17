@@ -608,15 +608,15 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
       <form class="form-panel" id="contactForm" novalidate>
         <div class="field">
           <label for="f-name">Name *</label>
-          <input id="f-name" name="name" type="text" required autocomplete="name">
+          <input id="f-name" maxlength="100" name="name" type="text" required autocomplete="name">
         </div>
         <div class="field">
           <label for="f-email">Email *</label>
-          <input id="f-email" name="email" type="email" required autocomplete="email">
+          <input id="f-email" maxlength="254" name="email" type="email" required autocomplete="email">
         </div>
         <div class="field">
           <label for="f-company">Company (optional)</label>
-          <input id="f-company" name="company" type="text" autocomplete="organization">
+          <input id="f-company" maxlength="200" name="company" type="text" autocomplete="organization">
         </div>
         <div class="field">
           <label for="f-interest">What brings you here</label>
@@ -632,7 +632,7 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
         </div>
         <div class="field">
           <label for="f-msg">Message</label>
-          <textarea id="f-msg" name="message"></textarea>
+          <textarea id="f-msg" maxlength="5000" name="message"></textarea>
         </div>
         <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" placeholder="Leave this empty">
         <div class="field consent">
@@ -642,7 +642,7 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
           </label>
         </div>
         <button class="submit" type="submit" id="submitBtn">Send message</button>
-        <p class="privacy">Your information is used only to respond to your enquiry. It is never sold, and never shared beyond the service that delivers it to us. The full picture: <a href="/privacy">what we store</a>. We reply within 48 hours.</p>
+        <p class="privacy">Your enquiry is saved privately so we can respond. Research updates are optional and require a separate confirmation. The full picture: <a href="/privacy">what we store</a>. We reply within 48 hours.</p>
         <p class="form-error" id="formError">Something went wrong. Please email us directly at <a href="mailto:paperfumed.ocea23@gmail.com">paperfumed.ocea23@gmail.com</a>.</p>
       </form>
       <div class="receipt-slot" id="receiptSlot" aria-live="polite">
@@ -763,37 +763,109 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
     addEventListener('scroll', onIslandScroll, {passive:true}); paintIsland();
   }
 
-  /* contact form -> formsubmit ajax + receipt */
-  var form = document.getElementById('contactForm');
-  if(form){
-    form.addEventListener('submit', function(ev){
-      ev.preventDefault();
-      if(form._honey.value){ return; }
-      if(!form.name.value.trim()){ form.name.focus(); return; }
-      var btn = document.getElementById('submitBtn');
-      btn.disabled = true; btn.textContent = 'Sending\u2026';
-      fetch('https://formsubmit.co/ajax/paperfumed.ocea23@gmail.com', {
-        method:'POST',
-        headers:{'Content-Type':'application/json','Accept':'application/json'},
-        body: JSON.stringify({
-          name: form.name.value, email: form.email.value, company: form.company.value,
-          interest: form.interest.value, message: form.message.value,
-          updates: form.updates.checked ? 'yes' : 'no',
-          _replyto: form.email.value,
-          _subject: 'PaperFumed enquiry: ' + form.name.value
-        })
-      }).then(function(r){ if(!r.ok) throw 0; showReceipt(); })
-        .catch(function(){
-          btn.disabled=false; btn.textContent='Send message';
-          document.getElementById('formError').classList.add('show');
-        });
-    });
-    function showReceipt(){
-      form.style.display = 'none';
-      document.getElementById('receiptSlot').classList.add('show');
-      requestAnimationFrame(function(){ document.getElementById('slotWindow').classList.add('open'); });
-    }
+  /* private storage + spam-checked contact workflow */
+var form = document.getElementById('contactForm');
+if (form) {
+  var btn = document.getElementById('submitBtn');
+  var error = document.getElementById('formError');
+  var token = '', widgetId, pendingId, pendingDigest, sending = false;
+  var challenge = document.createElement('div');
+  challenge.id = 'contactChallenge';
+  challenge.style.cssText = 'margin:18px 0;min-height:70px;max-width:100%';
+  btn.parentNode.insertBefore(challenge, btn);
+  var fallback = document.createElement('button');
+  fallback.type = 'button'; fallback.hidden = true;
+  fallback.className = btn.className;
+  fallback.style.cssText = 'margin-top:12px;';
+  fallback.textContent = 'Try the inbox-only route';
+  btn.parentNode.insertBefore(fallback, btn.nextSibling);
+  var fallbackNote = document.createElement('p');
+  fallbackNote.hidden = true;
+  fallbackNote.style.cssText = 'font-size:13px;line-height:1.5;margin-top:8px';
+  fallbackNote.textContent = 'This sends your note through FormSubmit instead. It may duplicate a note already saved. Research updates are not registered by this backup route.';
+  fallback.parentNode.insertBefore(fallbackNote, fallback.nextSibling);
+  function value(key) { return form.elements.namedItem(key).value.trim(); }
+  function fail(message, backup) {
+    error.textContent = message; error.classList.add('show');
+    fallback.hidden = !backup; fallbackNote.hidden = !backup;
   }
+  function resetChallenge() {
+    token = '';
+    if (window.turnstile && widgetId !== undefined) window.turnstile.reset(widgetId);
+  }
+  function receipt(saved, id) {
+    form.style.display = 'none';
+    var slot = document.getElementById('receiptSlot');
+    var big = slot && slot.querySelector('.r-big');
+    var sub = slot && slot.querySelector('.r-sub');
+    if (big) big.textContent = saved ? 'Your note is saved.' : 'Your note was accepted.';
+    if (sub) {
+      sub.style.overflowWrap = 'anywhere';
+      sub.style.fontSize = '13px';
+      sub.style.lineHeight = '1.6';
+      sub.textContent = saved
+        ? 'Saved securely for Paperfumed. Reference: ' + id + '. Inbox delivery is a separate step. If you asked for updates, your request is pending, not a subscription yet.'
+        : 'The inbox service accepted your note. That does not confirm inbox delivery. The backup route does not sign you up for research updates.';
+    }
+    if (slot) slot.classList.add('show');
+    requestAnimationFrame(function () {
+      var windowEl = document.getElementById('slotWindow');
+      if (windowEl) {
+        var receiptEl = windowEl.querySelector('.receipt');
+        if (receiptEl) windowEl.style.height = (receiptEl.offsetHeight + 30) + 'px';
+        windowEl.classList.add('open');
+      }
+    });
+  }
+  window.paperfumedTurnstileReady = function () {
+    widgetId = window.turnstile.render(challenge, {
+      sitekey: '0x4AAAAAAGEelW-wexK5rune', action: 'contact', theme: 'light', size: 'flexible',
+      callback: function (t) { token = t; },
+      'expired-callback': function () { token = ''; },
+      'error-callback': function () { token = ''; fail('The spam check could not load. Please try again or use the inbox-only route.', true); }
+    });
+  };
+  var script = document.createElement('script');
+  script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?onload=paperfumedTurnstileReady&render=explicit';
+  script.async = true; script.defer = true;
+  script.onerror = function () { fail('The spam check could not load. Please try again or use the inbox-only route.', true); };
+  document.head.appendChild(script);
+  form.addEventListener('submit', async function (ev) {
+    ev.preventDefault(); if (sending || value('_honey')) return;
+    if (!form.reportValidity()) return;
+    if (!token) { fail('Please finish the spam check before sending.', false); return; }
+    var data = { name:value('name'), email:value('email'), company:value('company'), interest:value('interest'), message:value('message'), updates:form.elements.namedItem('updates').checked, _honey:'' };
+    var digest = JSON.stringify(data);
+    if (!pendingId || digest !== pendingDigest) { pendingId = crypto.randomUUID(); pendingDigest = digest; }
+    data.submission_id = pendingId; data.captcha_token = token;
+    sending = true; btn.disabled = true; btn.textContent = 'Sending...';
+    error.classList.remove('show'); fallback.hidden = true; fallbackNote.hidden = true;
+    try {
+      var response = await fetch('/api/contact', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),signal:AbortSignal.timeout(25000)});
+      var result = await response.json();
+      if (response.ok && result.status === 'stored') { receipt(true, result.submission_id); return; }
+      if (response.status === 429) fail('Too many notes from this connection. Please wait an hour before trying again.', false);
+      else if (response.status === 422) fail('The spam check expired or could not be verified. Please try the fresh check.', false);
+      else fail('We could not confirm that your note was saved. You can retry safely with the same details, or choose the inbox-only route.', response.status >= 500);
+    } catch (_) { fail('We could not confirm that your note was saved. Retry with the same details to avoid duplicates, or choose the inbox-only route.', true); }
+    finally { sending = false; btn.disabled = false; btn.textContent = 'Send message'; resetChallenge(); }
+  });
+  fallback.addEventListener('click', async function () {
+    if (sending || value('_honey') || !form.reportValidity()) return;
+    sending = true; fallback.disabled = true; btn.disabled = true;
+    try {
+      var response = await fetch('https://formsubmit.co/ajax/paperfumed.ocea23@gmail.com', {
+        method:'POST', headers:{'Content-Type':'application/json',Accept:'application/json'},
+        body:JSON.stringify({name:value('name'),email:value('email'),company:value('company'),interest:value('interest'),message:value('message'),submission_id:pendingId || '',updates_requested:'Not registered: inbox-only backup route',_subject:'Paperfumed enquiry (backup route)',_template:'table'}), signal:AbortSignal.timeout(20000)
+      });
+      var result = await response.json();
+      if (!response.ok || !(result.success === true || result.success === 'true')) throw new Error('Not accepted');
+      receipt(false);
+    } catch (_) { fail('The inbox service did not confirm acceptance. Please email paperfumed.ocea23@gmail.com directly. Retrying may send a duplicate.', true); }
+    finally { sending = false; fallback.disabled = false; btn.disabled = false; }
+  });
+}
+
 })();
 </script>
 <script defer src="/vendors/cookieconsent.umd.js"></script>
