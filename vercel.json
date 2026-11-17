@@ -74,6 +74,13 @@
   ],
   "routes": [
     {
+      "src": "/contact.html",
+      "status": 308,
+      "headers": {
+        "Location": "/#contact"
+      }
+    },
+    {
       "src": "/index.html",
       "status": 308,
       "headers": {
