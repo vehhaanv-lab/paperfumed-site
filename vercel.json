@@ -74,6 +74,41 @@
   ],
   "routes": [
     {
+      "src": "/index.html",
+      "status": 308,
+      "headers": {
+        "Location": "/"
+      }
+    },
+    {
+      "src": "/concept.html",
+      "status": 308,
+      "headers": {
+        "Location": "/concept"
+      }
+    },
+    {
+      "src": "/science.html",
+      "status": 308,
+      "headers": {
+        "Location": "/science"
+      }
+    },
+    {
+      "src": "/questions.html",
+      "status": 308,
+      "headers": {
+        "Location": "/questions"
+      }
+    },
+    {
+      "src": "/privacy.html",
+      "status": 308,
+      "headers": {
+        "Location": "/privacy"
+      }
+    },
+    {
       "src": "/privacy",
       "dest": "/privacy.html"
     },
