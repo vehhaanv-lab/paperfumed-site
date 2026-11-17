@@ -854,7 +854,7 @@ if (form) {
     try {
       var response = await fetch('/api/contact', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),signal:AbortSignal.timeout(25000)});
       var result = await response.json();
-      if (response.ok && result.status === 'stored') { receipt(true, result.submission_id); return; }
+      if (response.ok && result.status === 'stored') { location.assign('/thanks'); return; }
       if (response.status === 429) fail('Too many notes from this connection. Please wait an hour before trying again.', false);
       else if (response.status === 422) fail('The spam check expired or could not be verified. Please try the fresh check.', false);
       else fail('We could not confirm that your note was saved. You can retry safely with the same details, or choose the inbox-only route.', response.status >= 500);
