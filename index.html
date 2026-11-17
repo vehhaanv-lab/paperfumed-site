@@ -293,7 +293,7 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
   .q-grid{grid-template-columns:1fr}
 }
 @media(max-width:720px){
-  .hero{background:linear-gradient(to bottom,#A8CDE6 0%,#DCECF5 48%,rgba(244,240,230,.9) 82%,var(--cream) 100%)}
+  .hero{background:radial-gradient(ellipse at 78% 32%,rgba(255,252,232,.85),transparent 48%),linear-gradient(175deg,#D8E3DF 0%,#E4E9DE 40%,#F4F0E6 76%);background-repeat:no-repeat;background-color:#F4F0E6}
   .island-far{display:block;left:-18vw;top:9vh;width:52vw;opacity:.85;filter:blur(1.5px)}
   .island-wrap{left:auto;right:-30vw;bottom:-7vh;width:92vw;opacity:.98}
   .nav{top:10px;flex-wrap:wrap;row-gap:6px;padding:9px 12px 9px 20px}
@@ -508,9 +508,25 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
 .isl-track{display:contents}
 @media(max-width:720px){
   .hero{overflow:clip}
-  .isl-track{display:block;position:relative;height:calc(306px + 140vh);margin-top:12px}
-  .isl-track .week-ticker{position:sticky;top:calc(50vh + 168px);right:auto;bottom:auto;display:block;width:max-content;margin:0 auto;z-index:6;background:rgba(244,240,230,.8);padding:6px 12px;border-radius:999px}
-  .isl-track .island-wrap{position:sticky;top:max(112px,calc(50vh - 150px));margin:0 auto;z-index:2}
+  .isl-track{display:block;position:relative;margin-top:12px}
+  .isl-track .week-ticker{display:none}
+  .isl-track .island-wrap{position:relative;margin:0 auto}
+}
+
+.story-m{display:none}
+@media(max-width:720px){
+  .story-m{display:block;padding:8px 0 24px}
+  .story-m .sm-stage{padding:28px 20px 8px;border-top:1px solid var(--line,#d8d0bf);background:linear-gradient(170deg,rgba(216,227,223,.55),rgba(244,240,230,0) 70%)}
+  .story-m .sm-k{font-size:10px;line-height:1.5;letter-spacing:1.8px;font-weight:700;text-transform:uppercase;color:var(--ink)}
+  .story-m h2{font-size:26px;line-height:1.15;letter-spacing:-.5px;font-weight:800;margin:8px 0 0}
+  .story-m .sm-art{display:block;width:100%;max-width:353px;aspect-ratio:1157/1003;height:auto;object-fit:contain;margin:18px auto 6px}
+  .story-m .sm-prog{display:flex;gap:8px;margin:16px 0}
+  .story-m .sm-prog span{height:3px;flex:1;background:#d8d0bf}
+  .story-m .sm-prog .on{background:var(--moss)}
+  .story-m .sm-lab{font-size:10px;letter-spacing:1.2px;font-weight:700;text-transform:uppercase}
+  .story-m p{font-size:15px;line-height:1.65;margin:10px 0 0}
+  .story-m .sm-note{font-size:12px;line-height:1.5;opacity:.8;border-top:1px solid #d8d0bf;padding-top:12px;margin-top:16px}
+  .story-m .sm-link{display:inline-flex;align-items:center;min-height:46px;margin:12px 0 4px;padding:0 22px;border:1px solid var(--ink);border-radius:999px;font-weight:700;font-size:14px;color:var(--ink);text-decoration:none}
 }
 
 /* ---------- smooth transitions ---------- */
@@ -593,6 +609,39 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
   <p class="intro-line reveal">PaperFumed is an <b>idea at research stage</b>. One question: can paper replace the plastic water bottle?</p>
 
   <p class="noclaim reveal">What we are not claiming: no product, no prototype, no results - yet. When that changes, this page changes.<span class="upd">Last updated 16 November 2026</span></p>
+
+  <div class="story-m" aria-label="Illustrated research story">
+    <div class="sm-stage reveal">
+      <div class="sm-k">Illustrated research story · Day 0</div>
+      <h2>The starting point</h2>
+      <img class="sm-art" src="/assets/island-bottle.webp" alt="Concept illustration: a paper bottle on a small floating island of moss" loading="lazy" decoding="async">
+      <div class="sm-prog" aria-hidden="true"><span class="on"></span><span></span><span></span></div>
+      <div class="sm-lab">Day 0 / Illustration 1 of 3</div>
+      <p>Could a mainly paper-fibre bottle hold water reliably? This illustration is a direction, not a tested product.</p>
+      <p class="sm-note">Concept images, not test data. Material performance and timing are unvalidated.</p>
+      
+    </div>
+    <div class="sm-stage reveal">
+      <div class="sm-k">Illustrated research story · Week 2</div>
+      <h2>The barrier question</h2>
+      <img class="sm-art" src="/assets/island-fraying.webp" alt="Concept illustration: the bottle fraying on the island" loading="lazy" decoding="async">
+      <div class="sm-prog" aria-hidden="true"><span class="on"></span><span class="on"></span><span></span></div>
+      <div class="sm-lab">Week 2 / Illustration 2 of 3</div>
+      <p>What happens to the lining as the fibre changes? The timing shown is a research target, not an observed result.</p>
+      <p class="sm-note">Concept images, not test data. Material performance and timing are unvalidated.</p>
+      
+    </div>
+    <div class="sm-stage reveal">
+      <div class="sm-k">Illustrated research story · Week 4</div>
+      <h2>The afterlife question</h2>
+      <img class="sm-art" src="/assets/island-bloomed.webp" alt="Concept illustration: a seedling growing on the island where the bottle was" loading="lazy" decoding="async">
+      <div class="sm-prog" aria-hidden="true"><span class="on"></span><span class="on"></span><span class="on"></span></div>
+      <div class="sm-lab">Week 4 / Illustration 3 of 3</div>
+      <p>Does it return safely to the local waste system? No breakdown timeline or safety claim has been validated.</p>
+      <p class="sm-note">Concept images, not test data. Material performance and timing are unvalidated.</p>
+      <a class="sm-link" href="/science">Explore the research</a>
+    </div>
+  </div>
 
   <section class="founder-band reveal" aria-label="From the founder">
     <p class="kicker">From the founder</p>
@@ -805,7 +854,7 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
       var trk = document.getElementById('islTrack');
       if(trk && matchMedia('(max-width:720px)').matches){
         var tr = trk.getBoundingClientRect(), span = trk.offsetHeight - 306 - 40;
-        p = Math.min(1, Math.max(0, (76 - tr.top) / Math.max(1, span)));
+        p = 0;
       } else {
         p = Math.min(1, Math.max(0, scrollY / (innerHeight*0.9)));
       }
