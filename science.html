@@ -6,20 +6,20 @@
 <title>Science · PaperFumed</title>
 <meta name="description" content="Six sourced findings on paper versus plastic: biodegradation, recycling rates, emissions and India's single-use plastic ban - every number cited.">
 <meta name="google-site-verification" content="Hcl2Nn9Ev7Kr6bgABZlpkPxtWmGOQ-QrAccmVXjXL7Y" />
-<link rel="canonical" href="https://paperfumed.vercel.app/science.html">
+<link rel="canonical" href="https://paperfumed.vercel.app/science">
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#F4F0E6">
 <meta property="og:site_name" content="PaperFumed">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://paperfumed.vercel.app/">
-<meta property="og:title" content="PaperFumed — Exploring what comes after Plastic">
-<meta property="og:description" content="Building paper-based packaging for India. Starting with the water bottle. Decomposes in weeks. Zero microplastics.">
+<meta property="og:url" content="https://paperfumed.vercel.app/science">
+<meta property="og:title" content="Science · PaperFumed">
+<meta property="og:description" content="Six sourced findings on paper versus plastic: biodegradation, recycling rates, emissions and India’s single-use plastic ban - with references.">
 <meta property="og:image" content="https://paperfumed.vercel.app/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="PaperFumed — Exploring what comes after Plastic">
-<meta name="twitter:description" content="Building paper-based packaging for India. Starting with the water bottle.">
+<meta name="twitter:title" content="Science · PaperFumed">
+<meta name="twitter:description" content="Six sourced findings on paper versus plastic: biodegradation, recycling rates, emissions and India’s single-use plastic ban - with references.">
 <meta name="twitter:image" content="https://paperfumed.vercel.app/og-image.png">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 33'%3E%3Crect x='8' y='0' width='10' height='6.5' rx='2' fill='%23EBE2CE'/%3E%3Cpath fill='%23EBE2CE' d='M2 8.5L2 31Q2 33 4 33L22 33Q24 33 24 31L24 14.5L16.5 8.5Z'/%3E%3Cpath fill='rgba(77,184,126,.5)' d='M16.5 8.5L24 14.5L16.5 14.5Z'/%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 33'%3E%3Crect x='8' y='0' width='10' height='6.5' rx='2' fill='%23EBE2CE'/%3E%3Cpath fill='%23EBE2CE' d='M2 8.5L2 31Q2 33 4 33L22 33Q24 33 24 31L24 14.5L16.5 8.5Z'/%3E%3Cpath fill='rgba(77,184,126,.5)' d='M16.5 8.5L24 14.5L16.5 14.5Z'/%3E%3C/svg%3E">
@@ -30,11 +30,10 @@
 <script type="application/ld+json">
 {
  "@context":"https://schema.org",
- "@type":"Organization",
- "name":"PaperFumed",
- "url":"https://paperfumed.vercel.app/",
- "sameAs":["https://www.linkedin.com/company/paperfumed"],
- "email":"paperfumed.ocea23@gmail.com"
+ "@graph":[
+ {"@type":"Organization","name":"PaperFumed","alternateName":["Paperfumed"],"url":"https://paperfumed.vercel.app/","sameAs":["https://www.linkedin.com/company/paperfumed"],"email":"paperfumed.ocea23@gmail.com"},
+ {"@type":"WebSite","name":"PaperFumed","alternateName":["Paperfumed"],"url":"https://paperfumed.vercel.app/","description":"An early research project exploring paper-based packaging for India, starting with the water bottle.","inLanguage":"en"}
+ ]
 }
 </script>
 <style>
@@ -58,6 +57,8 @@ a{color:inherit}
 .skip{position:absolute;left:-9999px;top:0;background:var(--ink);color:var(--cream);padding:10px 16px;z-index:200;border-radius:0 0 8px 0}
 .skip:focus{left:0}
 :focus-visible{outline:2px solid var(--moss);outline-offset:3px;border-radius:4px}
+
+html,body{overflow-x:clip}
 
 /* ---------- nav ---------- */
 .nav{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:100;
@@ -292,8 +293,21 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
   .hero{background:linear-gradient(to bottom,#A8CDE6 0%,#DCECF5 48%,rgba(244,240,230,.9) 82%,var(--cream) 100%)}
   .island-far{display:block;left:-18vw;top:9vh;width:52vw;opacity:.85;filter:blur(1.5px)}
   .island-wrap{left:auto;right:-30vw;bottom:-7vh;width:92vw;opacity:.98}
-  .nav .links{display:none}
-  .hero-inner{padding-top:110px}
+  .nav{top:10px;flex-wrap:wrap;row-gap:6px;padding:9px 12px 9px 20px}
+  .nav .links{display:flex;order:3;flex:1 1 100%;justify-content:center;gap:4px;overflow-x:auto}
+  .nav .links a{font-size:13px;padding:11px 12px;border-radius:999px;background:rgba(92,110,74,.10);white-space:nowrap}
+  .reveal{transform:translateY(16px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
+  .prob-nums .s{font-size:12px}
+  footer a{display:inline-block;padding:9px 4px}
+  .hero h1{text-wrap:balance}
+  .nav .cta{padding:12px 20px}
+  .cta-row a:not(.btn-ink){display:inline-flex;align-items:center;min-height:44px;padding:6px 8px}
+  .manifesto .w{transition:none;opacity:1}
+  .cookie-banner{padding:16px 16px 14px;bottom:12px}
+  .cookie-banner p{font-size:13px;line-height:1.5}
+  .cookie-banner .cb-btn{padding:13px 0;min-height:48px}
+  .cookie-banner .cb-plane{animation:none}
+  .hero-inner{padding-top:150px}
   .hero .chips{max-width:70%}
   .fact{grid-template-columns:1fr;gap:8px}
   .scroll-hint{display:none}
@@ -443,7 +457,7 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
 .prob-nums .s{font-size:10.5px;letter-spacing:.14em;color:#8a9a7c;margin-top:8px;text-transform:uppercase}
 .how-band{padding:92px 24px;text-align:center}
 .how-band p.hl{font-size:23px;line-height:1.6;font-weight:600;color:#33422d;margin:0 auto;max-width:760px}
-.imgcap{font-size:12px;letter-spacing:.1em;color:#8a8270;font-weight:600;text-transform:uppercase;margin:12px 0 60px}
+.imgcap{font-size:12.5px;letter-spacing:.1em;color:#6e6759;font-weight:600;text-transform:uppercase;margin:12px 0 60px}
 @media(max-width:900px){.prob-nums{gap:38px}.prob-nums .n{font-size:38px}.sec h2{font-size:27px}}
 </style>
 </head>
@@ -451,14 +465,14 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
 <a class="skip" href="#main">Skip to main content</a>
 
 <nav class="nav" id="nav" aria-label="Primary">
-  <a class="logo" href="index.html">Paper<em>Fumed</em></a>
+  <a class="logo" href="/">Paper<em>Fumed</em></a>
   <div class="links">
-    <a href="concept.html">Concept</a>
-    <a class="act" href="science.html">Science</a>
-    <a href="questions.html">Questions</a>
-    <a href="index.html#contact">Contact</a>
+    <a href="/concept">Concept</a>
+    <a class="act" href="/science">Science</a>
+    <a href="/questions">Questions</a>
+    <a href="/#contact">Contact</a>
   </div>
-  <a class="cta" href="index.html#contact">Get in touch</a>
+  <a class="cta" href="/#contact">Get in touch</a>
 </nav>
 <main id="main">
   <div class="pg-wrap">
@@ -576,7 +590,7 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
 <footer>
   <div class="foot-min">
     <span><b>PAPERFUMED</b></span>
-    <span><a href="https://www.linkedin.com/company/paperfumed" target="_blank" rel="noopener">LinkedIn</a> &middot; <a href="mailto:paperfumed.ocea23@gmail.com">paperfumed.ocea23@gmail.com</a> &middot; <a href="privacy.html">Privacy</a></span>
+    <span><a href="https://www.linkedin.com/company/paperfumed" target="_blank" rel="noopener">LinkedIn</a> &middot; <a href="mailto:paperfumed.ocea23@gmail.com">paperfumed.ocea23@gmail.com</a> &middot; <a href="/privacy">Privacy</a></span>
     <span>EARLY STAGE &middot; 2026</span>
   </div>
 </footer>
@@ -584,15 +598,12 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
   <div class="cb-top">
     <svg class="cb-plane" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2.5 12.8L21 3.5l-6.2 17-3.6-7.2-8.7-.5z" fill="#5c6e4a"/><path d="M11.2 13.3L21 3.5l-9.8 8.6v1.2z" fill="#7a8a6d"/></svg>
     <div>
-      <h2>A little housekeeping</h2>
-      <p>No tracking, no ads, nothing sneaky - this banner is just good manners. Whatever you pick, we save that one choice on your own device so we don&rsquo;t ask twice.</p>
-      <div class="cb-why" id="cbWhy">One word - your answer - in your browser&rsquo;s local storage. It never leaves your device. This site runs no analytics, no advertising and no trackers. If that ever changes, we will say so here first and ask again. The contact form works differently: <a href="privacy.html" style="color:#5c6e4a;font-weight:700">what we store</a>.</div>
+      <h2>No cookies here</h2>
+      <p>This site sets no cookies. An anonymous page-view counter (Vercel Web Analytics) notes which pages are visited, roughly where from and on what device - it uses no cookies, collects no personal data and cannot identify you. The only personal data we collect is what you type into the contact form: it reaches our inbox today, and will be stored in Supabase (Sydney region) once our backend ships. The detail: <a href="/privacy" style="color:#5c6e4a;font-weight:700">what we store</a>. We save this one acknowledgement on your device so we do not ask twice.</p>
     </div>
   </div>
   <div class="cb-row">
-    <button class="cb-btn cb-allow" id="cbAllow" type="button">Allow</button>
-    <button class="cb-btn cb-deny" id="cbDeny" type="button">Deny</button>
-    <button class="cb-link" id="cbWhyBtn" type="button">What we store</button>
+    <button class="cb-btn cb-allow" id="cbGot" type="button">Got it</button>
   </div>
 </div>
 <script>
@@ -606,16 +617,10 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
     b.hidden = false;
     requestAnimationFrame(function(){ requestAnimationFrame(function(){ b.classList.add('show'); }); });
   }
-  function pick(v){
-    try { localStorage.setItem(KEY, v); } catch (e) {}
+  document.getElementById('cbGot').addEventListener('click', function(){
+    try { localStorage.setItem(KEY, 'ack'); } catch (e) {}
     b.classList.remove('show');
     setTimeout(function(){ b.hidden = true; }, 650);
-    /* Gate for the future: load optional analytics here only when v === 'allow'. None exist today. */
-  }
-  document.getElementById('cbAllow').addEventListener('click', function(){ pick('allow'); });
-  document.getElementById('cbDeny').addEventListener('click', function(){ pick('deny'); });
-  document.getElementById('cbWhyBtn').addEventListener('click', function(){
-    document.getElementById('cbWhy').classList.toggle('open');
   });
 })();
 </script>
@@ -737,5 +742,7 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
   }
 })();
 </script>
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
