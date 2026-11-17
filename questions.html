@@ -472,6 +472,27 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
   text-decoration:none;padding:13px 20px;border-radius:999px}
 .pf-sticky a:active{background:var(--moss)}
 @media(max-width:768px){.pf-sticky.on{display:block}}
+
+/* ---------- mobile layout (393 reference) ---------- */
+.nav .menu-btn{display:none}
+@media(max-width:720px){
+  .nav{top:12px;left:16px;right:16px;width:auto;transform:none;height:56px;flex-wrap:nowrap;align-items:center;justify-content:space-between;gap:8px;padding:0 6px 0 18px;border-radius:28px}
+  .nav .logo{font-size:17px}
+  .nav .cta{margin-left:auto;padding:0 16px;min-height:44px;display:inline-flex;align-items:center}
+  .nav .menu-btn{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:0;border-radius:50%;background:transparent;color:var(--ink);cursor:pointer;padding:0}
+  .nav .menu-btn svg{width:22px;height:22px}
+  .nav .links{display:none;position:absolute;top:64px;left:0;right:0;order:0;flex:none;flex-direction:column;gap:0;overflow:visible;padding:8px;background:rgba(251,248,240,.98);border:1px solid var(--line);border-radius:22px;box-shadow:0 14px 44px rgba(20,32,26,.18)}
+  .nav.open .links{display:flex}
+  .nav .links a{display:flex;align-items:center;min-height:44px;padding:0 14px;font-size:15px;background:none;border-radius:12px;opacity:1}
+  .hero{min-height:0;padding-bottom:32px}
+  .hero-inner{padding-top:96px}
+  .hero h1{font-size:36px;line-height:1.1;letter-spacing:-1px}
+  .island-wrap{position:relative;inset:auto;left:auto;right:auto;bottom:auto;width:100%;max-width:353px;margin:20px auto 0;transform:none!important;opacity:1}
+  .island-wrap .island-bob{animation:none!important;transform:none!important}
+  .island-far,.fchip{display:none!important}
+  .scroll-hint{display:none}
+  main,.page-head{padding-left:0;padding-right:0}
+}
 </style>
 <link rel="stylesheet" href="/vendors/cookieconsent.css">
 </head>
@@ -480,13 +501,13 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
 
 <nav class="nav" id="nav" aria-label="Primary">
   <a class="logo" href="/">Paper<em>Fumed</em></a>
-  <div class="links">
+  <div class="links" id="navLinks">
     <a href="/concept">Concept</a>
     <a href="/science">Science</a>
     <a class="act" href="/questions">Questions</a>
     <a href="/#contact">Contact</a>
   </div>
-  <a class="cta" href="/#contact">Get in touch</a>
+  <a class="cta" href="/#contact">Get in touch</a><button class="menu-btn" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks"><svg viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
 </nav>
 <main id="main">
   <div class="pg-wrap">
@@ -656,5 +677,12 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
   upd();
 })();
 </script>
-</body>
+<script>
+(function(){var n=document.getElementById('nav'),b=document.getElementById('menuBtn');if(!n||!b)return;
+function set(o){n.classList.toggle('open',o);b.setAttribute('aria-expanded',o?'true':'false')}
+b.addEventListener('click',function(e){e.stopPropagation();set(!n.classList.contains('open'))});
+document.addEventListener('click',function(e){if(!n.contains(e.target))set(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&n.classList.contains('open')){set(false);b.focus()}});
+n.querySelectorAll('.links a').forEach(function(a){a.addEventListener('click',function(){set(false)})});})();
+</script></body>
 </html>
