@@ -482,6 +482,23 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
   .scroll-hint{display:none}
   main,.page-head{padding-left:0;padding-right:0}
 }
+
+/* ---------- smooth transitions ---------- */
+@view-transition{navigation:auto}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.22s;animation-timing-function:ease-out}
+@media(max-width:720px){
+  .reveal{transform:translateY(8px);transition:opacity .25s ease-out,transform .25s ease-out}
+  .nav .links{display:flex;visibility:hidden;opacity:0;transform:translateY(-6px);pointer-events:none;transition:opacity .22s ease-out,transform .22s ease-out,visibility 0s linear .22s}
+  .nav.open .links{visibility:visible;opacity:1;transform:none;pointer-events:auto;transition:opacity .22s ease-out,transform .22s ease-out}
+}
+.qx{interpolate-size:allow-keywords}
+.qx::details-content{block-size:0;overflow:clip;opacity:0;transition:block-size .25s ease-out,opacity .25s ease-out,content-visibility .25s allow-discrete}
+.qx[open]::details-content{block-size:auto;opacity:1}
+@media(prefers-reduced-motion:reduce){
+  @view-transition{navigation:none}
+  .reveal{opacity:1!important;transform:none!important;transition:none!important}
+  .nav .links,.qx::details-content{transition:none!important}
+}
 </style>
 <meta name="robots" content="noindex">
 <link rel="stylesheet" href="/vendors/cookieconsent.css">

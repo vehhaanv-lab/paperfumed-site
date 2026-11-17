@@ -503,6 +503,32 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
   .scroll-hint{display:none}
   main,.page-head{padding-left:0;padding-right:0}
 }
+
+/* ---------- stage story on phones ---------- */
+.isl-track{display:contents}
+@media(max-width:720px){
+  .hero{overflow:clip}
+  .isl-track{display:block;position:relative;height:calc(306px + 140vh);margin-top:12px}
+  .isl-track .week-ticker{position:sticky;top:calc(50vh + 168px);right:auto;bottom:auto;display:block;width:max-content;margin:0 auto;z-index:6;background:rgba(244,240,230,.8);padding:6px 12px;border-radius:999px}
+  .isl-track .island-wrap{position:sticky;top:max(112px,calc(50vh - 150px));margin:0 auto;z-index:2}
+}
+
+/* ---------- smooth transitions ---------- */
+@view-transition{navigation:auto}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.22s;animation-timing-function:ease-out}
+@media(max-width:720px){
+  .reveal{transform:translateY(8px);transition:opacity .25s ease-out,transform .25s ease-out}
+  .nav .links{display:flex;visibility:hidden;opacity:0;transform:translateY(-6px);pointer-events:none;transition:opacity .22s ease-out,transform .22s ease-out,visibility 0s linear .22s}
+  .nav.open .links{visibility:visible;opacity:1;transform:none;pointer-events:auto;transition:opacity .22s ease-out,transform .22s ease-out}
+}
+.qx{interpolate-size:allow-keywords}
+.qx::details-content{block-size:0;overflow:clip;opacity:0;transition:block-size .25s ease-out,opacity .25s ease-out,content-visibility .25s allow-discrete}
+.qx[open]::details-content{block-size:auto;opacity:1}
+@media(prefers-reduced-motion:reduce){
+  @view-transition{navigation:none}
+  .reveal{opacity:1!important;transform:none!important;transition:none!important}
+  .nav .links,.qx::details-content{transition:none!important}
+}
 </style>
 <link rel="stylesheet" href="/vendors/cookieconsent.css">
 </head>
@@ -538,6 +564,8 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
     </div>
   </div>
 
+  <div class="isl-track" id="islTrack">
+  <div class="week-ticker" id="weekTicker">DAY 0</div>
   <div class="island-wrap" id="islandWrap">
     <div class="island-bob">
       <div class="isl-stack">
@@ -548,13 +576,13 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
     </div>
   </div>
 
+  </div>
   <div class="island-wrap island-far" aria-hidden="true">
     <div class="island-bob" style="animation-duration:9.5s;animation-delay:.8s">
       <div class="island-img" style="transform:scaleX(-1)"></div>
     </div>
   </div>
 
-  <div class="week-ticker" id="weekTicker">DAY 0</div>
 
   <div class="fchip fchip-1" data-depth="1.6"><small>Material target</small>85% paper fibre</div>
   <div class="fchip fchip-2" data-depth="2.2"><small>Barrier target</small>Bio-based, &lt;2 g</div>
@@ -769,9 +797,18 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
       islF = document.getElementById('islBloomed'),
       tick = document.getElementById('weekTicker');
   if(islB && tick){
+
+    [islB, islM, islF].forEach(function(el){ var m=/url\(["']?([^"')]+)/.exec(getComputedStyle(el).backgroundImage||''); if(m){ var im=new Image(); im.decoding='async'; im.src=m[1]; if(im.decode) im.decode().catch(function(){}); } });
     function fade(p, a, b){ return Math.min(1, Math.max(0, (p - a) / (b - a))); }
     function paintIsland(){
-      var p = Math.min(1, Math.max(0, scrollY / (innerHeight*0.9)));
+      var p;
+      var trk = document.getElementById('islTrack');
+      if(trk && matchMedia('(max-width:720px)').matches){
+        var tr = trk.getBoundingClientRect(), span = trk.offsetHeight - 306 - 40;
+        p = Math.min(1, Math.max(0, (76 - tr.top) / Math.max(1, span)));
+      } else {
+        p = Math.min(1, Math.max(0, scrollY / (innerHeight*0.9)));
+      }
       if(reduced){ p = 1; }
       var oB = 1 - fade(p, .40, .58);
       var oM = fade(p, .34, .48) * (1 - fade(p, .58, .74));
@@ -780,7 +817,7 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
       islM.style.opacity = String(oM);
       islF.style.opacity = String(oF);
       islB.style.transform = 'translateY(' + (p*22) + 'px) scale(' + (1 - p*0.05) + ')';
-      tick.textContent = p < .15 ? 'DAY 0' : p < .45 ? 'WEEK 2' : p < .72 ? 'WEEK 4' : 'WEEK 6';
+      var lbl = p < .15 ? 'DAY 0' : p < .45 ? 'WEEK 2' : p < .72 ? 'WEEK 4' : 'WEEK 6'; if(tick.textContent !== lbl) tick.textContent = lbl;
       tick.style.setProperty('--p', p);
     }
     var islandTicking = false;
@@ -788,7 +825,7 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
       if(islandTicking) return;
       islandTicking = true;
       requestAnimationFrame(function(){
-        if(scrollY < innerHeight*1.25){ paintIsland(); }
+        paintIsland();
         islandTicking = false;
       });
     }
