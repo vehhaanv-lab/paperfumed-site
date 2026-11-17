@@ -508,27 +508,12 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
 .isl-track{display:contents}
 @media(max-width:720px){
   .hero{overflow:clip}
-  .isl-track{display:block;position:relative;margin-top:12px}
-  .isl-track .week-ticker{display:none}
-  .isl-track .island-wrap{position:relative;margin:0 auto}
+  .isl-track{display:block;position:relative;height:calc(306px + 140vh);margin-top:12px}
+  .isl-track .week-ticker{position:sticky;top:calc(50vh + 168px);right:auto;bottom:auto;display:block;width:max-content;margin:0 auto;z-index:6;background:rgba(244,240,230,.8);padding:6px 12px;border-radius:999px}
+  .isl-track .island-wrap{position:sticky;top:max(112px,calc(50vh - 150px));margin:0 auto;z-index:2}
 }
 
-.story-m{display:none}
-@media(max-width:720px){
-  .story-m{display:block;padding:8px 0 24px}
-  .story-m .sm-stage{padding:28px 20px 8px;border-top:1px solid var(--line,#d8d0bf);background:linear-gradient(170deg,rgba(216,227,223,.55),rgba(244,240,230,0) 70%)}
-  .story-m .sm-k{font-size:10px;line-height:1.5;letter-spacing:1.8px;font-weight:700;text-transform:uppercase;color:var(--ink)}
-  .story-m h2{font-size:26px;line-height:1.15;letter-spacing:-.5px;font-weight:800;margin:8px 0 0}
-  .story-m .sm-art{display:block;width:100%;max-width:353px;aspect-ratio:1157/1003;height:auto;object-fit:contain;margin:18px auto 6px}
-  .story-m .sm-prog{display:flex;gap:8px;margin:16px 0}
-  .story-m .sm-prog span{height:3px;flex:1;background:#d8d0bf}
-  .story-m .sm-prog .on{background:var(--moss)}
-  .story-m .sm-lab{font-size:10px;letter-spacing:1.2px;font-weight:700;text-transform:uppercase}
-  .story-m p{font-size:15px;line-height:1.65;margin:10px 0 0}
-  .story-m .sm-note{font-size:12px;line-height:1.5;opacity:.8;border-top:1px solid #d8d0bf;padding-top:12px;margin-top:16px}
-  .story-m .sm-link{display:inline-flex;align-items:center;min-height:46px;margin:12px 0 4px;padding:0 22px;border:1px solid var(--ink);border-radius:999px;font-weight:700;font-size:14px;color:var(--ink);text-decoration:none}
-}
-
+@media(max-width:720px){.cookie-banner{transition:transform .28s cubic-bezier(.22,1,.36,1);will-change:transform}}
 /* ---------- smooth transitions ---------- */
 @view-transition{navigation:auto}
 ::view-transition-old(root),::view-transition-new(root){animation-duration:.22s;animation-timing-function:ease-out}
@@ -610,40 +595,7 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
 
   <p class="noclaim reveal">What we are not claiming: no product, no prototype, no results - yet. When that changes, this page changes.<span class="upd">Last updated 16 November 2026</span></p>
 
-  <div class="story-m" aria-label="Illustrated research story">
-    <div class="sm-stage reveal">
-      <div class="sm-k">Illustrated research story · Day 0</div>
-      <h2>The starting point</h2>
-      <img class="sm-art" src="/assets/island-bottle.webp" alt="Concept illustration: a paper bottle on a small floating island of moss" loading="lazy" decoding="async">
-      <div class="sm-prog" aria-hidden="true"><span class="on"></span><span></span><span></span></div>
-      <div class="sm-lab">Day 0 / Illustration 1 of 3</div>
-      <p>Could a mainly paper-fibre bottle hold water reliably? This illustration is a direction, not a tested product.</p>
-      <p class="sm-note">Concept images, not test data. Material performance and timing are unvalidated.</p>
-      
-    </div>
-    <div class="sm-stage reveal">
-      <div class="sm-k">Illustrated research story · Week 2</div>
-      <h2>The barrier question</h2>
-      <img class="sm-art" src="/assets/island-fraying.webp" alt="Concept illustration: the bottle fraying on the island" loading="lazy" decoding="async">
-      <div class="sm-prog" aria-hidden="true"><span class="on"></span><span class="on"></span><span></span></div>
-      <div class="sm-lab">Week 2 / Illustration 2 of 3</div>
-      <p>What happens to the lining as the fibre changes? The timing shown is a research target, not an observed result.</p>
-      <p class="sm-note">Concept images, not test data. Material performance and timing are unvalidated.</p>
-      
-    </div>
-    <div class="sm-stage reveal">
-      <div class="sm-k">Illustrated research story · Week 4</div>
-      <h2>The afterlife question</h2>
-      <img class="sm-art" src="/assets/island-bloomed.webp" alt="Concept illustration: a seedling growing on the island where the bottle was" loading="lazy" decoding="async">
-      <div class="sm-prog" aria-hidden="true"><span class="on"></span><span class="on"></span><span class="on"></span></div>
-      <div class="sm-lab">Week 4 / Illustration 3 of 3</div>
-      <p>Does it return safely to the local waste system? No breakdown timeline or safety claim has been validated.</p>
-      <p class="sm-note">Concept images, not test data. Material performance and timing are unvalidated.</p>
-      <a class="sm-link" href="/science">Explore the research</a>
-    </div>
-  </div>
-
-  <section class="founder-band reveal" aria-label="From the founder">
+    <section class="founder-band reveal" aria-label="From the founder">
     <p class="kicker">From the founder</p>
     <p class="founder-text" id="founderText">450 years in the ground. Minutes in your hand. That is not a materials problem. That is a failure of imagination. We are early, and we will be wrong sometimes. But the maths only needs to be right once.</p>
     <p class="founder-sig">Vehhaan</p>
@@ -854,7 +806,7 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
       var trk = document.getElementById('islTrack');
       if(trk && matchMedia('(max-width:720px)').matches){
         var tr = trk.getBoundingClientRect(), span = trk.offsetHeight - 306 - 40;
-        p = 0;
+        p = Math.min(1, Math.max(0, (76 - tr.top) / Math.max(1, span)));
       } else {
         p = Math.min(1, Math.max(0, scrollY / (innerHeight*0.9)));
       }
