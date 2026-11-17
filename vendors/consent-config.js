@@ -104,7 +104,7 @@
           en: {
             consentModal: {
               title: 'Cookies: your call',
-              description: 'The site works either way. Allow switches on visit counting: Vercel Web Analytics and Speed Insights (no cookies) and Google Analytics 4 (sets its own cookies). No thanks means nothing is counted. Details are in Settings and on the privacy page.',
+              description: 'Allow turns on visit counting, including Google Analytics cookies. No thanks counts nothing.',
               acceptAllBtn: 'Allow',
               acceptNecessaryBtn: 'No thanks',
               showPreferencesBtn: 'Settings',
