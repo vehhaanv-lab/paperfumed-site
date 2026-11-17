@@ -26,3 +26,26 @@
   --cc-cookie-category-block-hover-bg:#ece4cf;
   --cc-cookie-category-block-border:#ddd3ba;
 }
+
+/* PaperFumed compact consent sheet (phones) */
+@media (max-width:720px){
+#cc-main .cm{left:10px!important;right:10px!important;bottom:10px!important;width:auto!important;max-width:none!important;padding:14px 16px 8px!important;border-radius:16px!important;border-left:3px solid #5c6e4a!important;box-shadow:0 10px 34px rgba(20,32,26,.18)!important}
+#cc-main .cm__body{padding:0!important}
+#cc-main .cm__texts{padding:0!important}
+#cc-main .cm__title{font-size:14px!important;margin:0 0 4px!important;padding:0!important;letter-spacing:.01em}
+#cc-main .cm__desc{font-size:13px!important;line-height:1.45!important;padding:0!important;margin:0!important}
+#cc-main .cm__btns{padding:10px 0 0!important;gap:2px!important;display:flex!important;flex-direction:column!important}
+#cc-main .cm__btn-group{display:flex!important;flex-direction:row!important;gap:8px!important;grid-auto-flow:unset!important}
+#cc-main .cm__btn-group .cm__btn{flex:1 1 0!important;min-height:44px!important;padding:0 8px!important;margin:0!important;font-size:14px!important}
+#cc-main .cm__btn-group:last-child{justify-content:center!important}
+#cc-main .cm__btn-group:last-child .cm__btn{flex:0 0 auto!important;min-height:32px!important;background:none!important;border:0!important;box-shadow:none!important;text-decoration:underline;font-size:12px!important;font-weight:600!important;padding:0 10px!important;color:#46543b!important}
+#cc-main .cm__footer{padding:0 0 6px!important;border:0!important;background:none!important;text-align:center;font-size:12px!important;min-height:0!important}
+#cc-main .cm__footer a{font-size:12px!important}
+}
+@media (max-width:720px){
+#cc-main .cm{padding-top:12px!important}
+#cc-main .cm__btns{padding-top:8px!important;gap:0!important}
+#cc-main .cm__btn-group .cm__btn{min-height:42px!important}
+#cc-main .cm__btn-group:last-child .cm__btn{min-height:26px!important}
+#cc-main .cm__footer{padding:0 0 4px!important;line-height:1.2}
+}

@@ -24,8 +24,8 @@
 <meta name="twitter:title" content="Thank you · PaperFumed">
 <meta name="twitter:description" content="What PaperFumed stores: your cookie choice on your own device, your form message so we can respond, and research-update consent only if you ask.">
 <meta name="twitter:image" content="https://paperfumed.vercel.app/og-image.png">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 33'%3E%3Crect x='8' y='0' width='10' height='6.5' rx='2' fill='%23EBE2CE'/%3E%3Cpath fill='%23EBE2CE' d='M2 8.5L2 31Q2 33 4 33L22 33Q24 33 24 31L24 14.5L16.5 8.5Z'/%3E%3Cpath fill='rgba(77,184,126,.5)' d='M16.5 8.5L24 14.5L16.5 14.5Z'/%3E%3C/svg%3E">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 33'%3E%3Crect x='8' y='0' width='10' height='6.5' rx='2' fill='%23EBE2CE'/%3E%3Cpath fill='%23EBE2CE' d='M2 8.5L2 31Q2 33 4 33L22 33Q24 33 24 31L24 14.5L16.5 8.5Z'/%3E%3Cpath fill='rgba(77,184,126,.5)' d='M16.5 8.5L24 14.5L16.5 14.5Z'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://formsubmit.co">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -462,6 +462,44 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
 .how-band p.hl{font-size:23px;line-height:1.6;font-weight:600;color:#33422d;margin:0 auto;max-width:760px}
 .imgcap{font-size:12.5px;letter-spacing:.1em;color:#6e6759;font-weight:600;text-transform:uppercase;margin:12px 0 60px}
 @media(max-width:900px){.prob-nums{gap:38px}.prob-nums .n{font-size:38px}.sec h2{font-size:27px}}
+
+/* ---------- mobile layout (393 reference) ---------- */
+.nav .menu-btn{display:none}
+@media(max-width:720px){
+  .nav{top:12px;left:16px;right:16px;width:auto;transform:none;height:56px;flex-wrap:nowrap;align-items:center;justify-content:space-between;gap:8px;padding:0 6px 0 18px;border-radius:28px}
+  .nav .logo{font-size:17px}
+  .nav .cta{margin-left:auto;padding:0 16px;min-height:44px;display:inline-flex;align-items:center}
+  .nav .menu-btn{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:0;border-radius:50%;background:transparent;color:var(--ink);cursor:pointer;padding:0}
+  .nav .menu-btn svg{width:22px;height:22px}
+  .nav .links{display:none;position:absolute;top:64px;left:0;right:0;order:0;flex:none;flex-direction:column;gap:0;overflow:visible;padding:8px;background:rgba(251,248,240,.98);border:1px solid var(--line);border-radius:22px;box-shadow:0 14px 44px rgba(20,32,26,.18)}
+  .nav.open .links{display:flex}
+  .nav .links a{display:flex;align-items:center;min-height:44px;padding:0 14px;font-size:15px;background:none;border-radius:12px;opacity:1}
+  .hero{min-height:0;padding-bottom:32px}
+  .hero-inner{padding-top:96px}
+  .hero h1{font-size:36px;line-height:1.1;letter-spacing:-1px}
+  .island-wrap{position:relative;inset:auto;left:auto;right:auto;bottom:auto;width:100%;max-width:353px;margin:20px auto 0;transform:none!important;opacity:1}
+  .island-wrap .island-bob{animation:none!important;transform:none!important}
+  .island-far,.fchip{display:none!important}
+  .scroll-hint{display:none}
+  main,.page-head{padding-left:0;padding-right:0}
+}
+
+/* ---------- smooth transitions ---------- */
+@view-transition{navigation:auto}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.22s;animation-timing-function:ease-out}
+@media(max-width:720px){
+  .reveal{transform:translateY(8px);transition:opacity .25s ease-out,transform .25s ease-out}
+  .nav .links{display:flex;visibility:hidden;opacity:0;transform:translateY(-6px);pointer-events:none;transition:opacity .22s ease-out,transform .22s ease-out,visibility 0s linear .22s}
+  .nav.open .links{visibility:visible;opacity:1;transform:none;pointer-events:auto;transition:opacity .22s ease-out,transform .22s ease-out}
+}
+.qx{interpolate-size:allow-keywords}
+.qx::details-content{block-size:0;overflow:clip;opacity:0;transition:block-size .25s ease-out,opacity .25s ease-out,content-visibility .25s allow-discrete}
+.qx[open]::details-content{block-size:auto;opacity:1}
+@media(prefers-reduced-motion:reduce){
+  @view-transition{navigation:none}
+  .reveal{opacity:1!important;transform:none!important;transition:none!important}
+  .nav .links,.qx::details-content{transition:none!important}
+}
 </style>
 <link rel="stylesheet" href="/vendors/cookieconsent.css">
 </head>
@@ -470,13 +508,13 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
 
 <nav class="nav" id="nav" aria-label="Primary">
   <a class="logo" href="/">Paper<em>Fumed</em></a>
-  <div class="links">
+  <div class="links" id="navLinks">
     <a href="/concept">Concept</a>
     <a href="/science">Science</a>
     <a href="/questions">Questions</a>
     <a href="/#contact">Contact</a>
   </div>
-  <a class="cta" href="/#contact">Get in touch</a>
+  <a class="cta" href="/#contact">Get in touch</a><button class="menu-btn" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navLinks"><svg viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
 </nav>
 <main id="main">
   <div class="pg-wrap" style="max-width:760px;text-align:center">
@@ -616,5 +654,12 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
 </script>
 <script defer src="/vendors/cookieconsent.umd.js"></script>
 <script defer src="/vendors/consent-config.js"></script>
-</body>
+<script>
+(function(){var n=document.getElementById('nav'),b=document.getElementById('menuBtn');if(!n||!b)return;
+function set(o){n.classList.toggle('open',o);b.setAttribute('aria-expanded',o?'true':'false')}
+b.addEventListener('click',function(e){e.stopPropagation();set(!n.classList.contains('open'))});
+document.addEventListener('click',function(e){if(!n.contains(e.target))set(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&n.classList.contains('open')){set(false);b.focus()}});
+n.querySelectorAll('.links a').forEach(function(a){a.addEventListener('click',function(){set(false)})});})();
+</script></body>
 </html>
