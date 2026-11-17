@@ -69,7 +69,7 @@
               closeIconLabel: 'Close',
               sections: [
                 { title: 'Your choice', description: 'The only optional thing here is anonymous visit counting. How everything else is handled is on the <a href="/privacy">privacy page</a>.' },
-                { title: 'Necessary', linkedCategory: 'necessary', description: 'One small cookie on this device (pf_consent) that remembers the choice you made here, so we do not ask again. It expires after about 6 months. Nothing else.' },
+                { title: 'Necessary', linkedCategory: 'necessary', description: 'One small cookie on this device (pf_consent) that remembers the choice you made here, so we do not ask again. It expires after about 6 months. The contact form also uses Cloudflare Turnstile for an essential spam check; see the privacy page.' },
                 { title: 'Visit counting', linkedCategory: 'analytics', description: 'Two counters run only if you allow them. Vercel Web Analytics is anonymous: it sets no cookies and cannot identify you. Google Analytics 4 sets its own cookies (_ga, kept about 2 years) and tells us which pages are read, how far visitors scroll, which outbound links are clicked, and on what device, from roughly where. Google processes that data for us. Off unless you allow it.' }
               ]
             }
