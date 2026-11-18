@@ -547,7 +547,6 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
     </div>
     <p class="chips-label">Research targets, not shipped specs</p>
     <div class="chips">
-      <span class="chip"><b>Target:</b> 85% paper</span>
       <span class="chip"><b>Hypothesis:</b> gone in 2–6 weeks</span>
       <span class="chip"><b>Goal:</b> zero microplastics</span>
       <span class="chip"><b>Sourcing:</b> under exploration</span>
@@ -555,7 +554,7 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
   </div>
 
   <div class="isl-track" id="islTrack">
-  <div class="week-ticker" id="weekTicker">DAY 0</div>
+  <div class="week-ticker" id="weekTicker">RESEARCH CONCEPT</div>
   <div class="island-wrap" id="islandWrap">
     <div class="island-bob">
       <div class="isl-stack">
@@ -574,7 +573,6 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
   </div>
 
 
-  <div class="fchip fchip-1" data-depth="1.6"><small>Material target</small>85% paper fibre</div>
   <div class="fchip fchip-2" data-depth="2.2"><small>Barrier target</small>Bio-based, &lt;2 g</div>
   <div class="fchip fchip-3" data-depth="1.2"><small>Afterlife target</small>Gone in 2–6 weeks</div>
 
@@ -586,7 +584,7 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
 
     <section class="founder-band reveal" aria-label="From the founder">
     <p class="kicker">From the founder</p>
-    <p class="founder-text" id="founderText">450 years in the ground. Minutes in your hand. That is not a materials problem. That is a failure of imagination. We are early, and we will be wrong sometimes. But the maths only needs to be right once.</p>
+    <p class="founder-text" id="founderText">450 years in the ground. Minutes in your hand. That is not a materials problem. That is a failure of imagination. But the maths only needs to be right once.</p>
     <p class="founder-sig">Vehhaan</p>
   </section>
 
@@ -596,7 +594,6 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
       <div>
         <p class="kicker">The Concept</p>
         <h2>What could a paper bottle look like?</h2>
-        <p class="pg-sub" data-nosnippet>The direction: 85% paper, gone in weeks. Research targets, not shipped specs.</p>
         <a class="pill" href="/concept">Explore the concept &rarr;</a>
       </div>
     </section>
@@ -650,7 +647,7 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
       <div class="ct-text">
         <p class="kicker">Follow or join the research</p>
         <h2>Want to be part of what comes next?</h2>
-        <p class="pg-sub" data-nosnippet>Day one. No pitch. No commitment. Or email directly: <a href="mailto:paperfumed.ocea23@gmail.com" style="color:#22301f;font-weight:700">paperfumed.ocea23@gmail.com</a></p>
+        <p class="pg-sub" data-nosnippet>An idea-stage research project. No pitch. No commitment. Or email directly: <a href="mailto:paperfumed.ocea23@gmail.com" style="color:#22301f;font-weight:700">paperfumed.ocea23@gmail.com</a></p>
       </div>
 
     </div>
@@ -805,7 +802,7 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
       islM.style.opacity = String(oM);
       islF.style.opacity = String(oF);
       islB.style.transform = 'translateY(' + (p*22) + 'px) scale(' + (1 - p*0.05) + ')';
-      var lbl = p < .15 ? 'DAY 0' : p < .45 ? 'WEEK 2' : p < .72 ? 'WEEK 4' : 'WEEK 6'; if(tick.textContent !== lbl) tick.textContent = lbl;
+      var lbl = p < .15 ? 'RESEARCH CONCEPT' : p < .45 ? 'WEEK 2' : p < .72 ? 'WEEK 4' : 'WEEK 6'; if(tick.textContent !== lbl) tick.textContent = lbl;
       tick.style.setProperty('--p', p);
     }
     var islandTicking = false;
