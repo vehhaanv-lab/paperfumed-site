@@ -611,7 +611,7 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
       islM.style.opacity = String(oM);
       islF.style.opacity = String(oF);
       islB.style.transform = 'translateY(' + (p*22) + 'px) scale(' + (1 - p*0.05) + ')';
-      tick.textContent = p < .15 ? 'DAY 0' : p < .45 ? 'WEEK 2' : p < .72 ? 'WEEK 4' : 'WEEK 6';
+      tick.textContent = p < .15 ? 'RESEARCH CONCEPT' : p < .45 ? 'WEEK 2' : p < .72 ? 'WEEK 4' : 'WEEK 6';
       tick.style.setProperty('--p', p);
     }
     addEventListener('scroll', paintIsland, {passive:true}); paintIsland();
