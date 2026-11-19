@@ -62,6 +62,22 @@
     {
       "source": "/og-image-v4.jpg",
       "destination": "/api/og-card"
+    },
+    {
+      "source": "/assets/island-img-640.webp",
+      "destination": "/api/ri-island-img"
+    },
+    {
+      "source": "/assets/island-bottle-800.webp",
+      "destination": "/api/ri-island-bottle"
+    },
+    {
+      "source": "/assets/island-bloomed-800.webp",
+      "destination": "/api/ri-island-bloomed"
+    },
+    {
+      "source": "/assets/island-fraying-800.webp",
+      "destination": "/api/ri-island-fraying"
     }
   ]
 }
