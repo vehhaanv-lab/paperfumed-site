@@ -57,5 +57,11 @@
       "destination": "/#contact",
       "permanent": true
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/og-image-v4.jpg",
+      "destination": "/api/og-card"
+    }
   ]
 }
