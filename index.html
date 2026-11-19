@@ -910,6 +910,7 @@ if (form) {
   form.addEventListener('submit', async function (ev) {
     ev.preventDefault(); if (sending || value('_honey')) return;
     if (!form.reportValidity()) return;
+    loadTurnstile();
     if (!token) { fail('Please finish the spam check before sending.', false); return; }
     var data = { name:value('name'), email:value('email'), company:value('company'), interest:value('interest'), message:value('message'), updates:form.elements.namedItem('updates').checked, _honey:'' };
     var digest = JSON.stringify(data);
