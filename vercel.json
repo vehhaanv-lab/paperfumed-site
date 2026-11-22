@@ -78,6 +78,10 @@
     {
       "source": "/assets/island-fraying-800.webp",
       "destination": "/api/ri-island-fraying"
+    },
+    {
+      "source": "/og-image.png",
+      "destination": "/api/og-card"
     }
   ]
 }
