@@ -105,7 +105,17 @@
       },
       categories: {
         necessary: { enabled: true, readOnly: true },
-        analytics: { enabled: false }
+        analytics: {
+          enabled: false,
+          /* If the visitor later switches analytics off, delete the cookies
+             GA4 set while it was allowed. Vercel's two measurers set none. */
+          autoClear: {
+            cookies: [
+              { name: '_ga' },
+              { name: /^_ga_/ }
+            ]
+          }
+        }
       },
       language: {
         default: 'en',
@@ -141,4 +151,3 @@
   if (window.CookieConsent) boot();
   else window.addEventListener('load', boot);
 })();
-
