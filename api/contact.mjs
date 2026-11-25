@@ -1,4 +1,4 @@
-import { createHash, createHmac } from 'node:crypto';
+import { createHash, createHmac, randomBytes } from 'node:crypto';
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const INTERESTS = new Set(['','Lab or pilot facility','Material scientist','Advisor or mentor','Potential partner','Just curious','Other']);
@@ -16,6 +16,25 @@ export function validate(raw) {
   out.email=out.email.toLowerCase();
   if (!EMAIL.test(out.email) || /[\r\n]/.test(out.email+out.name+out.company) || !INTERESTS.has(out.interest)) return null;
   return out;
+}
+
+export function confirmEmailText(link) {
+  return 'Hi, You asked for updates from PaperFumed. Please confirm this email address by opening this link: ' + link + ' Once confirmed, we will email you when there is something new. If you did not sign up, just ignore this email and nothing more will be sent. To be removed at any time, email paperfumed.ocea23@gmail.com';
+}
+export function confirmEmailHtml(link) {
+  const esc=link.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+  return '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>'
+    + '<body style="margin:0;padding:0;background-color:#0d1410;">'
+    + '<div style="display:none;max-height:0;overflow:hidden;">Confirm your email for PaperFumed updates.</div>'
+    + '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#0d1410;"><tr><td align="center" style="padding:24px 12px;">'
+    + '<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:600px;max-width:100%;background-color:#14201A;background-image:linear-gradient(165deg,#14201A 0%,#2C3826 78%,#22301f 100%);border-radius:8px;">'
+    + '<tr><td align="center" style="padding:44px 40px 6px;color:#F4F0E6;font-family:Montserrat,Arial,sans-serif;font-size:13px;letter-spacing:5px;text-transform:uppercase;font-weight:600;">PaperFumed</td></tr>'
+    + '<tr><td align="center" style="padding:18px 40px 0;"><img src="https://paperfumed.vercel.app/assets/confirm-island.png" width="230" height="150" alt="A small floating island with a glass bottle on it" style="display:block;border:0;"></td></tr>'
+    + '<tr><td align="center" style="padding:26px 40px 0;color:#F4F0E6;font-family:Montserrat,Arial,sans-serif;font-size:30px;line-height:1.25;font-weight:800;text-transform:uppercase;letter-spacing:1px;">Confirm<br>your <span style="font-family:Georgia,serif;font-style:italic;font-weight:600;color:#A9714B;text-transform:none;">email</span><br>for PaperFumed updates</td></tr>'
+    + '<tr><td align="center" style="padding:26px 56px 0;color:rgba(244,240,230,.8);font-family:Montserrat,Arial,sans-serif;font-size:15px;line-height:1.65;">Hi, You asked for updates from PaperFumed. Please confirm this email address by clicking the button below. Once confirmed, we will email you when there is something new. If you did not sign up, just ignore this email and nothing more will be sent.</td></tr>'
+    + '<tr><td align="center" style="padding:34px 40px 8px;"><a href="' + esc + '" style="display:inline-block;background-color:#A9714B;color:#FBF8F0;font-family:Montserrat,Arial,sans-serif;font-weight:800;font-size:15px;letter-spacing:.6px;text-decoration:none;padding:15px 42px;border-radius:999px;">Confirm my email</a></td></tr>'
+    + '<tr><td align="center" style="padding:30px 40px 44px;color:rgba(244,240,230,.45);font-family:Montserrat,Arial,sans-serif;font-size:11.5px;">To be removed at any time, email <a href="mailto:paperfumed.ocea23@gmail.com" style="color:rgba(244,240,230,.65);">paperfumed.ocea23@gmail.com</a></td></tr>'
+    + '</table></td></tr></table></body></html>';
 }
 export function payloadHash(v) {
   return createHash('sha256').update(JSON.stringify([v.name,v.email,v.company,v.interest,v.message,v.updates])).digest('hex');
@@ -77,6 +96,27 @@ export function makeHandler({ env=process.env, fetcher=fetch }={}) {
     if(accepted.outcome==='rate_limited'){res.setHeader('Retry-After','3600');return reply(429,{error:'too_many_requests'});}
     if(accepted.outcome==='conflict') return reply(409,{error:'request_changed_use_new_id'});
     if(!['created','duplicate'].includes(accepted.outcome)) return reply(503,{error:'storage_unconfirmed'});
+    let confirmEmail='not_requested';
+    if(v.updates){
+      confirmEmail='not_attempted';
+      if(env.MAILER_URL && env.MAILER_SECRET){
+        // The raw token goes only to the subscriber's inbox; the database
+        // keeps its hash. Tokens expire after 24 hours and are single-use.
+        try {
+          const token=randomBytes(32).toString('hex');
+          const tokenHash=createHash('sha256').update(token).digest('hex');
+          const expires=new Date(Date.now()+24*3600*1000).toISOString();
+          const claim=await db('contact_requests?submission_id=eq.'+v.submission_id+'&confirmed_at=is.null',{method:'PATCH',headers:{Prefer:'return=representation'},body:JSON.stringify({confirm_token_hash:tokenHash,confirm_token_expires:expires})});
+          if(!claim.ok) throw 0;
+          if((await claim.json()).length){
+            const link='https://paperfumed.vercel.app/api/confirm?id='+v.submission_id+'&token='+token;
+            const mail=await upstream(env.MAILER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({secret:env.MAILER_SECRET,to:v.email,subject:'Confirm your email for PaperFumed updates',body:confirmEmailText(link),html:confirmEmailHtml(link)})});
+            const receipt=await mail.json().catch(()=>({}));
+            confirmEmail=mail.ok && receipt.ok===true?'sent':'failed';
+          } else confirmEmail='already_confirmed';
+        } catch {confirmEmail='failed';}
+      }
+    }
     let notification=accepted.notification;
     if(notification==='not_attempted' && env.CONTACT_INBOX_ENABLED==='true') {
       // Claim once. A crash or unknown email response is never automatically
@@ -95,7 +135,7 @@ export function makeHandler({ env=process.env, fetcher=fetch }={}) {
         } else notification='sending';
       } catch {notification='not_attempted';}
     }
-    return reply(200,{status:'stored',notification,updates:v.updates?'pending':'not_requested',submission_id:v.submission_id});
+    return reply(200,{status:'stored',notification,updates:v.updates?'pending':'not_requested',confirmation_email:confirmEmail,submission_id:v.submission_id});
   };
 }
 export default makeHandler();
